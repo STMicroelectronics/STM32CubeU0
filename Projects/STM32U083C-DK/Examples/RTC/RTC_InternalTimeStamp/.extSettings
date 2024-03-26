@@ -1,0 +1,8 @@
+[ProjectFiles]
+HeaderPath=..\..\..\..\..\..\Drivers\BSP\STM32U083C-DK
+[Others]
+Define=
+HALModule=SPI;LCD
+[Groups]
+Doc=../README.md;
+Drivers/BSP/STM32U083C-DK=../../../../../../Drivers/BSP/STM32U083C-DK/stm32u083c_discovery_glass_lcd.c;../../../../../../Drivers/BSP/STM32U083C-DK/stm32u083c_discovery.c;

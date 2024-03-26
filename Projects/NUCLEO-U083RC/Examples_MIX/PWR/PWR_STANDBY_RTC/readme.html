@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="../../../../_htmresc/mini-st_2020.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<div class="row">
+<section id="pwr_standby_rtc-example-description">
+<h2><b>PWR_STANDBY_RTC Example Description</b></h2>
+<p>How to enter the Standby mode and wake up from this mode by using an
+external reset or the RTC wakeup timer through the STM32U0xx RTC and RCC
+HAL, and LL API (LL API use for maximizing performance).</p>
+<p>It allows to measure the current consumption in STANDBY mode with RTC
+enabled.</p>
+<p>In the associated software, the system clock is set to 48 MHz and the
+SysTick is programmed to generate an interrupt each 1 ms.</p>
+<p>The Low Speed Internal (LSI) clock is used as RTC clock source by
+default. EXTI_Line20 is internally connected to the RTC Wakeup
+event.</p>
+<p>The system automatically enters STANDBY mode 5 sec. after start-up.
+The RTC wake-up is configured to generate an interrupt on rising edge
+about 33 sec. afterwards.</p>
+<p>Current consumption in STANDBY mode with RTC feature enabled can be
+measured during that time.</p>
+<p>More than half a minute is chosen to ensure current convergence to
+its lowest operating point.</p>
+<p>Note: Due to LSI frequency variations, wake-up time is not guarantee.
+Adjustments need to be done after getting the real measurement of LSI
+oscillator (or if available, LSE oscillator can be used as well)</p>
+<p>After wake-up from STANDBY mode, program execution restarts in the
+same way as after a RESET.</p>
+<p>LED4 is used to monitor the system state as follows:</p>
+<ul>
+<li>LED4 toggling: system in RUN mode</li>
+<li>LED4 off : system in STANDBY mode</li>
+</ul>
+<h4 id="notes"><b>Notes</b></h4>
+<ol type="1">
+<li><p>These steps are repeated in an infinite loop.</p></li>
+<li><p>To measure the current consumption in STANDBY mode, remove JP5
+jumper and connect an amperemeter to JP5 to measure IDD
+current.</p></li>
+<li><p>This example can not be used in DEBUG mode due to the fact that
+the Cortex-M0+ core is no longer clocked during low power mode so
+debugging features are disabled.</p></li>
+<li><p>Care must be taken when HAL_RCCEx_PeriphCLKConfig() is used to
+select the RTC clock source; in this case the Backup domain will be
+reset in<br />
+order to modify the RTC Clock source, as consequence RTC registers
+(including the backup registers) and RCC_CSR register are set to their
+reset values.</p></li>
+<li><p>Care must be taken when using HAL_Delay(), this function provides
+accurate delay (in milliseconds) based on variable incremented in
+SysTick ISR. This implies that if HAL_Delay() is called from a
+peripheral ISR process, then the SysTick interrupt must have higher
+priority (numerically lower) than the peripheral interrupt. Otherwise
+the caller ISR process will be blocked. To change the SysTick interrupt
+priority you have to use HAL_NVIC_SetPriority() function.</p></li>
+<li><p>The application needs to ensure that the SysTick time base is
+always set to 1 millisecond to have correct HAL operation.</p></li>
+</ol>
+<h3 id="keywords"><b>Keywords</b></h3>
+<p>Power, PWR, stop mode, wake-up, RTC, Interrupt, low power mode</p>
+<h3 id="directory-contents"><b>Directory contents</b></h3>
+<ul>
+<li>PWR/PWR_STANDBY_RTC/Inc/stm32u0xx_conf.h HAL Configuration file</li>
+<li>PWR/PWR_STANDBY_RTC/Inc/stm32u0xx_it.h Header for
+stm32u0xx_it.c</li>
+<li>PWR/PWR_STANDBY_RTC/Inc/main.h Header file for main.c</li>
+<li>PWR/PWR_STANDBY_RTC/Src/system_stm32u0xx.c STM32U0xx system clock
+configuration file</li>
+<li>PWR/PWR_STANDBY_RTC/Src/stm32u0xx_it.c Interrupt handlers</li>
+<li>PWR/PWR_STANDBY_RTC/Src/main.c Main program</li>
+<li>PWR/PWR_STANDBY_RTC/Src/stm32u0xx_hal_msp.c HAL MSP module</li>
+</ul>
+<h3 id="hardware-and-software-environment"><b>Hardware and Software
+environment</b></h3>
+<ul>
+<li><p>This example runs on STM32U0xx devices</p></li>
+<li><p>This example has been tested with STMicroelectronics
+NUCLEO-U083RC board and can be easily tailored to any other supported
+device and development board.</p></li>
+<li><p>NUCLEO-U083RC Set-up :</p>
+<ul>
+<li>LED4 connected to PA.05 pin</li>
+</ul></li>
+</ul>
+<h3 id="how-to-use-it"><b>How to use it ?</b></h3>
+<p>In order to make the program work, you must do the following :</p>
+<ul>
+<li>Open your preferred toolchain</li>
+<li>Rebuild all files and load your image into target memory</li>
+<li>Once the image is loaded, power off the NUCLEO board in unplugging
+the power cable then power on the board again</li>
+<li>Run the example</li>
+</ul>
+</body>
+</html>

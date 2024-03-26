@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="../../../../_htmresc/mini-st_2020.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<div class="row">
+<div class="col-sm-12 col-lg-8">
+<h2><b>SPI_TwoBoards_FullDuplex_IT_Slave_Init Example Description</b></h2>
+<p>Data buffer transmission and reception via SPI using Interrupt mode (Slave).
+This example is based on the STM32U0xx SPI LL API. The peripheral
+initialization uses LL unitary service functions for optimization
+purposes (performance and size).</p>
+<p>The communication is done with 2 boards through SPI.</p>
+<ul>
+<li>Slave Board SPI1 Peripheral is configured in Slave mode. SPI1_IRQn
+activated. RXNE and TXE Interrupts SPI peripheral activated.</li>
+</ul>
+<p>Example execution:</p>
+<p>On BOARD MASTER, LED4 is blinking Fast (200ms) and wait User
+push-button action. Press User push-button on BOARD MASTER start a
+Full-Duplex communication through IT.</p>
+<p>On MASTER side, Clock will be generated on SCK line,
+Transmission(MOSI Line) and reception (MISO Line) will be done at the
+same time. SLAVE SPI will received the Clock (SCK Line), so
+Transmission(MISO Line) and reception (MOSI Line) will be done also.</p>
+<p>LED4 is On on both boards if data is well received.</p>
+<p>In case of errors, LED4 is blinking Slowly (1s).</p>
+<h4 id="notes"><b>Notes</b></h4>
+<ol type="1">
+<li>You need to perform a reset on Master board, then perform it on
+Slave board to have the correct behaviour of this example.</li>
+</ol>
+<h3 id="keywords"><b>Keywords</b></h3>
+<p>Connectivity, SPI, Full-duplex, Transmission, Reception, Slave, MISO,
+MOSI, Interrupt</p>
+<h3 id="directory-contents"><b>Directory contents</b></h3>
+<ul>
+<li>SPI/SPI_TwoBoards_FullDuplex_IT_Slave_Init/Inc/stm32u0xx_it.h
+Interrupt handlers header file</li>
+<li>SPI/SPI_TwoBoards_FullDuplex_IT_Slave_Init/Inc/main.h Header for
+main.c module</li>
+<li>SPI/SPI_TwoBoards_FullDuplex_IT_Slave_Init/Inc/stm32_assert.h
+Template file to include assert_failed function</li>
+<li>SPI/SPI_TwoBoards_FullDuplex_IT_Slave_Init/Src/stm32u0xx_it.c
+Interrupt handlers</li>
+<li>SPI/SPI_TwoBoards_FullDuplex_IT_Slave_Init/Src/main.c Main
+program</li>
+<li>SPI/SPI_TwoBoards_FullDuplex_IT_Slave_Init/Src/system_stm32u0xx.c
+STM32U0xx system source file</li>
+</ul>
+<h3 id="hardware-and-software-environment"><b>Hardware and Software
+environment</b></h3>
+<ul>
+<li><p>This example runs on STM32U083RCTx devices.</p></li>
+<li><p>This example has been tested with NUCLEO-U083RC board and can be
+easily tailored to any other supported device and development
+board.</p></li>
+<li><p>NUCLEO-U083RC Set-up</p>
+<ul>
+<li>Connect Master board PB3 to Slave Board PB3 (connected to pin 31 of
+CN10 connector)</li>
+<li>Connect Master board PB4 to Slave Board PB4 (connected to pin 27 of
+CN10 connector)</li>
+<li>Connect Master board PB5 to Slave Board PB5 (connected to pin 29 of
+CN10 connector)</li>
+<li>Connect Master board GND to Slave Board GND</li>
+</ul></li>
+</ul>
+<h3 id="how-to-use-it"><b>How to use it ?</b></h3>
+<p>In order to make the program work, you must do the following :</p>
+<ul>
+<li>Open your preferred toolchain</li>
+<li>Rebuild all files and load your image into target memory
+<ul>
+<li>Load the Master project in Master Board</li>
+<li>Load the Slave project in Slave Board</li>
+</ul></li>
+<li>Run the example</li>
+</ul>
+</div>
+</div>
+</body>
+</html>

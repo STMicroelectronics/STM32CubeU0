@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="../../../../_htmresc/mini-st_2020.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h2 id="oemirot_loader-application-description"><b>OEMiROT_Loader Application Description</b></h2>
+<p>This application is a sample code of a standalone local loader using the Ymodem protocol. This application allows the download of a new version of the firmware and data images.</p>
+<p>In order to ease the development process, prebuild and postbuild commands are integrated in each toolchain project. The prebuild command is in charge of preparing the scatter file according to common flash layout description in linker folder. The postbuild command is in charge of preparing the loader image.</p>
+<p>For more details, refer to Wiki article available here : <a href="https://wiki.st.com/stm32mcu/wiki/Category:Security">Link to Security Wiki</a></p>
+<h3 id="keywords"><b>Keywords</b></h3>
+<p>OEMiROT, boot path, Root Of Trust, Security, mcuboot</p>
+<h3 id="directory-contents"><strong>Directory contents</strong></h3>
+<ul>
+<li>OEMiROT_Loader/Src/com.c UART low level interface</li>
+<li>OEMiROT_Loader/Src/common.c UART common functionalities</li>
+<li>OEMiROT_Loader/Src/fw_update_app.c Firmware update interface</li>
+<li>OEMiROT_Loader/Src/low_level_device.c Flash low level device setting</li>
+<li>OEMiROT_Loader/Src/low_level_flash.c Flash low level interface</li>
+<li>OEMiROT_Loader/Src/main.c Main program</li>
+<li>OEMiROT_Loader/Src/system_stm32u5xx.c System init file</li>
+<li>OEMiROT_Loader/Src/tick.c HAL Tick implementation</li>
+<li>OEMiROT_Loader/Src/ymodem.c Ymodem support</li>
+<li>OEMiROT_Loader/Src/startup_stm32u5xx.c Startup file</li>
+<li>OEMiROT_Loader/Inc/loader_flash_layout.h Flash layout header file</li>
+<li>OEMiROT_Loader/Inc/com.h Header file for com.c</li>
+<li>OEMiROT_Loader/Inc/common.h Header file for common.c</li>
+<li>OEMiROT_Loader/Inc/fw_update_app.h Header file for fw_update_app.c</li>
+<li>OEMiROT_Loader/Inc/low_level_flash.h Header file for low_level_flash.c</li>
+<li>OEMiROT_Loader/Inc/main.h Main program header file</li>
+<li>OEMiROT_Loader/Inc/stm32u5xx_hal_conf.h HAL driver configuration file</li>
+<li>OEMiROT_Loader/Inc/ymodem.h Header file for Ymodem.c</li>
+</ul>
+<h3 id="how-to-use-it"><strong>How to use it ?</strong></h3>
+<p>In order to build the OEMiROT_Loader project, you must do the following:</p>
+<ul>
+<li>Open your preferred toolchain</li>
+<li>Rebuild the project</li>
+</ul>
+<p>Then refer to OEMiROT_Appli readme for example of application booted through OEMiROT boot path.</p>
+</body>
+</html>

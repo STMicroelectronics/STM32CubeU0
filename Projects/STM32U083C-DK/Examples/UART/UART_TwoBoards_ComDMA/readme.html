@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="../../../../_htmresc/mini-st_2020.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<div class="row">
+<section id="uart_twoboards_comdma-example-description" class="col-sm-12 col-lg-8">
+<h2><b>UART_TwoBoards_ComDMA Example Description</b></h2>
+<p>UART transmission (transmit/receive) in DMA mode between two
+boards.</p>
+<pre><code>Board: STM32U083C-DISCO (embeds a STM32U083RCTx device)
+Tx Pin: PA.09 (Pin 1 in CN5)
+Rx Pin: PA.10 (Pin 3 in CN9)</code></pre>
+<p>Two identical boards are connected as shown on the picture above.</p>
+<pre><code>Board 1: transmitting then receiving board
+Board 2: receiving then transmitting board</code></pre>
+<p>The user presses the Joystick Sel push-button on board 1. Then, board
+1 sends in DMA mode a message to board 2 that sends it back to board 1
+in DMA mode as well.</p>
+<p>Finally, board 1 and 2 compare the received message to that sent. If
+the messages are the same, the test passes.</p>
+<p>WARNING: as both boards do not behave the same way,
+“TRANSMITTER_BOARD” compilation switch is defined in /Src/main.c and
+must be enabled at compilation time before loading the executable in the
+board that first transmits then receives.</p>
+<p>The receiving then transmitting board needs to be loaded with an
+executable software obtained with TRANSMITTER_BOARD disabled.</p>
+<p>STM32U083C-DISCO board LEDs are used to monitor the transfer
+status:</p>
+<ul>
+<li><p>While board 1 is waiting for the user to press the Joystick Sel
+push-button, its LED5 is blinking rapidly (100 ms period).</p></li>
+<li><p>While board 2 is waiting for the message from board 1, its LED5
+is emitting a couple of flashes every half-second.</p></li>
+<li><p>When the test passes, LED5 is turned on.</p></li>
+<li><p>If there is an initialization or transfer error, LED5 is turned
+on.</p></li>
+</ul>
+<p>At the beginning of the main program the HAL_Init() function is
+called to reset all the peripherals, initialize the Flash interface and
+the systick. Then the SystemClock_Config() function is used to configure
+the system clock (SYSCLK) to run at 48 MHz.</p>
+<p>The UART is configured as follows:</p>
+<pre><code>- BaudRate = 9600 baud  
+- Word Length = 8 bits (8 data bits, no parity bit)
+- One Stop Bit
+- No parity
+- Hardware flow control disabled (RTS and CTS signals)
+- Reception and transmission are enabled in the time</code></pre>
+<h3 id="notes"><b>Notes</b></h3>
+<ol type="1">
+<li><p>When the parity is enabled, the computed parity is inserted at
+the MSB position of the transmitted data.</p></li>
+<li><p>Care must be taken when using HAL_Delay(), this function provides
+accurate delay (in milliseconds) based on variable incremented in
+SysTick ISR. This implies that if HAL_Delay() is called from a
+peripheral ISR process, then the SysTick interrupt must have higher
+priority (numerically lower) than the peripheral interrupt. Otherwise
+the caller ISR process will be blocked. To change the SysTick interrupt
+priority you have to use HAL_NVIC_SetPriority() function.</p></li>
+<li><p>The application needs to ensure that the SysTick time base is
+always set to 1 millisecond to have correct HAL operation.</p></li>
+</ol>
+<h3 id="keywords"><b>Keywords</b></h3>
+<p>Connectivity, UART/USART, baud rate, RS-232, full-duplex, DMA,
+parity, stop bit, Transmitter, Receiver, Asynchronous</p>
+<h3 id="directory-contents"><b>Directory contents</b></h3>
+<ul>
+<li>UART/UART_TwoBoards_ComDMA/Inc/stm32u083c_discovery_conf.h BSP
+configuration file</li>
+<li>UART/UART_TwoBoards_ComDMA/Inc/stm32u0xx_hal_conf.h HAL
+configuration file</li>
+<li>UART/UART_TwoBoards_ComDMA/Inc/stm32u0xx_it.h DMA interrupt handlers
+header file</li>
+<li>UART/UART_TwoBoards_ComDMA/Inc/main.h Header for main.c module<br />
+</li>
+<li>UART/UART_TwoBoards_ComDMA/Src/stm32u0xx_it.c DMA interrupt
+handlers</li>
+<li>UART/UART_TwoBoards_ComDMA/Src/main.c Main program</li>
+<li>UART/UART_TwoBoards_ComDMA/Src/stm32u0xx_hal_msp.c HAL MSP
+module</li>
+<li>UART/UART_TwoBoards_ComDMA/Src/system_stm32u0xx.c STM32U0xx system
+source file</li>
+</ul>
+<h3 id="hardware-and-software-environment"><b>Hardware and Software
+environment</b></h3>
+<ul>
+<li><p>This example runs on STM32U083RCTx devices.<br />
+</p></li>
+<li><p>This example has been tested with two STM32U083C-DISCO boards
+embedding a STM32U083RCTx device and can be easily tailored to any other
+supported device and development board.</p></li>
+<li><p>STM32U083C-DISCO set-up</p>
+<ul>
+<li>Connect a wire between 1st board PA9 pin (Uart Tx) and 2nd board
+PA10 pin (Uart Rx)</li>
+<li>Connect a wire between 1st board PA10 pin (Uart Rx) and 2nd board
+PA9 pin (Uart Tx)</li>
+<li>Connect 1st board GND to 2nd Board GND</li>
+</ul></li>
+</ul>
+<h3 id="how-to-use-it"><b>How to use it ?</b></h3>
+<p>In order to make the program work, you must do the following :</p>
+<ul>
+<li>Open your preferred toolchain</li>
+<li>Rebuild all files and load your image into target memory</li>
+<li>Run the example</li>
+</ul>
+</body>
+</html>

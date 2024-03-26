@@ -1,0 +1,8 @@
+[ProjectFiles]
+HeaderPath=..\..\..\..\..\..\Drivers\STM32U0xx_HAL_Driver\Inc;..\..\..\..\..\..\Drivers\STM32U0xx_HAL_Driver\Inc\Legacy;..\..\..\..\..\..\Drivers\CMSIS\Include;..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32U0xx\Include;..\..\..\..\..\..\Drivers\BSP\STM32U083C-DK
+[Others]
+Define=
+HALModule=HAL_MODULE_ENABLED;UART;ADC;EXTI;DMA;PWR
+[Groups]
+Doc=../README.md;../readme.txt;
+Drivers/BSP/STM32U083C-DK=../../../../../../Drivers/BSP/STM32U083C-DK/stm32u083c_discovery.c;

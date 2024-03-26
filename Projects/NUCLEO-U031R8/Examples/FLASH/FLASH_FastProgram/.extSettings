@@ -1,0 +1,9 @@
+[ProjectFiles]
+HeaderPath=..\..\..\..\..\..\Drivers\BSP\STM32U0xx_Nucleo
+[Others]
+Define=
+HALModule=CORTEX;GPIO;RCC;FLASH;PWR;EXTI
+[Groups]
+Doc=../README.md;
+Drivers/BSP/STM32U0xx_Nucleo=../../../../../../Drivers/BSP/STM32U0xx_Nucleo/stm32u0xx_nucleo.c;
+Drivers/STM32U0xx_HAL_Driver=../../../../../../Drivers/STM32U0xx_HAL_Driver/Src/stm32u0xx_hal_exti.c;

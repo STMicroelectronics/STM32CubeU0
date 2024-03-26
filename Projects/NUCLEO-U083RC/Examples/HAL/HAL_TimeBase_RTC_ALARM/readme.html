@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="../../../../_htmresc/mini-st_2020.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<div class="row">
+<section id="hal_timebase_rtc_alarm-example-description">
+<h2><b>HAL_TimeBase_RTC_ALARM Example Description</b></h2>
+<p>How to customize HAL using RTC alarm as main source of time base,
+instead of Systick.</p>
+<p>The User push-button is used to suspend or Resume tick increment.</p>
+<p>Each time the button is pressed; an interrupt is generated
+(EXTI_Line13) and in the ISR the uwIncrementState is checked:</p>
+<p>1- If the uwIncrementState = 0: the tick increment is suspended by
+calling HAL_SuspendTick() API (RTC alarm interrupt is disabled).</p>
+<p>2- If the uwIncrementState = 1: the tick increment is Resumed by
+calling HAL_ResumeTick() API(RTC alarm interrupt is enabled).</p>
+<p>The alarm is configured to assert an interrupt when the RTC reaches 1
+ms</p>
+<p>The example brings, in user file, a new implementation of the
+following HAL weak functions:</p>
+<p>HAL_InitTick() HAL_SuspendTick() HAL_ResumeTick()</p>
+<p>This implementation will overwrite native implementation in
+stm32u0xx_hal.c and so user functions will be invoked instead when
+called.</p>
+<p>The following time base functions are kept as implemented
+natively:</p>
+<p>HAL_IncTick() HAL_Delay()</p>
+<p>In an infinite loop, LED4 toggles spaced out over 500ms delay, except
+when tick increment is suspended.</p>
+<h3 id="notes"><b>Notes</b></h3>
+<p>1- Care must be taken when using HAL_Delay(), this function provides
+accurate delay (in milliseconds) based on variable incremented in HAL
+time base ISR. This implies that if HAL_Delay() is called from a
+peripheral ISR process, then the HAL time base interrupt must have
+higher priority (numerically lower) than the peripheral interrupt.
+Otherwise the caller ISR process will be blocked. To change the HAL time
+base interrupt priority you have to use HAL_NVIC_SetPriority()
+function.</p>
+<p>2- The application needs to ensure that the HAL time base is always
+set to 1 millisecond to have correct HAL operation.</p>
+<h3 id="keywords"><b>Keywords</b></h3>
+<p>System, RTC Alarm, Time base, HAL</p>
+<h3 id="directory-contents"><b>Directory contents</b></h3>
+<ul>
+<li>HAL/HAL_TimeBase_RTC_ALARM/Inc/stm32u0xx_nucleo_conf.h BSP
+configuration file</li>
+<li>HAL/HAL_TimeBase_RTC_ALARM/Inc/stm32u0xx_hal_conf.h HAL
+configuration file</li>
+<li>HAL/HAL_TimeBase_RTC_ALARM/Inc/stm32u0xx_it.h Interrupt handlers
+header file</li>
+<li>HAL/HAL_TimeBase_RTC_ALARM/Inc/main.h Header for main.c module<br />
+</li>
+<li>HAL/HAL_TimeBase_RTC_ALARM/Src/stm32u0xx_it.c Interrupt
+handlers</li>
+<li>HAL/HAL_TimeBase_RTC_ALARM/Src/main.c Main program</li>
+<li>HAL/HAL_TimeBase_RTC_ALARM/Src/stm32u0xx_hal_msp.c HAL MSP file</li>
+<li>HAL/HAL_TimeBase_RTC_ALARM/Src/stm32u0xx_hal_timebase_rtc_alarm.c
+HAL time base rtc alarm functions</li>
+<li>HAL/HAL_TimeBase_RTC_ALARM/Src/system_stm32u0xx.c STM32U0xx system
+source file</li>
+</ul>
+<h3 id="hardware-and-software-environment"><b>Hardware and Software
+environment</b></h3>
+<ul>
+<li><p>This example runs on STM32U083RCTx devices.</p></li>
+<li><p>This example has been tested with STMicroelectronics
+NUCLEO-U083RC board and can be easily tailored to any other supported
+device and development board.</p></li>
+</ul>
+<h3 id="how-to-use-it"><b>How to use it ?</b></h3>
+<p>In order to make the program work, you must do the following :</p>
+<ul>
+<li>Open your preferred toolchain</li>
+<li>Rebuild all files and load your image into target memory</li>
+<li>Run the example</li>
+</ul>
+</section>
+</div>
+</body>
+</html>

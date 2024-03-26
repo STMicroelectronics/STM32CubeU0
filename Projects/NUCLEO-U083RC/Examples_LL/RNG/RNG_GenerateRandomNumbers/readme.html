@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="../../../../_htmresc/mini-st_2020.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<div class="row">
+<section id="rng_generaterandomnumbers-example-description" class="col-sm-12 col-lg-8">
+<h2><b>RNG_GenerateRandomNumbers Example Description</b></h2>
+<p>Configuration of the RNG to generate 32-bit long random numbers. The
+peripheral initialization uses LL unitary service functions for
+optimization purposes (performance and size).</p>
+<p>Example execution: After startup from reset and system configuration,
+RNG configuration is performed. (Configure PLLSAI1 to enable 48M domain,
+then enable PLLSAI1 output mapped on 48MHz domain clock and configure
+PLLSAI as RNG clock source).</p>
+<p>User is then asked to press User push-button (LED4 blinking fast). On
+User push-button press, several (8) Random 32bit numbers are generated
+(DRDY flag is polled until 1, indicating a random number has been
+generated and could be retrieved from DR register). Corresponding
+generated values are available and stored in a u32 array (aRandom32bit),
+whose content could be displayed using debugger (Watch or LiveWatch
+features). After successful Random numbers generation, LED4 is turned
+On. In case of errors, LED4 is slowly blinking (1sec period).</p>
+<h3 id="keywords"><b>Keywords</b></h3>
+<p>Analog, RNG, Random, FIPS PUB 140-2, Analog Random number generator,
+Entropy, Period</p>
+<h3 id="directory-contents"><b>Directory contents</b></h3>
+<ul>
+<li>RNG/RNG_GenerateRandomNumbers/Inc/stm32u0xx_it.h Interrupt handlers
+header file</li>
+<li>RNG/RNG_GenerateRandomNumbers/Inc/main.h Header for main.c
+module</li>
+<li>RNG/RNG_GenerateRandomNumbers/Inc/stm32_assert.h Template file to
+include assert_failed function</li>
+<li>RNG/RNG_GenerateRandomNumbers/Src/stm32u0xx_it.c Interrupt
+handlers</li>
+<li>RNG/RNG_GenerateRandomNumbers/Src/main.c Main program</li>
+<li>RNG/RNG_GenerateRandomNumbers/Src/system_stm32u0xx.c STM32U0xx
+system source file</li>
+</ul>
+<h3 id="hardware-and-software-environment"><b>Hardware and Software
+environment</b></h3>
+<ul>
+<li><p>This example runs on STM32U083RCTx devices.</p></li>
+<li><p>This example has been tested with NUCLEO-U083RC board and can be
+easily tailored to any other supported device and development
+board.</p></li>
+</ul>
+<h3 id="how-to-use-it"><b>How to use it ?</b></h3>
+<p>In order to make the program work, you must do the following :</p>
+<ul>
+<li>Open your preferred toolchain</li>
+<li>Rebuild all files and load your image into target memory</li>
+<li>Run the example</li>
+<li>Push User push-button and use Variable watch window from debugger to
+access to values of generated numbers. (A break point could be set on
+LED_On() call, at end of RandomNumbersGeneration() function).</li>
+</ul>
+</body>
+</html>

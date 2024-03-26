@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="../../../../_htmresc/mini-st_2020.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<div class="row">
+<section id="uart_printf-example-description" class="col-sm-12 col-lg-8">
+<h2><b>UART_Printf Example Description</b></h2>
+<p>Re-routing of the C library printf function to the UART. The UART
+outputs a message on the HyperTerminal.</p>
+<ul>
+<li>Board : NUCLEO-U083RC</li>
+<li>Tx Pin: PA.02: available through ST-Link</li>
+<li>Rx Pin: PA.03: available through ST-Link</li>
+</ul>
+<p>LED4 toggles when there is an error.</p>
+<p>The USART is configured as follows:</p>
+<pre><code>- BaudRate = 115200 baud
+- Word Length = 8 Bits 
+- One Stop Bit
+- Odd parity
+- Hardware flow control disabled (RTS and CTS signals)
+- Reception and transmission are enabled in the time</code></pre>
+<p><b>Notes</b></p>
+<ol type="1">
+<li><p>When the parity is enabled, the computed parity is inserted at
+the MSB position of the transmitted data.</p></li>
+<li><p>Care must be taken when using HAL_Delay(), this function provides
+accurate delay (in milliseconds) based on variable incremented in
+SysTick ISR. This implies that if HAL_Delay() is called from a
+peripheral ISR process, then the SysTick interrupt must have higher
+priority (numerically lower) than the peripheral interrupt. Otherwise
+the caller ISR process will be blocked. To change the SysTick interrupt
+priority you have to use HAL_NVIC_SetPriority() function.</p></li>
+<li><p>The application needs to ensure that the SysTick time base is
+always set to 1 millisecond to have correct HAL operation.</p></li>
+</ol>
+<h3 id="keywords"><b>Keywords</b></h3>
+<p>Connectivity, UART/USART, Printf, baud rate, RS-232, HyperTerminal,
+full-duplex, Interrupt, Transmitter, Receiver, Asynchronous</p>
+<p><b>Directory contents</b></p>
+<ul>
+<li>UART/UART_Printf/Inc/stm32u0xx_nucleo_conf.h BSP configuration
+file</li>
+<li>UART/UART_Printf/Inc/stm32u0xx_hal_conf.h HAL configuration
+file</li>
+<li>UART/UART_Printf/Inc/stm32u0xx_it.h IT interrupt handlers header
+file</li>
+<li>UART/UART_Printf/Inc/main.h Header for main.c module</li>
+<li>UART/UART_Printf/Src/stm32u0xx_it.c Interrupt handlers</li>
+<li>UART/UART_Printf/Src/main.c Main program</li>
+<li>UART/UART_Printf/Src/stm32u0xx_hal_msp.c HAL MSP module</li>
+<li>UART/UART_Printf/Src/system_stm32u0xx.c STM32U0xx system source
+file</li>
+</ul>
+<p><b>Hardware and Software environment</b></p>
+<ul>
+<li><p>This example runs on STM32U083RCTx devices.</p></li>
+<li><p>This example has been tested with NUCLEO-U083RC board and can be
+easily tailored to any other supported device and development
+board.</p></li>
+<li><p>NUCLEO-U083RC Set-up Connect ST-Link cable to the PC USB port to
+display data on the HyperTerminal. A virtual COM port will then appear
+in the HyperTerminal.</p></li>
+<li><p>Hyperterminal configuration:</p>
+<ul>
+<li>Data Length = 7 Bits</li>
+<li>One Stop Bit</li>
+<li>Odd parity</li>
+<li>BaudRate = 115200 baud</li>
+<li>Flow control: None</li>
+</ul></li>
+</ul>
+<p><b>How to use it ?</b></p>
+<p>In order to make the program work, you must do the following :</p>
+<ul>
+<li>Open your preferred toolchain</li>
+<li>Rebuild all files and load your image into target memory</li>
+<li>Run the example</li>
+</ul>
+</section>
+</div>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="../../../../_htmresc/mini-st_2020.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h2 id="touchsensing_1touchkey-application-description"><b>TouchSensing_1touchkey Application Description</b></h2>
+<p>Use of the TSC to perform continuous acquisitions of one channel in Interrupt mode.</p>
+<p>This project is targeted to run on STM32U083xx devices on STM32U083C-DK board from STMicroelectronics.</p>
+<p>At the beginning of the main program the HAL_Init() function is called to reset all the peripherals, initialize the Flash interface and the systick. Then the SystemClock_Config() function is used to configure the system clock (SYSCLK) to run at 48 MHz.</p>
+<p>The TSC peripheral configuration is ensured by the HAL_TSC_Init() function. This later is calling the HAL_TSC_MspInit()function which core is implementing the configuration of the needed TSC resources according to the used hardware (CLOCK, GPIO and NVIC). You may update this function to change TSC configuration.</p>
+<p>First we initialize the hardware (leds). This step is assured by SystemHardwareInit().</p>
+<p>Push the USER button to start the example.</p>
+<p>The TSC acquisition is then initiated by TscInit(). When the end of acquisition occurs, the acquired data are affected to the TSCAcquisitionValue variable. Depending of value of TSCAcquisitionValue under the max threshold values, the corresponding LEDs are set ON. These max threshold values can be modified in top of main.c, due to disparity link to board layout quality</p>
+<p>The LEDs are used as follow:</p>
+<ul>
+<li>LED3 toggles when ECS is ON (when no touch is detected (all sensors are in the RELEASE state)).</li>
+<li>LED4 is ON when a touch is detected.</li>
+<li>LED4 is OFF when the touch is released.</li>
+<li>LED5 toggles when an error occurs.</li>
+</ul>
+<p>The LCD is used as follow:</p>
+<ul>
+<li>USE_LCD : To use or not the glass LCD.</li>
+</ul>
+<h4 id="notes"><b>Notes</b></h4>
+<ol type="1">
+<li><p>TSCx instance used and associated resources can be updated in “main.h” file depending hardware configuration used.</p></li>
+<li><p>TSCx_TS1_MAXTHRESHOLD can be modified if expected result is not satisfied. This threshold value is linked to the board layout quality.</p></li>
+<li><p>Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds) based on variable incremented in SysTick ISR. This implies that if HAL_Delay() is called from a peripheral ISR process, then the SysTick interrupt must have higher priority (numerically lower) than the peripheral interrupt. Otherwise the caller ISR process will be blocked. To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.</p></li>
+<li><p>The application need to ensure that the SysTick time base is always set to 1 millisecond to have correct HAL operation.</p></li>
+</ol>
+<h3 id="keywords"><b>Keywords</b></h3>
+<p>System, TSC, Input, Output, Alternate function, Toggle, Glass LCD</p>
+<h3 id="directory-contents"><b>Directory contents</b></h3>
+<ul>
+<li>TSC/TSC_BasicAcquisition_Interrupt/Inc/stm32u0xx_hal_conf.h HAL configuration file</li>
+<li>TSC/TSC_BasicAcquisition_Interrupt/Inc/stm32u0xx_it.h Interrupt handlers header file</li>
+<li>TSC/TSC_BasicAcquisition_Interrupt/Inc/main.h Header for main.c module</li>
+<li>TSC/TSC_BasicAcquisition_Interrupt/Inc/stm32u083c_discovery_conf.h STM32U083C-DK board configuration file</li>
+<li>TSC/TSC_BasicAcquisition_Interrupt/Src/stm32u0xx_it.c Interrupt handlers</li>
+<li>TSC/TSC_BasicAcquisition_Interrupt/Src/main.c Main program</li>
+<li>TSC/TSC_BasicAcquisition_Interrupt/Src/stm32u0xx_hal_msp.c HAL MSP file</li>
+<li>TSC/TSC_BasicAcquisition_Interrupt/Src/system_stm32u0xx.c STM32U0xx system source file</li>
+</ul>
+<h3 id="hardware-and-software-environment"><b>Hardware and Software environment</b></h3>
+<ul>
+<li><p>This example runs on STM32U083xx devices.</p></li>
+<li><p>This example has been tested with STM32U083C-DK (MB1933) board and can be easily tailored to any other supported device and development board.</p></li>
+</ul>
+<h3 id="how-to-use-it"><b>How to use it ?</b></h3>
+<p>In order to make the program work, you must do the following :</p>
+<ul>
+<li>Open your preferred toolchain</li>
+<li>Rebuild all files and load your image into target memory</li>
+<li>Run the example</li>
+</ul>
+</body>
+</html>

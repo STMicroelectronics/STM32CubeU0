@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="../../../../_htmresc/mini-st_2020.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<div class="row">
+<section id="spi_fullduplex_comit-example-description" class="col-sm-12 col-lg-8">
+<h2><b>SPI_FullDuplex_ComIT Example Description</b></h2>
+<p>Data buffer transmission/reception between two boards via SPI using
+Interrupt mode.</p>
+<ul>
+<li>Board: NUCLEO-U083RC (embeds a STM32U083RC device)</li>
+<li>CLK Pin: PA1 (CN8, pin 2)</li>
+<li>MISO Pin: PA11 (CN10, pin 14)</li>
+<li>MOSI Pin: PA12 (CN10, pin 12)</li>
+</ul>
+<p>HAL architecture allows user to easily change code to move to DMA or
+Polling mode. To see others communication modes please check following
+examples: SPI_FullDuplex_ComDMA SPI_FullDuplex_ComPolling</p>
+<p>At the beginning of the main program the HAL_Init() function is
+called to reset all the peripherals, initialize the Flash interface and
+the systick. Then the SystemClock_Config() function is used to configure
+the system clock (SYSCLK) to run at 48 MHz.</p>
+<p>The SPI peripheral configuration is ensured by the HAL_SPI_Init()
+function. This later is calling the HAL_SPI_MspInit()function which core
+is implementing the configuration of the needed SPI resources according
+to the used hardware (CLOCK, GPIO and NVIC). You may update this
+function to change SPI configuration.</p>
+<p>The SPI communication is then initiated. The
+HAL_SPI_TransmitReceive_IT() function allows the reception and the
+transmission of a predefined data buffer at the same time (Full Duplex
+Mode) The user can choose between Master and Slave through “#define
+MASTER_BOARD” in the “main.c” file.</p>
+<ul>
+<li>If the Master board is used, the “#define MASTER_BOARD” must be
+uncommented.</li>
+<li>If the Slave board is used the “#define MASTER_BOARD” must be
+commented.</li>
+</ul>
+<p>For this example the aTxBuffer is predefined and the aRxBuffer size
+is same as aTxBuffer.</p>
+<p>In a first step after the user press the User push-button, SPI Master
+starts the communication by sending aTxBuffer and receiving aRxBuffer
+through HAL_SPI_TransmitReceive_IT(), at the same time SPI Slave
+transmits aTxBuffer and receives aRxBuffer through
+HAL_SPI_TransmitReceive_IT(). The callback functions
+(HAL_SPI_TxRxCpltCallback and HAL_SPI_ErrorCallbackand) update the
+variable wTransferState used in the main function to check the transfer
+status. Finally, aRxBuffer and aTxBuffer are compared through
+Buffercmp() in order to check buffers correctness.</p>
+<p>STM32 board’s LEDs can be used to monitor the transfer status:</p>
+<ul>
+<li>LED4 toggles quickly on master board waiting User push-button to be
+pressed.</li>
+<li>LED4 turns ON if transmission/reception is complete and OK.</li>
+<li>LED4 toggles slowly when there is a timeout or an error in
+transmission/reception process.</li>
+</ul>
+<h4 id="notes"><b>Notes</b></h4>
+<ol type="1">
+<li><p>SPIx instance used and associated resources can be updated in
+“main.h” file depending hardware configuration used.</p></li>
+<li><p>You need to perform a reset on Slave board, then perform it on
+Master board to have the correct behaviour of this example.</p></li>
+<li><p>Care must be taken when using HAL_Delay(), this function provides
+accurate delay (in milliseconds) based on variable incremented in
+SysTick ISR. This implies that if HAL_Delay() is called from a
+peripheral ISR process, then the SysTick interrupt must have higher
+priority (numerically lower) than the peripheral interrupt. Otherwise
+the caller ISR process will be blocked. To change the SysTick interrupt
+priority you have to use HAL_NVIC_SetPriority() function.</p></li>
+<li><p>The application need to ensure that the SysTick time base is
+always set to 1 millisecond to have correct HAL operation.</p></li>
+</ol>
+<h3 id="keywords"><b>Keywords</b></h3>
+<p>SPI, Full-duplex, Transmission, Reception,</p>
+<h3 id="directory-contents"><b>Directory contents</b></h3>
+<ul>
+<li>SPI/SPI_FullDuplex_ComIT/Inc/stm32u0xx_hal_conf.h HAL configuration
+file</li>
+<li>SPI/SPI_FullDuplex_ComIT/Inc/stm32u0xx_it.h Interrupt handlers
+header file</li>
+<li>SPI/SPI_FullDuplex_ComIT/Inc/main.h Header for main.c module<br />
+</li>
+<li>SPI/SPI_FullDuplex_ComIT/Src/stm32u0xx_it.c Interrupt handlers</li>
+<li>SPI/SPI_FullDuplex_ComIT/Src/main.c Main program</li>
+<li>SPI/SPI_FullDuplex_ComIT/Src/system_stm32u0xx.c stm32u0xx system
+source file</li>
+<li>SPI/SPI_FullDuplex_ComIT/Src/stm32u0xx_hal_msp.c HAL MSP file</li>
+</ul>
+<h3 id="hardware-and-software-environment"><b>Hardware and Software
+environment</b></h3>
+<ul>
+<li><p>This example runs on STM32U083xx devices.</p></li>
+<li><p>This example has been tested with NUCLEO-U083RC board and can be
+easily tailored to any other supported device and development
+board.</p></li>
+<li><p>NUCLEO-U083RC Set-up</p>
+<ul>
+<li>Connect Master board SCK pin (PA1) to Slave Board SCK pin (PA1)
+(connector CN8, pin 2)</li>
+<li>Connect Master board MISO pin (PA11) to Slave Board MISO pin (PA11)
+(connector CN10, pin 14)</li>
+<li>Connect Master board MOSI pin (PA12) to Slave Board MOSI pin (PA12)
+(connector CN10, pin 12)</li>
+<li>Connect Master board GND to Slave Board GND</li>
+</ul></li>
+</ul>
+<h3 id="how-to-use-it"><b>How to use it ?</b></h3>
+<p>In order to make the program work, you must do the following:</p>
+<ul>
+<li>Open your preferred toolchain - Rebuild all files and load your image into target memory</li>
+<li>Uncomment “#define MASTER_BOARD” and load the project in Master Board</li>
+<li>Comment “#define MASTER_BOARD” and load the project in Slave Board</li>
+<li>Run the example</li>
+</ul>
+</section>
+</div>
+</body>
+</html>

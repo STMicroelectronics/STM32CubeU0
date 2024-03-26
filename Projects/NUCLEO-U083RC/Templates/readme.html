@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+  <link rel="stylesheet" href="_htmresc/mini-st_2020.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h2 id="templates-example-description"><b>Templates Example
+Description</b></h2>
+<p>This projects provides a reference template that can be used to build
+any firmware application.</p>
+<p>This directory provides a reference template project that can be used
+to build any firmware application for STM32U083xx devices using
+STM32CubeU0 HAL and running on NUCLEO-U083RC board from
+STMicroelectronics.</p>
+<h4 id="notes"><b>Notes</b></h4>
+<ol type="1">
+<li><p>Care must be taken when using HAL_Delay(), this function provides
+accurate delay (in milliseconds) based on variable incremented in
+SysTick ISR. This implies that if HAL_Delay() is called from a
+peripheral ISR process, then the SysTick interrupt must have higher
+priority (numerically lower) than the peripheral interrupt. Otherwise
+the caller ISR process will be blocked. To change the SysTick interrupt
+priority you have to use HAL_NVIC_SetPriority() function.</p></li>
+<li><p>The application needs to ensure that the SysTick time base is
+always set to 1 millisecond to have correct HAL operation.</p></li>
+</ol>
+<h3 id="directory-contents"><b>Directory contents</b></h3>
+<ul>
+<li>Templates/Src/main.c Main program</li>
+<li>Templates/Src/system_stm32u0xx.c STM32U0xx system clock
+configuration file</li>
+<li>Templates/Src/stm32u0xx_it.c Interrupt handlers</li>
+<li>Templates/Src/stm32u0xx_hal_msp.c HAL MSP module</li>
+<li>Templates/Inc/main.h Main program header file<br />
+</li>
+<li>Templates/Inc/stm32u0xx_hal_conf.h HAL Configuration file</li>
+<li>Templates/Inc/stm32u0xx_it.h Interrupt handlers header file</li>
+</ul>
+<h3 id="hardware-and-software-environment"><b>Hardware and Software
+environment</b></h3>
+<ul>
+<li><p>This example runs on STM32U083xx devices.</p></li>
+<li><p>This example has been compiled on EWARM 9.20.4</p></li>
+<li><p>This example has been tested with STMicroelectronics
+NUCLEO-U083RC (64 pins) board embedding a multispeed clock MSI and can
+be easily tailored to any other supported device and development
+board.</p></li>
+<li><p>NUCLEO-U083RC (64 pins) set-up:</p>
+<ul>
+<li>USART2 interface connected to ST-LINK</li>
+</ul></li>
+</ul>
+<h3 id="how-to-use-it"><b>How to use it ?</b></h3>
+<p>In order to make the program work, you must do the following :</p>
+<ul>
+<li>Open your preferred toolchain</li>
+<li>Rebuild all files and load your image into target memory</li>
+<li>Run the example</li>
+</ul>
+</body>
+</html>

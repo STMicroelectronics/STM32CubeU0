@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="../../../../_htmresc/mini-st_2020.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h2 id="oemirot_appli-application-description"><b>OEMiROT_Appli
+application Description</b></h2>
+<p>This project provides a OEMiROT boot path application example. Boot
+is performed through OEMiROT boot path after authenticity and the
+integrity checks of the project firmware and project data image.</p>
+<p>The application will display a menu on the console allowing to
+download a new version of the application firmware and the application
+data images. At next reset, the OEMiROT will decrypt and install these
+new versions after successful check of the authenticity and the
+integrity of each image.</p>
+<p>The maximum system clock frequency at 48Mhz is configured.</p>
+<p>For more details, refer to Wiki article available here : <a href="https://wiki.st.com/stm32mcu/wiki/Category:Security">Link to Security Wiki</a></p>
+<h3 id="keywords"><b>Keywords</b></h3>
+<p>OEMiROT, boot path, Root Of Trust, Security, mcuboot</p>
+<h3 id="directory-contents"><strong>Directory contents</strong></h3>
+<ul>
+<li>OEMiROT_Appli/Src/com.c UART low level interface</li>
+<li>OEMiROT_Appli/Src/common.c UART common functionalities</li>
+<li>OEMiROT_Appli/Src/data.c Data image example</li>
+<li>OEMiROT_Appli/Src/fw_update_app.c Firmware update interface</li>
+<li>OEMiROT_Appli/Src/low_level_device.c Flash low level device
+setting</li>
+<li>OEMiROT_Appli/Src/low_level_flash.c Flash low level interface</li>
+<li>OEMiROT_Appli/Src/main.c Main program</li>
+<li>OEMiROT_Appli/Src/stm32u0xx_it.c Interrupt handlers</li>
+<li>OEMiROT_Appli/Src/system_stm32u0xx.c System init file</li>
+<li>OEMiROT_Appli/Src/ymodem.c Ymodem support</li>
+<li>OEMiROT_Appli/Src/startup_stm32u083xx.s Startup file</li>
+<li>OEMiROT_Appli/Src/appli_flash_layout.h Flash layout header file</li>
+<li>OEMiROT_Appli/Src/com.h Header file for com.c</li>
+<li>OEMiROT_Appli/Src/common.h Header file for common.c</li>
+<li>OEMiROT_Appli/Src/data.h Header file for data.c</li>
+<li>OEMiROT_Appli/Src/fw_update_app.h Header file for
+fw_update_app.c</li>
+<li>OEMiROT_Appli/Src/low_level_flash.h Header file for
+low_level_flash.c</li>
+<li>OEMiROT_Appli/Inc/main.h Main program header file</li>
+<li>OEMiROT_Appli/Inc/stm32u0xx_hal_conf.h HAL driver Configuration
+file</li>
+<li>OEMiROT_Appli/Inc/stm32u0xx_it.h Interrupt handlers header file</li>
+<li>OEMiROT_Appli/Inc/ymodem.h Header file for Ymodem.c</li>
+<li>OEMiROT_Appli/Binary Application firmware image (application binary
++ MCUBoot header and metadata)</li>
+</ul>
+<h3 id="hardware-and-software-environment"><strong>Hardware and Software
+environment</strong></h3>
+<ul>
+<li>This example runs on STM32U083xx devices.</li>
+<li>This example has been tested with STMicroelectronics NUCLEO-U083RC
+(MB1932) board and can be easily tailored to any other supported device
+and development board.</li>
+<li>To print the application menu in your UART console you have to
+configure it using these parameters: Speed: 115200, Data: 8bits, Parity:
+None, stop bits: 1, Flow control: none.</li>
+</ul>
+<h3 id="how-to-use-it"><strong>How to use it ?</strong></h3>
+<p>This project is targeted to boot through <strong>OEMiROT boot
+path</strong>.</p>
+<p>Before compiling the project, you should first start the provisioning
+process. During the provisioning process, the linker files of project as
+well as the postbuild commands will be automatically updated.</p>
+<p>The <strong>provisioning process</strong>
+(ROT_Provisioning/OEMiROT/provisioning.bat) is divided in 4 majors steps
+:</p>
+<ul>
+<li><p>Step 1 : Selecting the RDP level</p>
+<li><p>Step 2 : Boot and local loader building</p>
+<ul>
+<li>OEMiROT boot binary: build OEMiROT_Boot project</li>
+<li>OEMiROT Loader binary: build OEMiROT_Loader project</li>
+</ul>
+<li><p>Step 3 : Images generation</p>
+<ul>
+<li>Code firmware image generation: automatically generated at the end
+of compilation (postbuild command)</li>
+<li>Data image generation with TrustedPackageCreator, if data image
+enabled</li>
+</ul></li>
+<li><p>Step 4 : Provisioning</p>
+<ul>
+<li>Programming the option bytes</li>
+<li>Flashing the images</li>
+<li>Setting the RDP level</li>
+</ul></li>
+</ul>
+<p>After application startup, check in your “UART console” the menu is
+well displayed:</p>
+<pre><code>======================== Main Menu ========================
+ Toggle LED -------------------------------------------- 1
+ New Firmware Image ------------------------------------ 2
+ Display Data ------------------------------------------ 3
+ Selection :
+</code></pre>
+<p>To update the application firmware and/or the application data image
+version, you must:</p>
+<ul>
+<li>Select the function “New Firmware Image”</li>
+<li>Download the new image(s)</li>
+<li>Reset the board</li>
+<li>After authenticity and integrity checks the new images are decrypted
+and installed.</li>
+</ul>
+<h4 id="notes"><strong>Notes:</strong></h4>
+<ol start="2" type="1">
+<li><p>Two versions of ROT_AppliConfig are available: windows executable
+and python version. By default, the windows executable is selected. It
+is possible to switch to python version by:</p>
+<ul>
+<li>installing python (Python 3.10 or newer) with the required modules
+listed in requirements.txt.</li>
+</ul>
+<pre><code>pip install -r requirements.txt
+</code></pre>
+<ul>
+<li>having python in execution path variable</li>
+<li>deleting main.exe in Utilities_Software_AppliConfig</li>
+</ul></li>
+</ol>
+</body>
+</html>

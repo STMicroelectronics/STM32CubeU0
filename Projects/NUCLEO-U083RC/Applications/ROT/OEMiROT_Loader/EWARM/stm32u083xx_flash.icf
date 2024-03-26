@@ -1,0 +1,26 @@
+define memory mem with size = 4G;
+define symbol __ICFEDIT_size_cstack__ = 0x400;
+define symbol __ICFEDIT_size_heap__ = 0x400;
+
+define exported symbol LOADER_CODE_START = 0x8018000;    /* This define is updated automatically by OEMiROT_Boot project */
+define exported symbol LOADER_CODE_SIZE = 0x4000;    /* This define is updated automatically by OEMiROT_Boot project */
+define exported symbol LOADER_DATA_START = 0x20000000;
+define exported symbol LOADER_DATA_SIZE = 0x2000;
+
+define region CODE_region = mem:[from LOADER_CODE_START size LOADER_CODE_SIZE];
+define region RAM_region = mem:[from (LOADER_DATA_START) size (LOADER_DATA_SIZE)];
+
+define block CSTACK with alignment = 8, size = __ICFEDIT_size_cstack__ { };
+define block HEAP with alignment = 8, size = __ICFEDIT_size_heap__ { };
+
+define block ER_CODE with alignment = 8 {readonly};
+define block ER_CODE_END with alignment = 32, size = 0 { };
+
+place at address mem:LOADER_CODE_START { readonly section .intvec };
+define block ER_DATA with maximum size = 0x10000, alignment = 8 {readwrite};
+
+do not initialize { section .noinit };
+initialize by copy { readwrite };
+
+place in CODE_region { block ER_CODE , last block ER_CODE_END,};
+place in RAM_region { block ER_DATA, block CSTACK, block HEAP };

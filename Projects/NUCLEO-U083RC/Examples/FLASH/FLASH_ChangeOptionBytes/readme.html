@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="../../../../_htmresc/mini-st_2020.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<body>
+<div class="row">
+<section id="flash_changeoptionbytes-example-description" class="col-sm-12 col-lg-8">
+<h2><b>FLASH_ChangeOptionBytes Example Description</b></h2>
+<p>How to configure and modify the Option Bytes of the Flash memory controller.</p>
+<p>At the beginning of the main program the HAL_Init() function is called to reset all the peripherals, initialize the Flash interface and the systick. Then the SystemClock_Config() function is used to configure the system clock (SYSCLK) to run at 56 MHz.</p>
+<p>After Reset, the Flash memory controller is locked. Dedicated functions are used to enable the FLASH control register access and the FLASH option bytes register access.</p>
+<p>The Option Bytes modification procedure is done by filling the Option Bytes init structure giving the option byte type and the option parameters. At this stage, the new option bytes will be programmed through the HAL FLASH OB programming API. Then, an OBL_Launch command is executed to start option bytes loading.</p>
+<p>Once this operation is launched, the STM32U0 device will reset and debugger connection will be lost.</p>
+<h4 id="notes"><b>Notes</b></h4>
+<p>In this example, the user can switch between the RDP Levels using the USER_BUTTON. The NUCLEO-U083RC board LEDs can be used to monitor the RDP status:</p>
+<ul>
+<li>LED4 is blinking with a frequency of 200ms when RDP Level is equal to 0.</li>
+<li>LED4 is blinking with a frequency 1s when RDP Level is equal to 1.</li>
+<li>Due to STLink’s limitation, make sure to disable the STLink Mass Storage interface by using STLinkUpgrade and changing the type from Debug+VCP+Mass Storage to Debug+VCP.</li>
+<li>After flashing the example on the board, make sure to remove the ST-Link jumper from the board and put it in 5V_VIN.</li>
+</ul>
+<h3 id="keywords"><b>Keywords</b></h3>
+<p>FLASH, Memory</p>
+<h3 id="directory-contents"><b>Directory contents</b></h3>
+<ul>
+<li>FLASH_ChangeOptionBytes/Src/main.c Main program</li>
+<li>FLASH_ChangeOptionBytes/Src/system_stm32u0xx.c STM32U0xx system clock configuration file</li>
+<li>FLASH_ChangeOptionBytes/Src/stm32u0xx_it.c Interrupt handlers</li>
+<li>FLASH_ChangeOptionBytes/Src/stm32u0xx_hal_msp.c HAL MSP module</li>
+<li>FLASH_ChangeOptionBytes/Inc/main.h Main program header file</li>
+<li>FLASH_ChangeOptionBytes/Inc/stm32u0xx_hal_conf.h HAL Configuration file</li>
+<li>FLASH_ChangeOptionBytes/Inc/stm32u0xx_it.h Interrupt handlers header file</li>
+</ul>
+<h3 id="hardware-and-software-environment"><b>Hardware and Software environment</b></h3>
+<ul>
+<li><p>This example runs on STM32U083xx devices.</p></li>
+<li><p>This example has been tested with NUCLEO-U083RC board and can be easily tailored to any other supported device and development board.</p></li>
+</ul>
+<h3 id="how-to-use-it"><b>How to use it ?</b></h3>
+<p>In order to make the program work, you must do the following :</p>
+<ul>
+<li>Open your preferred toolchain</li>
+<li>Rebuild all files and load your image into target memory</li>
+<li>Run the example</li>
+</ul>
+</body>
+</html>

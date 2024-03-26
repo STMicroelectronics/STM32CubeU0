@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="../../../../_htmresc/mini-st_2020.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<div class="row">
+<section id="lcd_segmentsdrive-example-description" class="col-sm-12 col-lg-8">
+<h2><b>LCD_SegmentsDrive Example Description</b></h2>
+<p>How to use the embedded LCD glass controller to drive the on-board
+LCD glass by Pacific Display Devices.</p>
+<p>The goal of this example is to display a “STM32U0xx” string on LCD
+glass in scrolling mode. The scrolling number is fixed to 100 repetition
+and the speed is fixed to SCROLL_SPEED_LOW ms (defined in
+stm32u083c_discovery_glass_lcd.h file).</p>
+<h3 id="notes"><b>Notes</b></h3>
+<ol type="1">
+<li><p>Care must be taken when using HAL_Delay(), this function provides
+accurate delay (in milliseconds) based on variable incremented in
+SysTick ISR. This implies that if HAL_Delay() is called from a
+peripheral ISR process, then the SysTick interrupt must have higher
+priority (numerically lower) than the peripheral interrupt. Otherwise
+the caller ISR process will be blocked. To change the SysTick interrupt
+priority you have to use HAL_NVIC_SetPriority() function.</p></li>
+<li><p>The application need to ensure that the SysTick time base is
+always set to 1 millisecond to have correct HAL operation.</p></li>
+</ol>
+<h3 id="keywords"><b>Keywords</b></h3>
+<p>LCD</p>
+<h3 id="directory-contents"><b>Directory contents</b></h3>
+<ul>
+<li>LCD/LCD_SegmentsDrive/Inc/stm32u0xx_hal_conf.h HAL configuration
+file</li>
+<li>LCD/LCD_SegmentsDrive/Inc/stm32u0xx_it.h Interrupt handlers header
+file</li>
+<li>LCD/LCD_SegmentsDrive/Inc/main.h Header for main.c module<br />
+</li>
+<li>LCD/LCD_SegmentsDrive/Src/stm32u0xx_it.c Interrupt handlers</li>
+<li>LCD/LCD_SegmentsDrive/Src/main.c Main program</li>
+<li>LCD/LCD_SegmentsDrive/Src/stm32u0xx_hal_msp.c HAL MSP file</li>
+<li>LCD/LCD_SegmentsDrive/Src/system_stm32u0xx.c STM32U0xx system source
+file</li>
+</ul>
+<h3 id="hardware-and-software-environment"><b>Hardware and Software
+environment</b></h3>
+<ul>
+<li><p>This example runs on STM32U0xx devices.</p></li>
+<li><p>This example has been tested with STMicroelectronics
+STM32U083C-DK board and can be easily tailored to any other supported
+device and development board.</p></li>
+</ul>
+<h3 id="how-to-use-it"><b>How to use it ?</b></h3>
+<p>In order to make the program work, you must do the following :</p>
+<ul>
+<li>Open your preferred toolchain</li>
+<li>Rebuild all files and load your image into target memory</li>
+<li>Run the example</li>
+</ul>
+</body>
+</html>

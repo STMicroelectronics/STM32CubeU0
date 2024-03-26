@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="../../../_htmresc/mini-st_2020.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h2 id="templates-rot-description"><b>Templates ROT Description</b></h2>
+<p>This project provides a OEMiROT boot path application template. Boot is performed through OEMiROT boot path after authenticity and the integrity checks of the project firmware and project data image.</p>
+<p>This project template is based on the STM32Cube HAL API.</p>
+<p>At the beginning of the main program, the HAL_Init() function is called to reset all the peripherals, initialize the Flash interface and the systick.</p>
+<p>The SystemClock_Config() function is used to configure the system clock (SYSCLK)</p>
+<p>The maximum system clock frequency at 48Mhz is configured.</p>
+<p>For more details, refer to Wiki article available here : <a href="https://wiki.st.com/stm32mcu/wiki/Category:Security">Link to Security Wiki</a></p>
+<h3 id="keywords"><b>Keywords</b></h3>
+<p>OEMiROT, boot path, Root Of Trust, Security, mcuboot</p>
+<h3 id="directory-contents"><b>Directory contents</b></h3>
+<ul>
+<li>Templates/Src/main.c Main program</li>
+<li>Templates/Src/system_stm32u0xx.c STM32U0xx system clock configuration file</li>
+<li>Templates/Src/stm32u0xx_it.c Interrupt handlers</li>
+<li>Templates/Src/stm32u0xx_hal_msp.c HAL MSP module</li>
+<li>Templates/Inc/main.h Main program header file</li>
+<li>Templates/Inc/stm32u0xx_hal_conf.h HAL Configuration file</li>
+<li>Templates/Inc/stm32u0xx_it.h Interrupt handlers header file</li>
+<li>OEMiROT_Appli/Binary Application firmware image (application binary + MCUBoot header and metadata)</li>
+</ul>
+<h3 id="hardware-and-software-environment"><b>Hardware and Software environment</b></h3>
+<ul>
+<li>This example runs on STM32U083xx devices.</li>
+<li>This example has been tested with STMicroelectronics NUCLEO-U083RC (MB1932) board and can be easily tailored to any other supported device and development board.</li>
+<li>To print the application menu in your UART console you have to configure it using these parameters: Speed: 115200, Data: 8bits, Parity: None, stop bits: 1, Flow control: none.</li>
+</ul>
+<h3 id="how-to-use-it"><b>How to use it ?</b></h3>
+<p>This project is targeted to boot through <strong>OEMiROT boot path</strong>.</p>
+<p>Before compiling the project, you should first start the provisioning process. During the provisioning process, the linker files of project as well as the postbuild commands will be automatically updated.</p>
+<p>The <strong>provisioning process</strong> (ROT_Provisioning/OEMiROT/provisioning.bat) is divided in 4 majors steps :</p>
+<ul>
+<li><p>Step 1 : Selecting the RDP level</p></li>
+<li><p>Step 2 : Boot and local loader building</p>
+<ul>
+<li>OEMiROT boot binary: build OEMiROT_Boot project</li>
+<li><p>OEMiROT Loader binary: build OEMiROT_Loader project* Step 3 : Images generation</p></li>
+<li>Code firmware image generation: automatically generated at the end of compilation (postbuild command)</li>
+<li>Data image generation with TrustedPackageCreator, if data image enabled</li>
+</ul></li>
+<li><p>Step 4 : Provisioning</p>
+<ul>
+<li>Programming the option bytes</li>
+<li>Flashing the images</li>
+<li>Setting the RDP level</li>
+</ul></li>
+</ul>
+<h4 id="notes"><b>Notes</b></h4>
+<ol start="2" type="1">
+<li><p>Two versions of ROT_AppliConfig are available: windows executable and python version. By default, the windows executable is selected. It is possible to switch to python version by:</p>
+<ul>
+<li>installing python (Python 3.10 or newer) with the required modules listed in requirements.txt.</li>
+</ul>
+<pre><code>pip install -r requirements.txt
+</code></pre>
+<ul>
+<li>having python in execution path variable</li>
+<li>deleting main.exe in Utilities_Software_AppliConfig</li>
+</ul></li>
+</ol>
+</body>
+</html>
