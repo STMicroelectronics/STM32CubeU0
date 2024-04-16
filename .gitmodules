@@ -14,3 +14,11 @@
 	path = Drivers/BSP/STM32U083C-DK
 	url = https://github.com/STMicroelectronics/stm32u083c-dk-bsp.git
 	branch = main
+[submodule "Drivers/BSP/Components/Common"]
+	path = Drivers/BSP/Components/Common
+	url = https://github.com/STMicroelectronics/stm32-bsp-common.git
+	branch = main
+[submodule "Drivers/BSP/Components/stts22h"]
+	path = Drivers/BSP/Components/stts22h
+	url = https://github.com/STMicroelectronics/stm32-stts22h.git
+	branch = main
