@@ -4,7 +4,7 @@
 This project provides a OEMiSB boot path application example. Boot is performed through OEMiSB boot path after integrity checks of the project firmware image.
 
 
-The application will display a menu on the console. If data is available, three menus are provided that allows reading, writing and erasing data.
+The application will display a menu on the console. If data is available, three menus are provided that allow reading, writing and erasing data.
 
 
 The maximum system clock frequency at 48Mhz is configured.
@@ -32,8 +32,8 @@ OEMiSB, boot path, Root Of Trust, Security, mcuboot
 ### **Hardware and Software environment**
 
 
-* This example runs on STM32U031xx devices.
-* This example has been tested with STMicroelectronics NUCLEO-U031R8 (MB1932)
+* This example runs on STM32U0xx devices.
+* This example has been tested with STMicroelectronics stm32u0xx (MB1932)
 board and can be easily tailored to any other supported device
 and development board.
 * To print the application menu in your UART console you have to configure it using these parameters:
@@ -53,14 +53,20 @@ of the project will be automatically updated.
 The **provisioning process** (ROT\_Provisioning/OEMiSB/provisioning.bat) is divided in 3 majors steps :
 
 
-* Step 1 : Images generation
+* Step 1 : Product configuration
 
 
 	+ Select RDP Level
 	+ Select data area size
+
+* Step 2 : Image generation
+
+
 	+ Build OEMiSB\_Boot project
 	+ Build OEMiSB\_Appli project
-* Step 2 : Provisioning
+
+
+* Step 3 : Provisioning
 
 
 	+ Programming the option bytes
@@ -94,14 +100,14 @@ It is possible to read, write or erase data
 
 
 
-2. Two versions of ROT\_AppliConfig are available: windows executable and python version. By default, the windows executable is selected. It
+Two versions of ROT\_AppliConfig are available: windows executable and python version. By default, the windows executable is selected. It
 is possible to switch to python version by:
 
 
 	* installing python (Python 3.10 or newer) with the required modules listed in requirements.txt.
 	```
 	pip install -r requirements.txt
-	
+
 	```
 	* having python in execution path variable
 	* deleting main.exe in Utilities\PC\_Software\ROT\_AppliConfig\dist

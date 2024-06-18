@@ -51,7 +51,7 @@ System, RCC, PLL, PLLCLK, SYSCLK, LSI, Switch Clock, Oscillator,
 
 ### <b>Hardware and Software environment</b> 
 
-  - This example runs on STM32U083RCTx devices.
+  - This example runs on STM32U083MCTx devices.
 
   - This example has been tested with STM32U083C-DISCO
     board and can be easily tailored to any other supported device

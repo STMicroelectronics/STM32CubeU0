@@ -202,7 +202,7 @@ const struct mpu_region_cfg_t mpu_region_boot_cfg[] =
     FLOW_CTRL_MPU_I_CH_R6,
 #endif /* FLOW_CONTROL */
   },
-/* Region 7 : data area depends on configuration done during provisioning process */
+  /* Region 7 : data area depends on configuration done during provisioning process */
   {
     {
 #if (DATA_SIZE > 0)
@@ -280,7 +280,7 @@ void LL_SECU_CheckStaticProtections(void)
   {
     Error_Handler();
   }
-  /* Check secure user flash protection (HDP) */
+  /* Check secure user flash protection */
   end = (FLASH_BOOT_AREA_SIZE - 1) / FLASH_PAGE_SIZE;
   if ((end > flash_option_bytes_bank.HDPEndPage)
    || (flash_option_bytes_bank.HDPState == 0xB4))

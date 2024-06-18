@@ -3,7 +3,7 @@
 How to use the HAL UART API for reception to IDLE event in circular DMA mode.
 
 
-- Board: STM32U083C-DISCO (embeds a STM32U083RCTx device)
+- Board: STM32U083C-DISCO (embeds a STM32U083MCTx device)
 - UART Instance : LPUART1
 - Tx Pin: PA2
 - Rx Pin: PA3
@@ -95,9 +95,9 @@ Connectivity, UART/USART, baud rate, RS-232, full-duplex, DMA, parity, stop bit,
 
 ### <b>Hardware and Software environment</b>
 
-  - This example runs on STM32U083RCTx devices.
+  - This example runs on STM32U083MCTx devices.
   - This example has been tested with one STM32U083C-DISCO board embedding
-    a STM32U083RCTx device and can be easily tailored to any other supported device
+    a STM32U083MCTx device and can be easily tailored to any other supported device
     and development board.
 
   - STM32U083C-DISCO Set-up

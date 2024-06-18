@@ -6,6 +6,10 @@ setlocal EnableDelayedExpansion
 :: Getting the CubeProgammer_cli path
 call ../env.bat
 
+::Updated by boot postbuild
+set data_image_number=1
+set ext_loader=1
+
 :: CubeProgammer path and input files
 set ob_flash_programming="ob_flash_programming.bat"
 
@@ -16,6 +20,7 @@ set appli_dir="../../%oemirot_boot_path_project%"
 set app_bin="../%appli_dir%/Binary/rot_app.bin"
 set app_enc_sign_bin="../%appli_dir%/Binary/rot_app_enc_sign.bin"
 set code_image_file="%projectdir%Images\OEMiROT_Code_Image.xml"
+set data_image_file="%projectdir%Images\OEMiRoT_Data_Image.xml"
 set boot_cfg_h="%cube_fw_path%\Projects\NUCLEO-U083RC\Applications\ROT\OEMiROT_Boot\Inc\boot_hal_cfg.h"
 
 :: Initial configuration
@@ -101,7 +106,6 @@ echo.
 if [%1] neq [AUTO] pause >nul
 
 ::update xml file
-if "%isGeneratedByCubeMX%" == "true" goto :cubemx1
 set "command=%python%%applicfg% xmlval -v %app_bin% --string -n "Firmware binary input file" %code_image_file%"
 %command%
 IF !errorlevel! NEQ 0 goto :step_error
@@ -115,20 +119,36 @@ echo        Press any key to continue...
 echo.
 if [%1] neq [AUTO] pause >nul
 
+if  "%ext_loader%" == "0" (goto :no_loader)
 echo    * Loader firmware image generation
 echo        Open the OEMiROT_Loader project with preferred toolchain and rebuild all files.
 echo        Press any key to continue...
 echo.
 if [%1] neq [AUTO] pause >nul
 
+:no_loader
+
+
+if  "%data_image_number%" == "0" (goto :no_data)
+echo    * Data generation (if Data image is enabled)
+echo        Select OEMiROT_Data_Image.xml(Default path is \ROT\Provisioning\OEMiROT\OEMiROT_Data_Image.xml)
+echo        Generate the data_enc_sign.hex image
+echo        Press any key to continue...
+echo.
+%stm32tpccli% -pb %data_image_file% > %state_change_log%
+if !errorlevel! neq 0 goto :step_error
+
+:no_data
+
+
 :: ========================================================= OEM2 key provisioning ==========================================================
 set "action=Provisioning of OEM2 key : %oem2_key%"
+set current_log_file=%state_change_log%
 echo    * %action%
 echo.
 set "command=%stm32programmercli% %connect_reset% -lockRDP2 %oem2_key%"
-echo %command% >> %state_change_log%
 %command% >> %state_change_log%
-IF !errorlevel! NEQ 0 goto :error
+IF !errorlevel! NEQ 0 goto :step_error
 
 :: ================================================== Option Bytes and flash programming ===================================================
 set "action=Programming the option bytes and flashing the images..."
@@ -148,10 +168,14 @@ echo.
 set "action=Setting RDP level %RDP_level%"
 set current_log_file=%state_change_log%
 echo    * %action%
-set "command=%stm32programmercli% %connect_no_reset% -ob RDP=%rdp_value%"
-echo %command% >> %state_change_log%
+set "command=%stm32programmercli% %connect_reset% -ob RDP=%rdp_value%"
 %command% >> %state_change_log%
 echo.
+if "%rdp_value%" == "0xAA" ( goto final_execution )
+echo    * Please unplug USB cable and plug it again to recover SWD Connection.
+echo        Press any key to continue...
+echo.
+if [%1] neq [AUTO] pause >nul
 :: In RDP 2, the connection with the board is lost and the return value of the command cannot be verified
 goto final_execution
 
@@ -176,4 +200,5 @@ echo ===== See %current_log_file% for details. Then try again.
 echo =====
 cmd /k
 exit 1
+
 

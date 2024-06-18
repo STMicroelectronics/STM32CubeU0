@@ -103,7 +103,7 @@
         <bEvRecOn>1</bEvRecOn>
         <bSchkAxf>0</bSchkAxf>
         <bTchkAxf>0</bTchkAxf>
-        <nTsel>6</nTsel>
+        <nTsel>0</nTsel>
         <sDll></sDll>
         <sDllPa></sDllPa>
         <sDlgDll></sDlgDll>
@@ -114,23 +114,23 @@
         <tDlgDll></tDlgDll>
         <tDlgPa></tDlgPa>
         <tIfile></tIfile>
-        <pMon>STLink\ST-LINKIII-KEIL_SWO.dll</pMon>
+        <pMon>BIN\UL2CM3.DLL</pMon>
       </DebugOpt>
       <TargetDriverDllRegistry>
         <SetRegEntry>
           <Number>0</Number>
-          <Key>ARMRTXEVENTFLAGS</Key>
-          <Name>-L70 -Z18 -C0 -M0 -T1</Name>
+          <Key>UL2CM3</Key>
+          <Name>UL2CM3(-S0 -C0 -P0 )  -FN1 -FC2000 -FD20000000 -FF0STM32U0xx_256k -FL040000 -FS08000000 -FP0($$Device:STM32U083MCTx$CMSIS\Flash\STM32U0xx_256k.FLM)</Name>
         </SetRegEntry>
         <SetRegEntry>
           <Number>0</Number>
           <Key>ST-LINKIII-KEIL_SWO</Key>
-          <Name>-U0669FF525383874867073334 -O206 -SF4000 -C0 -A0 -I0 -HNlocalhost -HP7184 -P1 -N00("ARM CoreSight SW-DP") -D00(6BA02477) -L00(0) -TO131090 -TC48000000 -TT10000000 -TP21 -TDS8017 -TDT0 -TDC1F -TIEFFFFFFFF -TIP8 -FO7 -FD20000000 -FC2000 -FN1 -FF0STM32U0xx_256k.FLM -FS08000000 -FL040000 -FP0($$Device:STM32U083RCIx$CMSIS\Flash\STM32U0xx_256k.FLM)</Name>
+          <Name>UL2CM3(-S0 -C0 -P0 )  -FN1 -FC2000 -FD20000000 -FF0STM32U0xx_256k -FL040000 -FS08000000 -FP0($$Device:STM32U083MCTx$CMSIS\Flash\STM32U0xx_256k.FLM)</Name>
         </SetRegEntry>
         <SetRegEntry>
           <Number>0</Number>
-          <Key>UL2CM3</Key>
-          <Name>UL2CM3(-S0 -C0 -P0 ) -FN1 -FC2000 -FD20000000 -FF0STM32U0xx_256k -FL040000 -FS08000000 -FP0($$Device:STM32U083RCIx$CMSIS\Flash\STM32U0xx_256k.FLM)</Name>
+          <Key>ARMRTXEVENTFLAGS</Key>
+          <Name>-L70 -Z18 -C0 -M0 -T1</Name>
         </SetRegEntry>
         <SetRegEntry>
           <Number>0</Number>

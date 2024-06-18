@@ -69,6 +69,9 @@
 
     <p id="STM32U0xxImportantLink">
       <div>Reference materials available on <a href="http://www.st.com/stm32cubefw" target="_blank">www.st.com/stm32cubefw</a></div>
+      <ul>
+        <li><a href="https://www.st.com/resource/en/user_manual/um3313-stm32cubeu0-stm32u083cdk-demonstration-firmware-stmicroelectronics.pdf" target="_blank">UM3313</a>: STM32CubeU0  STM32U083C-DK demonstration firmware.</li>
+      </ul>
     </p>
 		<table border='1' bgcolor='#f0f0fF' >
 			<tr align=center style="background-repeat: no-repeat;background-position: right center;background-color: #39A9DC;color: #FFF;">
@@ -80,24 +83,6 @@
 				<td>NUCLEO-U083RC</td>
 				<td>NUCLEO-U031R8</td>
 			</tr>
-      <tr align=center>
-        <td style="background-repeat: no-repeat;background-position: right center;background-color: #39A9DC;color: #FFF;" rowspan=2><p id="Templates_ROT">Templates_ROT</p></td>
-        <td align=left rowspan=1><p id="-">-</p></td>
-        <td align=left><p id="-">-</p></td>
-        <td align=left>
-This project provides a OEMiROT boot path application template. Boot is performed through OEMiROT boot path after authenticity and the integrity checks of the project firmware and project data
-image.
-</td>
-        <td>-</td>
-        <td><font size="5" color=green>X</font></td>
-        <td>-</td>
-      </tr>
-      <tr style="background-repeat: no-repeat;background-position: right center;background-color: #39A9DC;color: #FFF;" align=center>
-        <td colspan="3"><b>Total number of templates_rot: 1</b></td>
-        <td>0</td>
-        <td>1</td>
-        <td>0</td>
-      </tr>
       <tr align=center>
         <td style="background-repeat: no-repeat;background-position: right center;background-color: #39A9DC;color: #FFF;" rowspan=2><p id="Templates_Board">Templates_Board</p></td>
         <td align=left rowspan=1><p id="-">-</p></td>
@@ -153,6 +138,24 @@ architecture. All modules can be reused separately in standalone applications.
         <td>0</td>
       </tr>
       <tr align=center>
+        <td style="background-repeat: no-repeat;background-position: right center;background-color: #39A9DC;color: #FFF;" rowspan=2><p id="Templates_ROT">Templates_ROT</p></td>
+        <td align=left rowspan=1><p id="-">-</p></td>
+        <td align=left><p id="-">-</p></td>
+        <td align=left>
+This project provides a OEMiROT boot path application template. Boot is performed through OEMiROT boot path after authenticity and the integrity checks of the project firmware and project data
+image.
+</td>
+        <td>-</td>
+        <td><font size="5" color=green>X</font></td>
+        <td>-</td>
+      </tr>
+      <tr style="background-repeat: no-repeat;background-position: right center;background-color: #39A9DC;color: #FFF;" align=center>
+        <td colspan="3"><b>Total number of templates_rot: 1</b></td>
+        <td>0</td>
+        <td>1</td>
+        <td>0</td>
+      </tr>
+      <tr align=center>
         <td style="background-repeat: no-repeat;background-position: right center;background-color: #39A9DC;color: #FFF;" rowspan=2><p id="Templates_LL">Templates_LL</p></td>
         <td align=left rowspan=1><p id="-">-</p></td>
         <td align=left><p id="Starter project">Starter project</p></td>
@@ -170,7 +173,7 @@ This projects provides a reference template through the LL API that can be used 
         <td>1</td>
       </tr>
       <tr align=center>
-        <td style="background-repeat: no-repeat;background-position: right center;background-color: #39A9DC;color: #FFF;" rowspan=124><p id="Examples">Examples</p></td>
+        <td style="background-repeat: no-repeat;background-position: right center;background-color: #39A9DC;color: #FFF;" rowspan=125><p id="Examples">Examples</p></td>
         <td align=left rowspan=1><p id="-">-</p></td>
         <td align=left><p id="BSP">BSP</p></td>
         <td align=left>
@@ -715,7 +718,7 @@ This example shows how to configure the LPTIM peripheral in Encoder mode.
       <tr align=center>
         <td align=left><p id="LPTIM_PWMExternalClock">LPTIM_PWMExternalClock</p></td>
         <td align=left>
-How to configure and use, through the HAL LPTIM API, the LPTIM peripheral using an external counter clock, 
+How to configure and use, through the HAL LPTIM API, the LPTIM peripheral using an external counter clock,
 to generate a PWM signal at the lowest power consumption.
 </td>
         <td>-</td>
@@ -808,7 +811,7 @@ How to configure the system to measure the current consumption in different low-
 </td>
         <td>-</td>
         <td><font size="5" color=green>X</font></td>
-        <td>-</td>
+        <td><font size="5" color=green>X</font></td>
       </tr>
       <tr align=center>
         <td align=left><p id="PWR_PVD">PWR_PVD</p></td>
@@ -889,7 +892,7 @@ or RTC wakeup timer.
         <td><font size="5" color=green>X</font></td>
       </tr>
       <tr align=center>
-        <td align=left rowspan=6><p id="RCC">RCC</p></td>
+        <td align=left rowspan=7><p id="RCC">RCC</p></td>
         <td align=left><p id="RCC_CRS_Synchronization_IT">RCC_CRS_Synchronization_IT</p></td>
         <td align=left>
 Configuration of the clock recovery service (CRS) in Interrupt mode, using the RCC HAL API.
@@ -913,6 +916,15 @@ Configuration of the clock recovery system (CRS) in Polling mode, using the RCC 
 Configuration of the system clock (SYSCLK) and modification of the clock settings in Run mode, using the RCC HAL API.
 </td>
         <td><font size="5" color=green>CubeMx</font></td>
+        <td><font size="5" color=green>CubeMx</font></td>
+        <td>-</td>
+      </tr>
+      <tr align=center>
+        <td align=left><p id="RCC_ClockConfig_MaxFreq">RCC_ClockConfig_MaxFreq</p></td>
+        <td align=left>
+Configuration of the system clock (SYSCLK) to the maximum frequency (56MHz), using the RCC HAL API.
+</td>
+        <td>-</td>
         <td><font size="5" color=green>CubeMx</font></td>
         <td>-</td>
       </tr>
@@ -1395,13 +1407,13 @@ generates an MCU WWDG reset when a predefined time period has elapsed.
         <td>-</td>
       </tr>
       <tr style="background-repeat: no-repeat;background-position: right center;background-color: #39A9DC;color: #FFF;" align=center>
-        <td colspan="3"><b>Total number of examples: 159</b></td>
+        <td colspan="3"><b>Total number of examples: 161</b></td>
         <td>29</td>
-        <td>103</td>
-        <td>27</td>
+        <td>104</td>
+        <td>28</td>
       </tr>
       <tr align=center>
-        <td style="background-repeat: no-repeat;background-position: right center;background-color: #39A9DC;color: #FFF;" rowspan=81><p id="Examples_LL">Examples_LL</p></td>
+        <td style="background-repeat: no-repeat;background-position: right center;background-color: #39A9DC;color: #FFF;" rowspan=83><p id="Examples_LL">Examples_LL</p></td>
         <td align=left rowspan=9><p id="ADC">ADC</p></td>
         <td align=left><p id="ADC_AnalogWatchdog_Init">ADC_AnalogWatchdog_Init</p></td>
         <td align=left>
@@ -1649,7 +1661,7 @@ is initialized with LL initialization function to demonstrate LL init usage.
         <td><font size="5" color=green>CubeMx</font></td>
       </tr>
       <tr align=center>
-        <td align=left rowspan=9><p id="I2C">I2C</p></td>
+        <td align=left rowspan=11><p id="I2C">I2C</p></td>
         <td align=left><p id="I2C_OneBoard_AdvCommunication_DMAAndIT_Init">I2C_OneBoard_AdvCommunication_DMAAndIT_Init</p></td>
         <td align=left>
 How to exchange data between an I2C master device in DMA mode and an I2C slave 
@@ -1722,6 +1734,22 @@ with LL unitary service functions to optimize for performance and size.
 How to transmit data bytes from an I2C master device using polling mode
 to an I2C slave device using interrupt mode. The peripheral is initialized
 with LL unitary service functions to optimize for performance and size.
+</td>
+        <td>-</td>
+        <td><font size="5" color=green>CubeMx</font></td>
+        <td>-</td>
+      </tr>
+      <tr align=center>
+        <td align=left><p id="I2C_TwoBoards_MultiMasterIT_Master">I2C_TwoBoards_MultiMasterIT_Master</p></td>
+        <td align=left>How to handle I2C data buffer communication between two boards, using an interrupt and two Masters and one Slave.
+</td>
+        <td>-</td>
+        <td><font size="5" color=green>CubeMx</font></td>
+        <td>-</td>
+      </tr>
+      <tr align=center>
+        <td align=left><p id="I2C_TwoBoards_MultiMasterIT_Slave">I2C_TwoBoards_MultiMasterIT_Slave</p></td>
+        <td align=left>How to handle I2C data buffer communication between two boards, using an interrupt and two Masters and one Slave.
 </td>
         <td>-</td>
         <td><font size="5" color=green>CubeMx</font></td>
@@ -2298,9 +2326,9 @@ uses the LL unitary service functions for optimization purposes (performance and
         <td>-</td>
       </tr>
       <tr style="background-repeat: no-repeat;background-position: right center;background-color: #39A9DC;color: #FFF;" align=center>
-        <td colspan="3"><b>Total number of examples_ll: 82</b></td>
+        <td colspan="3"><b>Total number of examples_ll: 84</b></td>
         <td>1</td>
-        <td>78</td>
+        <td>80</td>
         <td>3</td>
       </tr>
       <tr align=center>
@@ -2605,7 +2633,7 @@ Use of the TSC to perform continuous acquisitions of one channel in Interrupt mo
         <td align=left>
 Use of the TSC to perform continuous acquisitions of one channel in Interrupt mode (low power mode).
 </td>
-        <td><font size="5" color=green>CubeMx</font></td>
+        <td><font size="5" color=green>X</font></td>
         <td>-</td>
         <td>-</td>
       </tr>
@@ -2665,10 +2693,10 @@ it shows how to develop USB Device Human Interface "HID" mouse based bare metal 
         <td>2</td>
       </tr>
       <tr style="background-repeat: no-repeat;background-position: right center;background-color: #39A9DC;color: #FFF;" align=center>
-      	<td colspan="4"><b>Total number of projects: 285</b></td>
+      	<td colspan="4"><b>Total number of projects: 289</b></td>
       	<td>43</td>
-      	<td>207</td>
-      	<td>35</td>
+      	<td>210</td>
+      	<td>36</td>
       </tr>
     </table>
   </body>

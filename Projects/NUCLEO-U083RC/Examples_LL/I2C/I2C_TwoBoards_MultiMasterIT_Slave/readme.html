@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="../../../../../_htmresc/mini-st_2020.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h2 id="i2c_twoboards_multimasterit_slave-example-description"><b>I2C_TwoBoards_MultiMasterIT_Slave Example Description</b></h2>
+<p>How to handle I2C data buffer communication between two boards, using an interrupt and two Masters and one Slave.</p>
+<pre><code>      - Board: NUCLEO-U083RC's (embeds a STM32U083xx device)
+      - SCL Master1 Pin: PB8 (Arduino D15 CN5 pin 10, Morpho CN10 pin 3)
+      - SDA Master1 Pin: PB9 (Arduino D14 CN5 pin 9, Morpho CN10 pin 5)
+      - SCL Master2 Pin: PC0 (Arduino A5 CN8 pin 6, Morpho CN7 pin 38)
+      - SDA Master2 Pin: PC1 (Arduino A4 CN8 pin 5, Morpho CN7 pin 36)
+      - SCL Slave   Pin: PB8 (Arduino D15 CN5 pin 10, Morpho CN10 pin 3)
+      - SDA Slave   Pin: PB9 (Arduino D14 CN5 pin 9, Morpho CN10 pin 5)
+  Connect GND between each board.</code></pre>
+<p>This projects provides a reference example through the LL API that can be used to build any firmware application.</p>
+<p>This project is targeted to run on STM32U083xx device on NUCLEO-U083RC board from STMicroelectronics.</p>
+<p>The reference template project configures the maximum system clock frequency at 48Mhz.</p>
+<p>In this example, two instances I2C are used in Master mode on a single board to communicate with a Slave on another board. The TIM peripheral is used to simulate a RTOS scheduling, between Master1 managed through main() and Master2 through the TimerUpdate_Callback(). Every millisecond, the timer will send an interrupt to give the Master2 the upperhand for the communication with the Slave.</p>
+
+<p>In a first step, I2C Master1, Master2 and Timer are initialized through the LL_I2C_Init() and LL_TIM_Init() functions respectively. Each time the timer generate an interrupt, the associated callback TimerUpdate_Callback() is called and a Master2 starts the communication by sending aTxBufferMaster2 through LL_I2C_TransmitData8() to I2C Slave which receives aRxBuffer through LL_I2C_ReceiveData8().</p>
+<p>Then when user press the User push-button on the Master Board, I2C Master1 starts the communication by sending
+aTxBufferMaster1 through LL_I2C_TransmitData8() to I2C Slave which receives aRxBuffer through
+LL_I2C_ReceiveData8().</p>
+<p>Each time the Slave retrieve a buffer, associated variable are incremented.
+User can easily add to live watch the variable nbMst1RxCplt and nbMst2RxCplt to catch the Multimaster buffer reception
+on Slave side.</p>
+
+<p>And user can easily add to live watch the variable Master1BusBusyCpt and Master2BusBusyCpt to catch the Multimaster
+bandwidth detection on Master side.</p>
+
+<p>NUCLEO-U083RC's LED can be used to monitor the transfer status: LED4 toggle each time the timer period elapsed. LED4 is slowly blinking (1 sec. period) in case of error in initialization or transmission process.</p>
+
+<h3 id="keywords"><b>Keywords</b></h3>
+<p>I2C, Master, Slave, TIM, Multimaster, Communication, Interrupt, Transmission, Reception</p>
+<h3 id="directory-contents"><b>Directory contents</b></h3>
+<ul>
+<li>I2C/I2C_TwoBoards_MultiMasterIT_Slave/Inc/stm32u0xx_it.h          Interrupt handlers header file</li>
+<li>I2C/I2C_TwoBoards_MultiMasterIT_Slave/Inc/main.h                  Header for main.c module</li>
+<li>I2C/I2C_TwoBoards_MultiMasterIT_Slave/Inc/stm32_assert.h          Template file to include assert_failed function</li>
+<li>I2C/I2C_TwoBoards_MultiMasterIT_Slave/Src/stm32u0xx_it.c          Interrupt handlers</li>
+<li>I2C/I2C_TwoBoards_MultiMasterIT_Slave/Src/main.c                  Main program</li>
+<li>I2C/I2C_TwoBoards_MultiMasterIT_Slave/Src/system_stm32u0xx.c      STM32U0xx system source file</li>
+</ul>
+<h3 id="hardware-and-software-environment"><b>Hardware and Software environment</b></h3>
+<ul>
+<li><p>This example runs on STM32U083xx devices.</p></li>
+<li><p>This example has been tested with NUCLEO-U083RC board and can be easily tailored to any other supported device and development board.</p></li>
+<li><p>NUCLEO-U083RC Set-up</p>
+<ul>
+<li>Connect Master board PB8 (Arduino D15 CN5 pin 10, Morpho CN10 pin 3) to Slave Board PB8 (Arduino D15 CN5 pin 10, Morpho CN10 pin 3)</li>
+<li>Connect Master board PB9 (Arduino D14 CN5 pin 9, Morpho CN10 pin 5) to Slave Board PB9 (Arduino D14 CN5 pin 9, Morpho CN10 pin 5)</li>
+<li>Connect Master board PC0 (Arduino A5 CN8 pin 6, Morpho CN7 pin 38) to Slave Board PC0 (Arduino A5 CN8 pin 6, Morpho CN7 pin 38)</li>
+<li>Connect Master board PC1 (Arduino A4 CN8 pin 5, Morpho CN7 pin 36) to Slave Board PB9 (Arduino A4 CN8 pin 5, Morpho CN7 pin 36)</li>
+<li>Connect Master board GND to Slave Board GND.</li>
+</ul></li>
+</ul>
+<h3 id="how-to-use-it"><b>How to use it ?</b></h3>
+<p>In order to make the program work, you must do the following :</p>
+<ul>
+<li>Open your preferred toolchain</li>
+<li>Rebuild all files and load your image into target memory</li>
+<li>Run the example</li>
+</ul>
+</body>
+</html>

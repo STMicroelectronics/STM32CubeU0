@@ -18,10 +18,10 @@ the report buffer through the ux_device_class_hid_event_set() API.
 
 #### <b>Expected success behavior</b>
 
-When plugged to PC host, the STM32U083RCTx must be properly enumerated as an USB HID mouse device.
+When plugged to PC host, the STM32U083MCTx must be properly enumerated as an USB HID mouse device.
 During the enumeration phase, device provides host with the requested descriptors (Device, configuration, string).
 Those descriptors are used by host driver to identify the device capabilities.
-Once the STM32U083RCTx USB device successfully completed the enumeration phase, the device sends a HID report after a user button press.
+Once the STM32U083MCTx USB device successfully completed the enumeration phase, the device sends a HID report after a user button press.
 Each report sent should move the mouse cursor by one step on host side.
 
 #### <b>Error behaviors</b>
@@ -85,7 +85,7 @@ RTOS, ThreadX, USBXDevice, USB_DRD, Full Speed, HID, Mouse,
 
 ### <b>Hardware and Software environment</b>
 
-  - This example runs on STM32U083RCTx devices.
+  - This example runs on STM32U083MCTx devices.
   - This example has been tested with STMicroelectronics STM32U083C-DK boards Revision MB1933-U083C-B01 and can be easily tailored to any other supported device and development board.
 
 ### <b>How to use it ?</b>

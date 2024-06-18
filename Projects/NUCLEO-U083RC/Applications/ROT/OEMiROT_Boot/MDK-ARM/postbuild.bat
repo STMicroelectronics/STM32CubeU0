@@ -35,6 +35,7 @@ set "preprocess_bl2_file=%projectdir%\image_macros_preprocessed_bl2.c"
 set "appli_dir=..\..\..\..\%oemirot_boot_path_project%"
 set "loader_dir=..\..\..\..\Applications\ROT\OEMiROT_Loader"
 set "option_bytes=%projectdir%\..\..\..\..\ROT_Provisioning\OEMiROT\ob_flash_programming.bat"
+set "provisioning=%projectdir%\..\..\..\..\ROT_Provisioning\OEMiROT\provisioning.bat"
 
 :: Environment variable for AppliCfg
 set appli_system_file="%appli_dir%\Src\system_stm32u0xx.c"
@@ -48,6 +49,9 @@ set loader_linker_file="%loader_dir%\MDK-ARM\stm32u0xx_loader.sct"
 
 set code_xml="%projectdir%\..\..\..\..\ROT_Provisioning\OEMiROT\Images\OEMiRoT_Code_image.xml"
 set data_xml="%projectdir%\..\..\..\..\ROT_Provisioning\OEMiROT\Images\OEMiRoT_Data_Image.xml"
+set code_size="Firmware area size"
+set data_size="Data area size"
+set scratch_sector_number="Number of scratch sectors"
 
 :: Bypass configuration of appli linker file if not present
 if not exist %appli_linker_file% goto :loader_linker_file
@@ -192,6 +196,18 @@ set "command=%python%%applicfg% flash --layout %preprocess_bl2_file% -b data_ima
 %command%
 IF !errorlevel! NEQ 0 goto :error
 
+set "command=%python%%applicfg% flash --layout %preprocess_bl2_file% -b ext_loader -m RE_LOADER --decimal %option_bytes% --vb >> %current_log_file% 2>&1"
+%command%
+IF !errorlevel! NEQ 0 goto :error
+
+set "command=%python%%applicfg% flash --layout %preprocess_bl2_file% -b data_image_number -m RE_DATA_IMAGE_NUMBER --decimal %provisioning% --vb >> %current_log_file% 2>&1"
+%command%
+IF !errorlevel! NEQ 0 goto :error
+
+set "command=%python%%applicfg% flash --layout %preprocess_bl2_file% -b ext_loader -m RE_LOADER --decimal %provisioning% --vb >> %current_log_file% 2>&1"
+%command%
+IF !errorlevel! NEQ 0 goto :error
+
 :: xml files used for image generation
 set "command=%python%%applicfg% xmlval --layout %preprocess_bl2_file% -m RE_CODE_IMAGE_SIZE -c S %code_xml% --vb >> %current_log_file% 2>&1"
 %command%
@@ -214,6 +230,22 @@ set "command=%python%%applicfg% xmlparam --layout  %preprocess_bl2_file% -m RE_O
 IF !errorlevel! NEQ 0 goto :error
 
 set "command=%python%%applicfg% xmlparam --layout  %preprocess_bl2_file% -m RE_OVER_WRITE -n "Write Option" -t Data -c --overwrite-only -h 1 -d "" --vb %data_xml% >> %current_log_file% 2>&1"
+%command%
+IF !errorlevel! NEQ 0 goto :error
+
+set "command=%python%%applicfg% xmlval --layout %preprocess_bl2_file% -m RE_FLASH_AREA_SCRATCH_SIZE -n %scratch_sector_number% --decimal %code_xml% --vb >> %current_log_file% 2>&1"
+%command%
+IF !errorlevel! NEQ 0 goto :error
+
+set "command=%python%%applicfg% xmlval -xml %code_xml% -nxml %code_size% -nxml %scratch_sector_number% --decimal -e (((val1+1)/val2)+1) -cond val2 -c M %code_xml% --vb >> %current_log_file% 2>&1"
+%command%
+IF !errorlevel! NEQ 0 goto :error
+
+set "command=%python%%applicfg% xmlval --layout %preprocess_bl2_file% -m RE_FLASH_AREA_SCRATCH_SIZE -n %scratch_sector_number% --decimal %data_xml% --vb >> %current_log_file% 2>&1"
+%command%
+IF !errorlevel! NEQ 0 goto :error
+
+set "command=%python%%applicfg% xmlval -xml %data_xml% -nxml %data_size% -nxml %scratch_sector_number% --decimal -e (((val1+1)/val2)+1) -cond val2 -c M %data_xml% --vb >> %current_log_file% 2>&1"
 %command%
 IF !errorlevel! NEQ 0 goto :error
 

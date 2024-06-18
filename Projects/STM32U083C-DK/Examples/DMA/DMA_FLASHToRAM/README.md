@@ -56,7 +56,7 @@ System, DMA, Data Transfer, Memory to memory, Stream, Flash, RAM
      
 ### <b>Hardware and Software environment</b>
 
-  - This example runs on STM32U083RCTx Devices.
+  - This example runs on STM32U083MCTx Devices.
 
   - This example has been tested with STMicroelectronics STM32U083C-DK 
     board and can be easily tailored to any other supported device 

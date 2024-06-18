@@ -55,7 +55,7 @@ Power, PWR, Standby mode, Interrupt, EXTI, Wakeup, Low Power, External reset
 
 ### <b>Hardware and Software environment</b> 
 
-  - This example runs on STM32U083RCTx devices
+  - This example runs on STM32U083MCTx devices
 
   - This example has been tested with STMicroelectronics STM32U083C-DK
     board and can be easily tailored to any other supported device

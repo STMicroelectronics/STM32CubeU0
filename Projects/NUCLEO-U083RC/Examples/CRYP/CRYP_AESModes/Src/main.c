@@ -53,37 +53,6 @@ CRYP_HandleTypeDef hcryp;
 uint32_t pKeyAES[4] = {0x2B7E1516,0x28AED2A6,0xABF71588,0x09CF4F3C};
 
 /* USER CODE BEGIN PV */
-#if (USE_VCP_CONNECTION == 1)
-/**
-  * @brief Defines related to Timeout to uart transmission
-  */
-#define UART_TIMEOUT_VALUE  1000 /* 1 Second */
-
-/* UART handler declaration */
-UART_HandleTypeDef UartHandle;
-
-/**
-  * @brief  Retargets the C library printf function to the USARTx.
-  * @param  ch: character to send
-  * @param  f: pointer to file (not used)
-  * @retval The character transmitted
-  */
-#if defined(__GNUC__) && !defined(__ARMCC_VERSION)
-/* With GCC, small printf (option LD Linker->Libraries->Small printf
-   set to 'Yes') calls __io_putchar() */
-int __io_putchar(int ch)
-#else
-int fputc(int ch, FILE *f)
-#endif /* __GNUC__ */
-{
-  /* Place your implementation of fputc here */
-  /* e.g. write a character to the UART and Loop until the end of transmission */
-  HAL_UART_Transmit(&UartHandle, (uint8_t *)&ch, 1, UART_TIMEOUT_VALUE);
-
-  return ch;
-}
-
-#endif
 
 /* Key size 256 bits */
  uint32_t aAES256key[8] = {0x603DEB10, 0x15CA71BE, 0x2B73AEF0, 0x857D7781,

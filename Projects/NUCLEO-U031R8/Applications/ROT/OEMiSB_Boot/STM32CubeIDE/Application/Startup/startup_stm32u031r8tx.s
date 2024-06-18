@@ -142,7 +142,7 @@ g_pfnVectors:
   .word	0
   .word	PendSV_Handler
   .word	SysTick_Handler
-  .word	WWDG_IRQHandler                  /* Window watchdog interrupt                                                       */
+  .word	WWDG_IWDG_IRQHandler             /* Window watchdog interrupt                                                       */
   .word	PVD_PVM_IRQHandler               /* PVD/PVM1/PVM2/PVM3 interrupt (combined with EXTI lines 16 and 19 and 20 and 21) */
   .word	RTC_TAMP_IRQHandler              /* RTC and TAMP interrupts(combined EXTI lines 19 and 21)                          */
   .word	FLASH_ECC_IRQHandler             /* FLASH global interrupt                                                          */
@@ -151,10 +151,10 @@ g_pfnVectors:
   .word	EXTI2_3_IRQHandler               /* EXTI lines 2 and 3 interrupt                                                    */
   .word	EXTI4_15_IRQHandler              /* EXTI lines 4 to 15 interrupt                                                    */
   .word	0                                /*                                                                                 */
-  .word	DMA1_CHannel1_IRQHandler         /* DMA1 channel 1 interrupt                                                        */
+  .word	DMA1_Channel1_IRQHandler         /* DMA1 channel 1 interrupt                                                        */
   .word	DMA1_Channel2_3_IRQHandler       /* DMA1 channel 2 and 3 interrupts                                                 */
   .word	DMA1_Ch4_7_DMAMUX_OVR_IRQHandler /* DMA1 channel 4, 5, 6, 7, DMAMUX overrun interrupts                              */
-  .word	ADC_COMP1_IRQHandler             /* ADC and COMP1 interrupts (ADC combined with EXTI lines 17 and 18)                */
+  .word	ADC_COMP1_IRQHandler             /* ADC and COMP1 interrupts (ADC combined with EXTI lines 17 and 18)               */
   .word	TIM1_BRK_UP_TRG_COM_IRQHandler   /* TIM1 break, update, trigger and commutation interrupts                          */
   .word	TIM1_CC_IRQHandler               /* TIM1 Capture Compare interrupt                                                  */
   .word	TIM2_IRQHandler                  /* TIM2 global interrupt                                                           */
@@ -200,8 +200,8 @@ g_pfnVectors:
 	.weak	SysTick_Handler
 	.thumb_set SysTick_Handler,Default_Handler
 
-	.weak	WWDG_IRQHandler
-	.thumb_set WWDG_IRQHandler,Default_Handler
+	.weak	WWDG_IWDG_IRQHandler
+	.thumb_set WWDG_IWDG_IRQHandler,Default_Handler
 
 	.weak	PVD_PVM_IRQHandler
 	.thumb_set PVD_PVM_IRQHandler,Default_Handler
@@ -224,8 +224,8 @@ g_pfnVectors:
 	.weak	EXTI4_15_IRQHandler
 	.thumb_set EXTI4_15_IRQHandler,Default_Handler
 
-	.weak	DMA1_CHannel1_IRQHandler
-	.thumb_set DMA1_CHannel1_IRQHandler,Default_Handler
+	.weak	DMA1_Channel1_IRQHandler
+	.thumb_set DMA1_Channel1_IRQHandler,Default_Handler
 
 	.weak	DMA1_Channel2_3_IRQHandler
 	.thumb_set DMA1_Channel2_3_IRQHandler,Default_Handler

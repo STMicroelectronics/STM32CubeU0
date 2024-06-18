@@ -53,8 +53,4 @@ echo "Creating application image"  >> $current_log_file 2>&1
 "$stm32tpccli" -pb $code_xml >> $current_log_file 2>&1
 if [ $? != 0 ]; then error; fi
 
-echo "Creating data image"  >> $current_log_file 2>&1
-"$stm32tpccli" -pb $data_xml >> $current_log_file 2>&1
-if [ $? != 0 ]; then error; fi
-
 exit 0

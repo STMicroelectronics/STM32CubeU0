@@ -31,6 +31,7 @@
 /* Exported functions ------------------------------------------------------- */
 
 #define DATA_SIZE                        0x4000
+
 /* Constants used by Serial Command Line Mode */
 #define TX_TIMEOUT          ((uint32_t)100U)
 #define RX_TIMEOUT          ((uint32_t)2000U)

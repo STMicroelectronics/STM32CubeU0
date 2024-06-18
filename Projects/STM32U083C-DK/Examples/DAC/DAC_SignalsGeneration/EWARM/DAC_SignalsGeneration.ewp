@@ -74,7 +74,7 @@
         </option>
         <option>
           <name>OGChipSelectEditMenu</name>
-          <state>STM32U083RC	ST STM32U083RC</state>
+          <state>STM32U083MC	ST STM32U083MC</state>
         </option>
         <option>
           <name>GenLowLevelInterface</name>
@@ -120,7 +120,7 @@
         </option>
         <option>
           <name>GFPUDeviceSlave</name>
-          <state>STM32U083RC	ST STM32U083RC</state>
+          <state>STM32U083MC	ST STM32U083MC</state>
         </option>
         <option>
           <name>FPU2</name>

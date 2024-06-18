@@ -29,7 +29,7 @@
 </ul>
 <p>To customize the HID application by sending the mouse position step by step every 10ms. For each 10ms, the application calls the GetPointerData() API to update the mouse position (x, y) and send the report buffer through the ux_device_class_hid_event_set() API.</p>
 <h4 id="expected-success-behavior"><b>Expected success behavior</b></h4>
-<p>When plugged to PC host, the STM32U083RCTx must be properly enumerated as an USB HID mouse device. During the enumeration phase, device provides host with the requested descriptors (Device, configuration, string). Those descriptors are used by host driver to identify the device capabilities. Once the STM32U083RCTx USB device successfully completed the enumeration phase, the device sends a HID report after a user button press. Each report sent should move the mouse cursor by one step on host side.</p>
+<p>When plugged to PC host, the STM32U083MCTx must be properly enumerated as an USB HID mouse device. During the enumeration phase, device provides host with the requested descriptors (Device, configuration, string). Those descriptors are used by host driver to identify the device capabilities. Once the STM32U083MCTx USB device successfully completed the enumeration phase, the device sends a HID report after a user button press. Each report sent should move the mouse cursor by one step on host side.</p>
 <h4 id="error-behaviors"><b>Error behaviors</b></h4>
 <p>Host PC shows that USB device does not operate as designed (Mouse enumeration failed, the mouse pointer doesn’t move).</p>
 <h4 id="assumptions-if-any"><b>Assumptions if any</b></h4>
@@ -42,7 +42,7 @@
 <p>STANDALONE, USBXDevice, USB_DRD, Full Speed, HID, Mouse</p>
 <h3 id="hardware-and-software-environment"><b>Hardware and Software environment</b></h3>
 <ul>
-<li>This example runs on STM32U083RCTx devices.</li>
+<li>This example runs on STM32U083MCTx devices.</li>
 <li>This example has been tested with STMicroelectronics STM32U083C-DK boards Revision MB1933-U083C-B01 and can be easily tailored to any other supported device and development board.</li>
 </ul>
 <h3 id="how-to-use-it"><b>How to use it ?</b></h3>

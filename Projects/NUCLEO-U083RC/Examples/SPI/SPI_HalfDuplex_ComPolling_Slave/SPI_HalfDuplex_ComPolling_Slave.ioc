@@ -51,10 +51,6 @@ ProjectManager.ComputerToolchain=false
 ProjectManager.CoupleFile=false
 ProjectManager.DeletePrevious=true
 ProjectManager.DeviceId=STM32U083RCTx
-<<<<<<< HEAD   (3b5f48 Update clock source for TIM_BreakAndDeadtime_Init LL_Example)
-=======
-ProjectManager.FirmwarePackage=STM32Cube FW_U0 V1.0.0RC1
->>>>>>> CHANGE (dd1219 SPI_Halfduplex_ComPolling Master/Slave update configuration)
 ProjectManager.FreePins=false
 ProjectManager.HalAssertFull=false
 ProjectManager.HeapSize=0x200

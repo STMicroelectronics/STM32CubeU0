@@ -10,18 +10,18 @@
       <TargetName>STM32U083C_DK_Demo</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>6180000::V6.18::ARMCLANG</pCCUsed>
+      <pCCUsed>6190000::V6.19::ARMCLANG</pCCUsed>
       <uAC6>1</uAC6>
       <TargetOption>
         <TargetCommonOption>
-          <Device>STM32U083RCIx</Device>
+          <Device>STM32U083MCTx</Device>
           <Vendor>STMicroelectronics</Vendor>
           <PackID>Keil.STM32U0xx_DFP.0.1.0</PackID>
           <PackURL>https://www.keil.com/pack/</PackURL>
           <Cpu>IRAM(0x20000000,0x8000) IRAM2(0x20002000,0x2000) IROM(0x08000000,0x040000) CPUTYPE("Cortex-M0+") CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
-          <FlashDriverDll>UL2CM3(-S0 -C0 -P0 -FD20000000 -FC2000 -FN1 -FF0STM32U0xx_256k -FS08000000 -FL040000 -FP0($$Device:STM32U083RCIx$CMSIS\Flash\STM32U0xx_256k.FLM))</FlashDriverDll>
+          <FlashDriverDll>UL2CM3(-S0 -C0 -P0 -FD20000000 -FC2000 -FN1 -FF0STM32U0xx_256k -FS08000000 -FL040000 -FP0($$Device:STM32U083MCTx$CMSIS\Flash\STM32U0xx_256k.FLM))</FlashDriverDll>
           <DeviceId>0</DeviceId>
           <RegisterFile></RegisterFile>
           <MemoryEnv></MemoryEnv>
@@ -33,7 +33,7 @@
           <SLE66CMisc></SLE66CMisc>
           <SLE66AMisc></SLE66AMisc>
           <SLE66LinkerMisc></SLE66LinkerMisc>
-          <SFDFile>$$Device:STM32U083RCIx$CMSIS\SVD\STM32U083.svd</SFDFile>
+          <SFDFile>$$Device:STM32U083MCTx$CMSIS\SVD\STM32U083.svd</SFDFile>
           <bCustSvd>0</bCustSvd>
           <UseEnv>0</UseEnv>
           <BinPath></BinPath>
@@ -138,7 +138,7 @@
           </Flash1>
           <bUseTDR>1</bUseTDR>
           <Flash2>BIN\UL2CM3.DLL</Flash2>
-          <Flash3>"" ()</Flash3>
+          <Flash3></Flash3>
           <Flash4></Flash4>
           <pFcarmOut></pFcarmOut>
           <pFcarmGrp></pFcarmGrp>
@@ -707,14 +707,7 @@
 
   <RTE>
     <apis/>
-    <components>
-      <component Cclass="CMSIS" Cgroup="CORE" Cvendor="ARM" Cversion="5.6.0" condition="ARMv6_7_8-M Device">
-        <package name="CMSIS" schemaVersion="1.7.7" url="http://www.keil.com/pack/" vendor="ARM" version="5.9.0"/>
-        <targetInfos>
-          <targetInfo name="NUCLEO-U0_Templates"/>
-        </targetInfos>
-      </component>
-    </components>
+    <components/>
     <files/>
   </RTE>
 

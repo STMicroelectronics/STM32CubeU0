@@ -54,6 +54,15 @@
 		<Hidden>1</Hidden>
 		<Default></Default>
 	</Param>
+	<Param>
+		<Name>Number of scratch sectors</Name>
+		<Value>5</Value>
+		<Type>Data</Type>
+		<Command>-M</Command>
+		<Hidden>1</Hidden>
+		<Tooltip>This is the firmware area size divided by the scratch area size</Tooltip>
+		<Default>5</Default>
+	</Param>
     <Param>
 		<Name>Dependency with other image</Name>
 		<Value>1,1.0.0</Value>

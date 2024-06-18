@@ -207,7 +207,7 @@ int main(void)
       /*       of value "VDDA_APPLI").                                        */
       /*       In typical case of Vref+ connected to Vdd, it allows to        */
       /*       deduce Vdd value.                                              */
-      uhADCxConvertedData_VrefAnalog_mVolt = __LL_ADC_CALC_VREFANALOG_VOLTAGE(uhADCxConvertedData[1], LL_ADC_RESOLUTION_12B);
+      uhADCxConvertedData_VrefAnalog_mVolt = VDDA_APPLI;
 
       /* Computation of ADC conversions raw data to physical values           */
       /* using LL ADC driver helper macro.                                    */

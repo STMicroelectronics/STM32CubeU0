@@ -67,7 +67,7 @@
   * @{
   */
 
-/** @addtogroup stm32u0xx_system
+/** @addtogroup STM32U0xx_system
   * @{
   */
 
@@ -117,7 +117,7 @@
 /*!< Uncomment the following line if you need to relocate your vector Table in
      Internal SRAM. */
 //#define VECT_TAB_SRAM
-#define VECT_TAB_OFFSET  0x0U /*!< Vector Table base offset field.
+#define VECT_TAB_OFFSET  0x2000U /*!< Vector Table base offset field.
                                    This value must be a multiple of 0x200. */
 
 /*!< Comment the following line if you would like to disable the software
@@ -146,7 +146,7 @@
        Note: If you use this function to configure the system clock; then there
              is no need to call the 2 first functions listed above, since SystemCoreClock
              variable is updated automatically.
-*/
+ */
 uint32_t SystemCoreClock = 4000000U;
 
 const uint8_t  AHBPrescTable[16] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 6, 7, 8, 9};
@@ -180,9 +180,17 @@ const uint32_t MSIRangeTable[12] = {100000U,   200000U,   400000U,   800000U,  1
 void SystemInit(void)
 {
 #ifdef ENABLE_DBG_SWEN
-uint32_t tmp_seccr;
-uint32_t tmp_optr;
+  uint32_t tmp_seccr;
+  uint32_t tmp_optr;
 #endif /* ENABLE_DBG_SWEN */
+
+  /* Reset the RCC clock configuration to the default reset state ------------*/
+  /* Set MSION bit */
+  RCC->CR = RCC_CR_MSION;
+
+  /* Reset CFGR register */
+  RCC->CFGR = 0U;
+
   /* Configure the Vector Table location add offset address ------------------*/
 #ifdef VECT_TAB_SRAM
   SCB->VTOR = SRAM1_BASE | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal SRAM */

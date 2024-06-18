@@ -119,8 +119,7 @@ extern "C" {
 #if !defined  (LSI_VALUE)
 #define LSI_VALUE               32000U    /*!< LSI Typical Value in Hz*/
 #endif /* LSI_VALUE */                    /*!< Value of the Internal Low Speed oscillator in Hz
-                                           The real value may vary depending on the variations
-                                           in voltage and temperature.*/
+The real value may vary depending on the variations in voltage and temperature.*/
 
 #if !defined  (LSI_STARTUP_TIME)
 #define LSI_STARTUP_TIME        130U      /*!< Time out for LSI start up, in ms */
@@ -281,7 +280,6 @@ extern "C" {
 #endif /* HAL_TIM_MODULE_ENABLED */
 
 #ifdef HAL_TSC_MODULE_ENABLED
-#include "stm32u0xx_ll_system.h"
 #include "stm32u0xx_hal_tsc.h"
 #endif /* HAL_TSC_MODULE_ENABLED */
 

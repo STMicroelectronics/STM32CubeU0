@@ -109,7 +109,7 @@ RTOS, ThreadX, Threading, CMSIS RTOS, Semaphore, Mutex
 
 ### <b>Hardware and Software environment</b>
 
-  - This application runs on STM32U083RCTx devices
+  - This application runs on STM32U083MCTx devices
   - This application has been tested with STMicroelectronics NUCLEO-U083RC boards Revision MB1932-U083RC-B01
     and can be easily tailored to any other supported device and development board.
 

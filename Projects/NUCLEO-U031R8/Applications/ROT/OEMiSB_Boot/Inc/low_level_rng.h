@@ -54,7 +54,7 @@ void RNG_DeInit(void);
   * @param  None
   * @retval None
   */
-int RNG_Delay(void);
+void RNG_Delay(void);
 
 /**
   * @brief  Initializes random values

@@ -36,11 +36,11 @@
                 </option>
                 <option>
                     <name>Input description</name>
-                    <state></state>
+                    <state>Automatic choice of formatter, without multibyte support.</state>
                 </option>
                 <option>
                     <name>Output description</name>
-                    <state></state>
+                    <state>Automatic choice of formatter, without multibyte support.</state>
                 </option>
                 <option>
                     <name>GOutputBinary</name>
@@ -48,7 +48,7 @@
                 </option>
                 <option>
                     <name>OGCoreOrChip</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>GRuntimeLibSelect</name>
@@ -62,7 +62,7 @@
                 </option>
                 <option>
                     <name>RTDescription</name>
-                    <state></state>
+                    <state>Use the normal configuration of the C/C++ runtime library. No locale interface, C locale, no file descriptor support, no multibytes in printf and scanf, and no hex floats in strtod.</state>
                 </option>
                 <option>
                     <name>OGProductVersion</name>
@@ -74,7 +74,7 @@
                 </option>
                 <option>
                     <name>OGChipSelectEditMenu</name>
-                    <state>Default	None</state>
+                    <state>STM32U083MC	ST STM32U083MC</state>
                 </option>
                 <option>
                     <name>GenLowLevelInterface</name>
@@ -94,7 +94,7 @@
                 </option>
                 <option>
                     <name>RTConfigPath2</name>
-                    <state></state>
+                    <state>$TOOLKIT_DIR$\inc\c\DLib_Config_Normal.h</state>
                 </option>
                 <option>
                     <name>GBECoreSlave</name>
@@ -116,11 +116,11 @@
                 <option>
                     <name>CoreVariant</name>
                     <version>31</version>
-                    <state>38</state>
+                    <state>35</state>
                 </option>
                 <option>
                     <name>GFPUDeviceSlave</name>
-                    <state>Default	None</state>
+                    <state>STM32U083MC	ST STM32U083MC</state>
                 </option>
                 <option>
                     <name>FPU2</name>
@@ -139,7 +139,7 @@
                 <option>
                     <name>GFPUCoreSlave2</name>
                     <version>31</version>
-                    <state>38</state>
+                    <state>35</state>
                 </option>
                 <option>
                     <name>OGCMSISPackSelectDevice</name>

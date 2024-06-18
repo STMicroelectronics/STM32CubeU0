@@ -19,42 +19,41 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32u0xx_hal.h"
-#include "low_level_rng.h"
 #include "stm32u0xx_ll_bus.h"
+#include "low_level_rng.h"
 #include "main.h"
+#include <string.h>
 
 /* exported variables --------------------------------------------------------*/
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 #define COMPILER_BARRIER() __ASM __IO("" : : : "memory")
-#define RNG_NUMBER 10
+#define RNG_NUMBER                10UL
 
 /* Private variables ---------------------------------------------------------*/
 static RNG_HandleTypeDef handle;
-unsigned char seed_buf[RNG_NUMBER] = {0};
-size_t index_seed_buf = 0;
+uint8_t seed_buf[RNG_NUMBER];
+size_t index_seed_buf;
 
 /* Private function prototypes -----------------------------------------------*/
+
+/* Private functions ---------------------------------------------------------*/
 /**
   * @brief  The Random delay
   * @param  None
   * @retval None
   */
-int RNG_Delay(void)
+void RNG_Delay(void)
 {
-    uint8_t delay;
-    int foo = 0;
-    volatile int rc;
+  uint8_t delay = 0u;
+  int foo = 0;
 
-    delay = RNG_Get_Random();
+  delay = RNG_Get_Random();
 
-    for (volatile int i = 0; i < delay; i++) {
-        foo++;
-    }
-
-    rc = 1;
-    return rc;
+  for (volatile int i = 0; i < delay; i++) {
+      foo++;
+  }
 }
 
 /**
@@ -79,13 +78,16 @@ uint8_t RNG_Get_Random(void)
 {
   uint8_t delay;
 
-  delay = seed_buf[index_seed_buf];
-  index_seed_buf++;
-
-  if ( RNG_NUMBER == index_seed_buf )
+  while (delay == 0u)
   {
-    RNG_Delay_Init();
-    index_seed_buf = 0;
+    delay = seed_buf[index_seed_buf];
+    index_seed_buf++;
+
+    if ( RNG_NUMBER == index_seed_buf )
+    {
+      RNG_Delay_Init();
+      index_seed_buf = 0;
+     }
   }
   return delay;
 }
@@ -98,6 +100,11 @@ uint8_t RNG_Get_Random(void)
 void RNG_Init(void)
 {
   uint32_t dummy;
+
+  /* Reset Seed Buffer */
+  memset(seed_buf, 0x00, sizeof(seed_buf) / sizeof(uint8_t));
+  /* Reset Seed Buffer counter*/
+  index_seed_buf = 0UL;
 
   /* Select RNG clock source */
   LL_RCC_SetRNGClockSource(LL_RCC_RNG_CLKSOURCE_MSI);
@@ -162,7 +169,6 @@ void RNG_GetBytes(uint8_t *output, size_t length, size_t *output_length)
     *output_length = 0;
   }
 }
-
 
 /**
   * @brief  DeInitializes the RNG peripheral

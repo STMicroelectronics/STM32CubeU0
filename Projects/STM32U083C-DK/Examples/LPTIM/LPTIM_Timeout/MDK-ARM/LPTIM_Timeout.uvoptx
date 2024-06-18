@@ -115,7 +115,7 @@
 				<SetRegEntry>
 					<Number>0</Number>
 					<Key>ST-LINKIII-KEIL_SWO</Key>
-					<Name>UL2CM3(-S0 -C0 -P0 ) -FN1 -FC2000 -FD20000000 -FF0STM32U0xx_256k -FL040000 -FS08000000 -FP0($$Device:STM32U083RCIx$CMSIS\Flash\STM32U0xx_256k.FLM)</Name>
+					<Name>UL2CM3(-S0 -C0 -P0 ) -FN1 -FC2000 -FD20000000 -FF0STM32U0xx_256k -FL040000 -FS08000000 -FP0($$Device:STM32U083MCTx$CMSIS\Flash\STM32U0xx_256k.FLM)</Name>
 				</SetRegEntry>
 				<SetRegEntry>
 					<Number>0</Number>

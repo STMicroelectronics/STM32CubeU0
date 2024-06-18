@@ -9,6 +9,7 @@ appliaddress=0x8030000
 dataaddress=0x801E000
 loaderaddress=0x8018000
 data_image_number=0x1
+ext_loader=0x1
 code_image=$oemirot_appli
 
 connect_no_reset="-c port=SWD speed=fast mode=Hotplug"
@@ -57,12 +58,13 @@ if [ "$data_image_number" == "0x1" ]; then
 	if [ $? -ne 0 ]; then error; return 1; fi
 fi
 
-action="Write OEMiROT_Loader"
-echo "$action"
-"$stm32programmercli" $connect_reset -d "$cube_fw_path/Projects/NUCLEO-U083RC/Applications/ROT/OEMiROT_Loader/Binary/OEMiROT_Loader.bin" $loaderaddress -v
-if [ $? -ne 0 ]; then error; return 1; fi
-echo "OEMiROT_Loader Written"
-
+if [ "$ext_loader" == "0x1" ]; then
+	action="Write OEMiROT_Loader"
+	echo "$action"
+	"$stm32programmercli" $connect_reset -d "$cube_fw_path/Projects/NUCLEO-U083RC/Applications/ROT/OEMiROT_Loader/Binary/OEMiROT_Loader.bin" $loaderaddress -v
+	if [ $? -ne 0 ]; then error; return 1; fi
+	echo "OEMiROT_Loader Written"
+fi
 # ========================================================= Extra board protections ========================================================
 action="Configure Option Bytes: Write Protection, Hide Protection and Boot Lock"
 echo "$action"

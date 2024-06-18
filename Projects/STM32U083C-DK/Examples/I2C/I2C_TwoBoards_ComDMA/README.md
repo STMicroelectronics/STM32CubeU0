@@ -3,7 +3,7 @@
 How to handle I2C data buffer transmission/reception between two boards, 
 via DMA.
 
-Board: STM32U083C-DK (embeds a STM32U083RCTx device)
+Board: STM32U083C-DK (embeds a STM32U083MCTx device)
 SCL Pin: PB8 (CN5, pin10)
 SDA Pin: PB7 (CN5, pin9)
 

@@ -2059,6 +2059,7 @@ context_boot_go(struct boot_loader_state *state, struct boot_rsp *rsp)
      * have finished. By the end of the loop each image in the primary slot will
      * have been re-validated.
      */
+    BOOT_LOG_INF("Starting validation of primary slot(s)");
     IMAGES_ITER(BOOT_CURR_IMG(state)) {
         if (BOOT_SWAP_TYPE(state) != BOOT_SWAP_TYPE_NONE) {
             /* Attempt to read an image header from each slot. Ensure that image

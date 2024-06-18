@@ -12,6 +12,7 @@ set appliaddress=0x8030000
 set dataaddress=0x801E000
 set loaderaddress=0x8018000
 set data_image_number=1
+set ext_loader=1
 set code_image=%oemirot_appli%
 
 :: STM32CubeProgammer connection
@@ -55,11 +56,13 @@ IF !errorlevel! NEQ 0 goto :error
 echo "OEMiROT_Data Written"
 )
 
+if  "%ext_loader%" == "1" (
 set "action=Write OEMiROT_Loader"
 echo %action%
 %stm32programmercli% %connect_no_reset% -d %cube_fw_path%\Projects\NUCLEO-U083RC\Applications\ROT\OEMiROT_Loader\Binary\OEMiROT_Loader.bin %loaderaddress% -v
 IF !errorlevel! NEQ 0 goto :error
 echo "OEMiROT_Loader Written"
+)
 
 :: ========================================================= Extra board protections ========================================================
 set "action=Configure Option Bytes: Write Protection, Hide Protection and Boot Lock"

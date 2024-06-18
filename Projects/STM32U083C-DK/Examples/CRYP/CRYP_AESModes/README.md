@@ -77,9 +77,9 @@ Security, Cryptography, CRYPT, AES, ECB, CBC, CTR, MAC, USART
 
 ### <b>Hardware and Software environment</b>
 
-  - This example runs on STM32U083RC devices : make sure that the AES is enabled in the device.
+  - This example runs on STM32U083MC devices : make sure that the AES is enabled in the device.
 
-  - This example has been tested with a STM32U083RCTx embedded on an
+  - This example has been tested with a STM32U083MCTx embedded on an
     STM32U083C-DISCO board and can be easily tailored to any other supported
     device and development board.
 

@@ -728,7 +728,7 @@ void TouchWakeup_demo(void)
           else if (TKEY_REL(id) && (uwTSC_WakeupDetected == 1))
           {
             BSP_LCD_GLASS_Clear();
-            BSP_LCD_GLASS_ScrollSentence((uint8_t *)"STOP2 MODE ENTERING", 1, SCROLL_SPEED_MEDIUM);
+            BSP_LCD_GLASS_ScrollSentence((uint8_t *)" STOP2 MODE ENTERING", 1, SCROLL_SPEED_MEDIUM);
             BSP_LED_Off(LED4);
             uwTSC_WakeupDetected = 0;
           }
@@ -832,7 +832,7 @@ void TempSensor_demo(void)
      }
      
      BSP_LCD_GLASS_DisplayStrDeci(tab);
-     HAL_Delay(1000);
+     HAL_Delay(100);
      
      joystickstatus =  (JOYPin_TypeDef)BSP_JOY_GetState(JOY1);
      tickstart = HAL_GetTick();

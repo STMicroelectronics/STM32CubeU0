@@ -361,7 +361,7 @@
         </option>
         <option>
           <name>CCOptLevel</name>
-          <state>0</state>
+          <state>3</state>
         </option>
         <option>
           <name>CCOptStrategy</name>
@@ -370,7 +370,7 @@
         </option>
         <option>
           <name>CCOptLevelSlave</name>
-          <state>0</state>
+          <state>3</state>
         </option>
         <option>
           <name>CCPosIndRopi</name>

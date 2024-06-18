@@ -17,12 +17,9 @@
   <![endif]-->
 </head>
 <body>
-<body>
-<div class="row">
-<section id="flash_changeoptionbytes-example-description" class="col-sm-12 col-lg-8">
-<h2><b>FLASH_ChangeOptionBytes Example Description</b></h2>
+<h2 id="flash_changeoptionbytes-example-description"><b>FLASH_ChangeOptionBytes Example Description</b></h2>
 <p>How to configure and modify the Option Bytes of the Flash memory controller.</p>
-<p>At the beginning of the main program the HAL_Init() function is called to reset all the peripherals, initialize the Flash interface and the systick. Then the SystemClock_Config() function is used to configure the system clock (SYSCLK) to run at 56 MHz.</p>
+<p>At the beginning of the main program the HAL_Init() function is called to reset all the peripherals, initialize the Flash interface and the systick. Then the SystemClock_Config() function is used to configure the system clock (SYSCLK) to run at 48 MHz.</p>
 <p>After Reset, the Flash memory controller is locked. Dedicated functions are used to enable the FLASH control register access and the FLASH option bytes register access.</p>
 <p>The Option Bytes modification procedure is done by filling the Option Bytes init structure giving the option byte type and the option parameters. At this stage, the new option bytes will be programmed through the HAL FLASH OB programming API. Then, an OBL_Launch command is executed to start option bytes loading.</p>
 <p>Once this operation is launched, the STM32U0 device will reset and debugger connection will be lost.</p>
@@ -32,7 +29,9 @@
 <li>LED4 is blinking with a frequency of 200ms when RDP Level is equal to 0.</li>
 <li>LED4 is blinking with a frequency 1s when RDP Level is equal to 1.</li>
 <li>Due to STLink’s limitation, make sure to disable the STLink Mass Storage interface by using STLinkUpgrade and changing the type from Debug+VCP+Mass Storage to Debug+VCP.</li>
-<li>After flashing the example on the board, make sure to remove the ST-Link jumper from the board and put it in 5V_VIN.</li>
+<li>After flashing the example on the board, make sure to remove the ST-Link jumper from the board and put it in CHG.</li>
+<li>User need to keep pushing the PB for several seconds when switching from RDP level 1 to level 0.</li>
+<li>STLink Cable unplug/plug to perform hard reset is required after RDP level 1 to level 0 regression.</li>
 </ul>
 <h3 id="keywords"><b>Keywords</b></h3>
 <p>FLASH, Memory</p>
@@ -50,6 +49,19 @@
 <ul>
 <li><p>This example runs on STM32U083xx devices.</p></li>
 <li><p>This example has been tested with NUCLEO-U083RC board and can be easily tailored to any other supported device and development board.</p></li>
+<li>NUCLEO-U083RC Set-up
+<ul>
+<li>Connect ST-Link cable to the PC USB port to display data on the HyperTerminal.</li>
+<li>A virtual COM port will then appear in the HyperTerminal.</li>
+</ul></li>
+<li>Hyperterminal configuration:
+<ul>
+<li>Data Length : 8 Bits</li>
+<li>Stop Bit : 1 Bit</li>
+<li>Parity: None</li>
+<li>BaudRate = 115200 baud</li>
+<li>Flow control: None</li>
+</ul></li>
 </ul>
 <h3 id="how-to-use-it"><b>How to use it ?</b></h3>
 <p>In order to make the program work, you must do the following :</p>

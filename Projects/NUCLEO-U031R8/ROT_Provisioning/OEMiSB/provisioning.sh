@@ -283,5 +283,10 @@ echo "    * $action"
 
 "$stm32programmercli" "$connect_no_reset" -ob RDP="$rdp_value" >> "$state_change_log"
 echo ""
+if [ "$rdp_value" != "0xAA" ]; then
+    echo "   *Please Unplug USB Cable and Plug it again to recover SWD connection"
+    echo "        Press any key to continue..."
+    if [ "$mode" != "AUTO" ]; then read -p "" -n1 -s; fi
+ fi
 
 final_execution

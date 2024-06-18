@@ -218,7 +218,7 @@ static Scenario_StatusTypeDef get_lowpower_cmd(LowPower_ScenarioTypeDef *scenari
       return SCENARIO_ERROR;
     }
   }
-  while ((Scenrio_CmdBuff[0U] < CODE_ASCII_0) || (Scenrio_CmdBuff[0U] > CODE_ASCII_7));
+  while ((Scenrio_CmdBuff[0U] < CODE_ASCII_0) || (Scenrio_CmdBuff[0U] > CODE_ASCII_9));
 
   /* Print index selected */
   Console_Log((char *)Scenrio_CmdBuff);

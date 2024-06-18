@@ -48,10 +48,10 @@ The support of the VCP interface is managed through the ST Virtual COM Port driv
 
 #### <b>Expected success behavior</b>
 
-When plugged to PC host, the STM32U083RCTx must be properly enumerated a composite device as an HID ,USB Serial device and an STlink Com port.
+When plugged to PC host, the STM32U083MCTx must be properly enumerated a composite device as an HID ,USB Serial device and an STlink Com port.
 During the enumeration phase, device provides host with the requested descriptors (Device, configuration, string).
 Those descriptors are used by host driver to identify the device capabilities.
-Once STM32U083RCTx USB device successfully completed the enumeration phase.
+Once STM32U083MCTx USB device successfully completed the enumeration phase.
 Connect USB cable to Host , Open two hyperterminals (USB com port and UART com port) to send/receive data to/from host to/from device.
 When USER_Button is pressed, the device sneds a HID report. Each report sent should move the PC host machine mouse cursor by one step.
 
@@ -117,7 +117,7 @@ RTOS, ThreadX, USBXDevice, USB_DRD, Full Speed, CDC, HID, VCP, USART, DMA, Mouse
 
 ### <b>Hardware and Software environment</b>
 
-  - This example runs on STM32U083RCTx devices.
+  - This example runs on STM32U083MCTx devices.
   - This example has been tested with STMicroelectronics STM32U083C-DK boards Revision MB1933-U083C-B01 and can be easily tailored to any other supported device and development board.
   - STM32U083C-DK Set-up
   - Connect the STM32U083C-DK board CN1 to the PC through "TYPE-C" to "Standard A" cable.

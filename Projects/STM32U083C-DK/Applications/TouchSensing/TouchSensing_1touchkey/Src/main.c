@@ -281,15 +281,9 @@ void Process_Sensors(tsl_user_status_t status)
   {
     case TSL_USER_STATUS_OK_ECS_OFF:
       BSP_LED_Off(LED3);
-#if USE_LCD > 0
-      BSP_LCD_GLASS_DisplayString((uint8_t *)("ECS OFF"));
-#endif
       break;
     case TSL_USER_STATUS_OK_ECS_ON:
       BSP_LED_Toggle(LED3);
-#if USE_LCD > 0
-      BSP_LCD_GLASS_DisplayString((uint8_t *)("ECS ON "));
-#endif
       break;
     default:
       break;

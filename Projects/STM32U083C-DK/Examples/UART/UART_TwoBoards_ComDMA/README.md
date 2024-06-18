@@ -2,7 +2,7 @@
 
 UART transmission (transmit/receive) in DMA mode between two boards.
 
-    Board: STM32U083C-DISCO (embeds a STM32U083RCTx device)
+    Board: STM32U083C-DISCO (embeds a STM32U083MCTx device)
     Tx Pin: PA.09 (Pin 1 in CN5)
     Rx Pin: PA.10 (Pin 3 in CN9)
 
@@ -85,9 +85,9 @@ Transmitter, Receiver, Asynchronous
 
 ### <b>Hardware and Software environment</b>
 
-  - This example runs on STM32U083RCTx devices.    
+  - This example runs on STM32U083MCTx devices.    
   - This example has been tested with two STM32U083C-DISCO boards embedding
-    a STM32U083RCTx device and can be easily tailored to any other supported device 
+    a STM32U083MCTx device and can be easily tailored to any other supported device 
     and development board.
 
   - STM32U083C-DISCO set-up

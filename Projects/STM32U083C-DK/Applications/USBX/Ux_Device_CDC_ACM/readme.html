@@ -40,7 +40,7 @@
 <li>The user has to check the list of the COM ports in Device Manager to find out the COM port number that have been assigned (by OS) to the VCP interface.</li>
 <li><p>CDC ACM non-blocking transmission by default disabled, to enable non-blocking transmission UX_DEVICE_CLASS_CDC_ACM_TRANSMISSION_DISABLE must be disabled and 2048 additional in USBX byte pool and USBX_MEMORY_SIZE. #### <b>Expected success behavior</b></p></li>
 </ul>
-<p>When plugged to PC host, the STM32U083RCTx must be properly enumerated as an USB Serial device and an STlink Com port. During the enumeration phase, the device must provide host with the requested descriptors (Device descriptor, configuration descriptor, string descriptors). Those descriptors are used by host driver to identify the device capabilities. Once STM32U083RCTx USB device successfully completed the enumeration phase. Open two hyperterminals (USB com port and UART com port(USB STLink VCP)) to send/receive data to/from host from/to device.</p>
+<p>When plugged to PC host, the STM32U083MCTx must be properly enumerated as an USB Serial device and an STlink Com port. During the enumeration phase, the device must provide host with the requested descriptors (Device descriptor, configuration descriptor, string descriptors). Those descriptors are used by host driver to identify the device capabilities. Once STM32U083MCTx USB device successfully completed the enumeration phase. Open two hyperterminals (USB com port and UART com port(USB STLink VCP)) to send/receive data to/from host from/to device.</p>
 <h4 id="error-behaviors"><b>Error behaviors</b></h4>
 <p>Host PC shows that USB device does not operate as designed (CDC Device enumeration failed, PC and Device can not communicate over VCP ports).</p>
 <p>The Red LED is toggling to indicate any error that has occurred.</p>
@@ -89,7 +89,7 @@ Read more in STM32CubeIDE User Guide, chapter: &quot;Linker script&quot;.</code>
 <p>RTOS, ThreadX, USBX, USBXDevice, USB_DRD, Full Speed, CDC, VCP, USART, DMA.</p>
 <h3 id="hardware-and-software-environment"><b>Hardware and Software environment</b></h3>
 <ul>
-<li>This application runs on STM32U083RCTx devices</li>
+<li>This application runs on STM32U083MCTx devices</li>
 <li><p>This application has been tested with STMicroelectronics STM32U083C-DK boards Revision MB1933-U083C-B01. and can be easily tailored to any other supported device and development board.</p></li>
 <li>STM32U083C-DK Set-up:
 <ul>

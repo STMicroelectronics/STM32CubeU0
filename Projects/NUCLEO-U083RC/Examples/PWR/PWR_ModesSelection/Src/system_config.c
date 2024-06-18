@@ -21,7 +21,7 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
-#define USER_MSI_CALIBRATION  0U
+#define USER_MSI_CALIBRATION  RCC_MSICALIBRATION_DEFAULT
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 /* RTC handler declaration */
@@ -93,6 +93,24 @@ void system_config(System_LowPowerModeScenarioTypeDef scenario)
   {
     CLEAR_REG(RCC->IOPSMENR);
   }
+
+  /* HSI16 disable for LP-Sleep/Run modes */
+  if( (scenario == SYSTEM_LOWPOWER_S8) || (scenario == SYSTEM_LOWPOWER_S9))
+  {
+    __HAL_RCC_HSI_DISABLE();
+  }
+  
+  /* HSI16 disable for LP-Sleep/Run modes */
+  if( (scenario == SYSTEM_LOWPOWER_S4) || (scenario == SYSTEM_LOWPOWER_S5))
+  {
+    CLEAR_REG(RCC->IOPSMENR);
+    __HAL_RCC_HSI_DISABLE();
+    __HAL_RCC_MSI_DISABLE();
+    __HAL_RCC_SYSCFG_CLK_DISABLE();
+  }
+
+  /* Clock disable for HSI48 */
+  __HAL_RCC_HSI48_DISABLE();
 
 }
 
@@ -676,6 +694,16 @@ System_StatusTypeDef system_regulator_config(System_LowPowerModeScenarioTypeDef 
       HAL_PWREx_EnableLowPowerRunMode();
       break;
     }
+    case SYSTEM_LOWPOWER_S8:
+    {
+      HAL_PWREx_EnableLowPowerRunMode();
+      break;
+    }
+    case SYSTEM_LOWPOWER_S9:
+    {
+      HAL_PWREx_EnableLowPowerRunMode();
+      break;
+    }
     default:
     {
       HAL_PWREx_DisableLowPowerRunMode();
@@ -707,17 +735,17 @@ System_StatusTypeDef system_flash_config(System_LowPowerModeScenarioTypeDef scen
     }
     case SYSTEM_LOWPOWER_S7:
     {
-     HAL_PWREx_EnableFlashPowerDown(PWR_FLASHPD_STOP);
+      HAL_PWREx_EnableFlashPowerDown(PWR_FLASHPD_STOP);
       break;
     }
     case SYSTEM_LOWPOWER_S8:
     {
-      HAL_PWREx_DisableFlashPowerDown(PWR_FLASHPD_LPSLEEP);
+      HAL_PWREx_EnableFlashPowerDown(PWR_FLASHPD_LPSLEEP);
       break;
     }
     case SYSTEM_LOWPOWER_S9:
     {
-      HAL_PWREx_EnableFlashPowerDown(PWR_FLASHPD_LPRUN);
+      HAL_PWREx_DisableFlashPowerDown(PWR_FLASHPD_LPRUN);
       __HAL_RCC_FLASH_CLK_SLEEP_DISABLE();
       break;
     }

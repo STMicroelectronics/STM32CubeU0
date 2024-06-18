@@ -38,6 +38,7 @@ extern "C" {
 
 /* Exported types ------------------------------------------------------------*/
 /* USER CODE BEGIN ET */
+#define USE_VCP_CONNECTION 0
 /* USER CODE END ET */
 
 /* Exported constants --------------------------------------------------------*/

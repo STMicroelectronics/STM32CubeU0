@@ -32,6 +32,8 @@
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
+#define NB_BYTES                (8U)
+
 /* Private variables ---------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
 static void SystemClock_Config(void);
@@ -208,11 +210,12 @@ void FW_APP_Run(void)
 
 void Read_DATA(void)
 {
-  uint8_t buffer[16U];
-  memcpy((void *)buffer, (void *)(FLASH_BASE + FLASH_SIZE_DEFAULT - DATA_SIZE), 16);
+  uint8_t buffer[NB_BYTES];
+
+  memcpy((void *)buffer, (void *)(FLASH_BASE + FLASH_SIZE_DEFAULT - DATA_SIZE), NB_BYTES);
   /* display the first 32 data bytes */
   printf("Data from flash: ");
-  for (int i = 0U; i < 8U; i++)
+  for (int i = 0U; i < NB_BYTES; i++)
   {
     printf("%x",buffer[i]);
   }
@@ -221,9 +224,15 @@ void Read_DATA(void)
 
 void Write_DATA(void)
 {
-  uint32_t buffer[2U] = {0xA5A5A5A5, 0xA5A5A5A5};
-  HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD, (uint32_t)(FLASH_BASE + FLASH_SIZE_DEFAULT - DATA_SIZE), (uint32_t)(*buffer));
-  printf("Write 0xA5A5A5A5 in flash\r\n\n");
+  uint8_t buffer[NB_BYTES] = {0xA5, 0xA5, 0xA5, 0xA5, 0xA5, 0xA5, 0xA5, 0xA5};
+
+  HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD, (uint32_t)(FLASH_BASE + FLASH_SIZE_DEFAULT - DATA_SIZE), *((uint64_t*)buffer));
+  printf("Write in flash: 0x");
+  for (int i = 0U; i < NB_BYTES; i++)
+  {
+    printf("%x",buffer[i]);
+  }
+  printf("\r\n\n");
 }
 
 void Erase_DATA(void)
@@ -262,11 +271,11 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.OscillatorType      = RCC_OSCILLATORTYPE_MSI;
   RCC_OscInitStruct.MSIState            = RCC_MSI_ON;
   RCC_OscInitStruct.PLL.PLLState        = RCC_PLL_ON;
-  RCC_OscInitStruct.MSICalibrationValue = 4/*RCC_MSICALIBRATION_DEFAULT*/;
+  RCC_OscInitStruct.MSICalibrationValue = RCC_MSICALIBRATION_DEFAULT;
   RCC_OscInitStruct.MSIClockRange       = RCC_MSIRANGE_11; /* MSI = 48MHz */
   RCC_OscInitStruct.PLL.PLLSource       = RCC_PLLSOURCE_MSI;
   RCC_OscInitStruct.PLL.PLLM            = RCC_PLLM_DIV8;
-  RCC_OscInitStruct.PLL.PLLN            = 8; 
+  RCC_OscInitStruct.PLL.PLLN            = 16; 
   RCC_OscInitStruct.PLL.PLLP            = RCC_PLLP_DIV2; /* 24MHz */
   RCC_OscInitStruct.PLL.PLLQ            = RCC_PLLQ_DIV2; /* 24MHz */
   RCC_OscInitStruct.PLL.PLLR            = RCC_PLLR_DIV2; /* 24MHz */

@@ -230,8 +230,12 @@
 /*
  * The maximum number of status entries supported by the bootloader.
  */
-#define MCUBOOT_STATUS_MAX_ENTRIES      ((FLASH_MAX_PARTITION_SIZE) / \
-                                          FLASH_AREA_SCRATCH_SIZE)
+#if defined (MCUBOOT_OVERWRITE_ONLY)
+#define MCUBOOT_STATUS_MAX_ENTRIES      (0)
+#else
+#define MCUBOOT_STATUS_MAX_ENTRIES      (((FLASH_MAX_PARTITION_SIZE - 1) / \
+                                          FLASH_AREA_SCRATCH_SIZE)+1)
+#endif
 /* Maximum number of image sectors supported by the bootloader. */
 #define MCUBOOT_MAX_IMG_SECTORS         ((FLASH_MAX_PARTITION_SIZE) / \
                                           FLASH_AREA_IMAGE_SECTOR_SIZE)

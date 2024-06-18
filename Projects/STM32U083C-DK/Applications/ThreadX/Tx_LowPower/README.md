@@ -129,7 +129,7 @@ RTOS, ThreadX, Threading, Semaphore, PWR, STOP Mode, Interrupt, EXTI, Wakeup, Lo
 
 ### <b>Hardware and Software environment</b>
 
-  - This application runs on STM32U083RCTx devices.
+  - This application runs on STM32U083MCTx devices.
   - This application has been tested with STMicroelectronics NUCLEO-C031C6 boards Revision MB1717 B-01
     and can be easily tailored to any other supported device and development board.
 

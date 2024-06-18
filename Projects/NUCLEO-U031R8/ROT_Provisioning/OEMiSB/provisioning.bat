@@ -271,6 +271,11 @@ set current_log_file=%state_change_log%
 echo    * %action%
 %stm32programmercli% %connect_reset% -ob RDP=%rdp_value% >> %state_change_log%
 echo.
+if "%rdp_value%" == "0xAA" ( goto final_execution )
+echo    * Please unplug USB cable and plug it again to recover SWD Connection.
+echo        Press any key to continue...
+echo.
+if [%1] neq [AUTO] pause >nul
 goto final_execution
 
 :: ============================================================= End functions =============================================================  

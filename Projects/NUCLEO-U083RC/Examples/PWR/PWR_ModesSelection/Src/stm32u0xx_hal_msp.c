@@ -69,8 +69,6 @@ void HAL_MspInit(void)
   __HAL_RCC_PWR_CLK_ENABLE();
   __HAL_RCC_SYSCFG_CLK_ENABLE();
 
-  __HAL_RCC_PWR_CLK_ENABLE();
-
   /* System interrupt init*/
 
   /* USER CODE BEGIN MspInit 1 */
@@ -190,7 +188,7 @@ void HAL_RTC_MspInit(RTC_HandleTypeDef* hrtc)
    /* Enable LSE oscillator */
   RCC_OscInitStruct.PLL.PLLState   = RCC_PLL_NONE;
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSE;
-  RCC_OscInitStruct.LSEState       = RCC_LSE_ON;
+  RCC_OscInitStruct.LSEState       = RCC_LSE_ON_RTC_ONLY;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
     Error_Handler();

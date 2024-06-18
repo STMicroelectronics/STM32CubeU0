@@ -296,5 +296,3 @@ g_pfnVectors:
 	.thumb_set RNG_CRYP_IRQHandler,Default_Handler
 
 	.weak	SystemInit
-
-/************************ (C) COPYRIGHT STMicroelectonics *****END OF FILE****/

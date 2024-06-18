@@ -22,12 +22,15 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32u0xx_hal.h"
-#include <stdio.h>
 #include "stm32u0xx_ll_rcc.h"
+#include <stdio.h>
+
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
 /* exported variables --------------------------------------------------------*/
+/* Exported macros -----------------------------------------------------------*/
+/* Exported functions ------------------------------------------------------- */
 extern void Error_Handler(void);
 /* Definition for USARTx clock resources */
 

@@ -16,9 +16,6 @@ echo Creating OEMiROT image  >> %current_log_file% 2>&1
 %stm32tpccli% -pb "%provisioningdir%\OEMiROT\Images\OEMiRoT_Code_Image.xml" >> %current_log_file% 2>&1
 IF !errorlevel! NEQ 0 goto :error
 
-echo Creating OEMiROT data  >> %current_log_file% 2>&1
-%stm32tpccli% -pb "%provisioningdir%\OEMiROT\Images\OEMiRoT_Data_Image.xml" >> %current_log_file% 2>&1
-IF !errorlevel! NEQ 0 goto :error
 exit 0
 
 :error

@@ -41,10 +41,10 @@ data at the same time it is transmitting another data (full- duplex feature).
   and 2048 additional in USBX byte pool and USBX_MEMORY_SIZE.
 #### <b>Expected success behavior</b>
 
-When plugged to PC host, the STM32U083RCTx must be properly enumerated as an USB Serial device and an STlink Com port.
+When plugged to PC host, the STM32U083MCTx must be properly enumerated as an USB Serial device and an STlink Com port.
 During the enumeration phase, the device must provide host with the requested descriptors (Device descriptor, configuration descriptor, string descriptors).
 Those descriptors are used by host driver to identify the device capabilities.
-Once STM32U083RCTx USB device successfully completed the enumeration phase.
+Once STM32U083MCTx USB device successfully completed the enumeration phase.
 Open two hyperterminals (USB com port and UART com port(USB STLink VCP)) to send/receive data to/from host from/to device.
 
 #### <b>Error behaviors</b>
@@ -104,7 +104,7 @@ RTOS, ThreadX, USBX, USBXDevice, USB_DRD, Full Speed, CDC, VCP, USART, DMA.
 
 ### <b>Hardware and Software environment</b>
 
-  - This application runs on STM32U083RCTx devices
+  - This application runs on STM32U083MCTx devices
   - This application has been tested with STMicroelectronics STM32U083C-DK boards Revision MB1933-U083C-B01.
     and can be easily tailored to any other supported device and development board.
 

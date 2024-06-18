@@ -26,7 +26,7 @@ OEMiSB, boot path, Root Of Trust, Security
 * OEMiSB\_Boot/Src/main.c Main program
 * OEMiSB\_Boot/Src/stm32u0xx\_it.c Interrupt handlers
 * OEMiSB\_Boot/Src/system\_stm32u0xx.c System init file
-* OEMiSB\_Boot/Src/startup\_stm32u083xx.s Startup file
+* OEMiSB\_Boot/Src/startup\_stm32u0xx.s Startup file
 * OEMiSB\_Boot/Inc/mcuboot\_config/mcuboot\_config.h Mcuboot configuration file
 * OEMiSB\_Boot/Inc/boot.h Header file for boot.c
 * OEMiSB\_Boot/Inc/boot\_cfg.h Configuration file
@@ -42,8 +42,8 @@ OEMiSB, boot path, Root Of Trust, Security
 ### **Hardware and Software environment**
 
 
-* This example runs on STM32U031xx devices.
-* This example has been tested with STMicroelectronics NUCLEO-U031R8 (MB1932)
+* This example runs on STM32U0xx  devices.
+* This example has been tested with STMicroelectronics STM32U0xx  (MB1932)
 board and can be easily tailored to any other supported device and development board.
 * To get debug print in your UART console you have to configure it using these parameters:
 Speed: 115200, Data: 8bits, Parity: None, stop bits: 1, Flow control: none.

@@ -49,9 +49,9 @@ extern "C" {
 #define FLOW_STEP_MPU_I_EN_R3       0x0000cccdU        /*!< Step MPU Region 3 Init enable value */
 #define FLOW_STEP_MPU_I_EN_R4       0x0000d2d3U        /*!< Step MPU Region 4 Init enable value */
 #define FLOW_STEP_MPU_I_EN_R5       0x0000e3dcU        /*!< Step MPU Region 5 Init enable value */
-#define FLOW_STEP_MPU_I_EN_R6       0x00043d7aU        /*!< No effect on control flow */
-#define FLOW_STEP_MPU_I_EN_R7       0x0001cf0eU        /*!< No effect on control flow */
-#define FLOW_STEP_MPU_I_EN          0x0001ffffU        /*!< Step MPU Secure Init enable value */
+#define FLOW_STEP_MPU_I_EN_R6       0x00043d7aU        /*!< Step MPU Region 6 Init enable value */
+#define FLOW_STEP_MPU_I_EN_R7       0x0001cf0eU        /*!< Step MPU Region 7 Init enable value */
+#define FLOW_STEP_MPU_I_EN          0x000673eaU        /*!< Step MPU Secure Init enable value */
 #else /* OEMISB_MPU_PROTECTION */
 #define FLOW_STEP_MPU_I_EN_R0       0x00000000U        /*!< No effect on control flow */
 #define FLOW_STEP_MPU_I_EN_R1       0x00000000U        /*!< No effect on control flow */
@@ -71,8 +71,8 @@ extern "C" {
 #define FLOW_STEP_MPU_I_CH_R3       0x0001cef0U        /*!< Step MPU Region 3 Init check value */
 #define FLOW_STEP_MPU_I_CH_R4       0x000a6e24U        /*!< Step MPU Region 4 Init check value */
 #define FLOW_STEP_MPU_I_CH_R5       0x0001d0eeU        /*!< Step MPU Region 5 Init check value */
-#define FLOW_STEP_MPU_I_CH_R6       0x000569ceU        /*!< No effect on control flow */
-#define FLOW_STEP_MPU_I_CH_R7       0x000577d0U        /*!< No effect on control flow */
+#define FLOW_STEP_MPU_I_CH_R6       0x000569ceU        /*!< Step MPU Region 6 Init check value */
+#define FLOW_STEP_MPU_I_CH_R7       0x000577d0U        /*!< Step MPU Region 7 Init check value */
 #define FLOW_STEP_MPU_I_CH          0x0001e1e1U        /*!< Step MPU Init check value */
 #else /* OEMISB_MPU_PROTECTION */
 #define FLOW_STEP_MPU_I_CH_R0       0x00000000U        /*!< No effect on control flow */
@@ -86,12 +86,12 @@ extern "C" {
 #define FLOW_STEP_MPU_I_CH          0x00000000U        /*!< No effect on control flow */
 #endif /* OEMISB_MPU_PROTECTION */
 
-#define FLOW_STEP_HASH_CH_R0        0x00023bd7U         /*!< No effect on control flow */
-#define FLOW_STEP_HASH_CH_R1        0x00025dafU         /*!< No effect on control flow */
-#define FLOW_STEP_HASH_CH_R2        0x00029cf6U         /*!< No effect on control flow */
-#define FLOW_STEP_HASH_CH_R3        0x00012cd3U         /*!< No effect on control flow */
-#define FLOW_STEP_HASH_CH_R4        0x0000b4abU         /*!< No effect on control flow */
-#define FLOW_STEP_HASH_CH_R5        0x0000fdc2U         /*!< No effect on control flow */
+#define FLOW_STEP_HASH_CH_R0        0x00023bd7U         /*!< Step HASH Region 0 check value */
+#define FLOW_STEP_HASH_CH_R1        0x00025dafU         /*!< Step HASH Region 1 check value*/
+#define FLOW_STEP_HASH_CH_R2        0x00029cf6U         /*!< Step HASH Region 2 check value */
+#define FLOW_STEP_HASH_CH_R3        0x00012cd3U         /*!< Step HASH Region 3 check value */
+#define FLOW_STEP_HASH_CH_R4        0x0000b4abU         /*!< Step HASH Region 4 check value */
+#define FLOW_STEP_HASH_CH_R5        0x0000fdc2U         /*!< Step HASH Region 5 check value */
 
 /**
   * @brief  Flow Control : Control values runtime protections

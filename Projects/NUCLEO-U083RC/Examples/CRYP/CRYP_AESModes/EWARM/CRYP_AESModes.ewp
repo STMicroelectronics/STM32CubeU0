@@ -86,7 +86,7 @@
         </option>
         <option>
           <name>OGBufferedTerminalOutput</name>
-          <state>0</state>
+          <state>1</state>
         </option>
         <option>
           <name>GenStdoutInterface</name>
@@ -1157,6 +1157,12 @@
       </file>
       <file>
         <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32U0xx_HAL_Driver\Src\stm32u0xx_hal_tim_ex.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32U0xx_HAL_Driver\Src\stm32u0xx_hal_uart.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32U0xx_HAL_Driver\Src\stm32u0xx_hal_uart_ex.c</name>
       </file>
     </group>
   </group>

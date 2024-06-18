@@ -37,24 +37,32 @@ This example behaves as follows:
    - AES192 CTR decryption
    - AES256 CTR decryption
 
-When resorting to IAR Embedded Workbench IDE, AES algorithms processing status
-are displayed on debugger Terminal I/O as follows: View --> Terminal I/O.
-When resorting to MDK-ARM KEIL IDE, AES algorithms processing status 
-are displayed on debugger as follows:  View --> Serial Viewer --> Debug (printf) Viewer.
+When resorting to IAR Embedded Workbench IDE, AES algorithms processing status are displayed on :
+- Debugger Terminal I/O as follows: View --> Terminal I/O.
+- Hyperterminal using VCP connection as follows: General Options --> Library Options 1 --> Uncheck Buffered terminal output.
+
+
+When resorting to MDK-ARM KEIL IDE:
+Command Code could not be displayed on debugger but user can use the Virtual Com port of the NUCLEO-U083RC.
 
 When resorting to STM32CubeIDE:
 
 Command Code is displayed on debugger as follows: Window--> Show View--> Console.
 
-In Debug configuration :
+In Debug configuration using Semihosting:
 
 - Window\Debugger, select the Debug probe : ST-LINK(OpenOCD)
 - Window\Startup, add the command "monitor arm semihosting enable"
 
+In Debug and Release configurations using VCP connection :
+   Command Code is displayed on PC (as HyperTerminal or TeraTerm) with proper configuration :
+   - uncheck "exclude resource from build" for "syscall.c" file
+   - remove "-specs=rdimon.specs -lc -lrdimon" from from cubeIDE Propreties --> C/C++ Build --> Settings
+   --> Tool Settings --> MCU GCC linker --> Miscellaneous
+
 Results can be displayed on PC (through HyperTerminal or TeraTerm) by Virtual Com Port
 by enabling USE_VCP_CONNECTION compilation switch and with the proper configuration
 (115200 bauds, 8 bits data, 1 stop bit, no parity, no HW flow control).
-
 When all ciphering and deciphering operations are successful, LED4 is turned on.
 In case of ciphering or deciphering issue, LED4 is blinking slowly.
 

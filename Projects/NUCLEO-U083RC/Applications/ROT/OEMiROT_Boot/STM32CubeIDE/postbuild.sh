@@ -42,6 +42,7 @@ preprocess_bl2_file="$project_dir/image_macros_preprocessed_bl2.c"
 appli_dir="../../../../$oemirot_boot_path_project"
 loader_dir="../../../../Applications/ROT/OEMiROT_Loader"
 option_bytes="$project_dir/../../../../ROT_Provisioning/OEMiROT/ob_flash_programming.sh"
+provisioning="$project_dir/../../../../ROT_Provisioning/OEMiROT/provisioning.sh"
 
 appli_system_file="$appli_dir/Src/system_stm32u0xx.c"
 loader_system_file="$loader_dir/Src/system_stm32u0xx.c"
@@ -54,6 +55,10 @@ loader_ld_file="$loader_dir/STM32CubeIDE/STM32U083RCIX_FLASH.ld"
 
 code_xml="$project_dir/../../../../ROT_Provisioning/OEMiROT/Images/OEMiRoT_Code_Image.xml"
 data_xml="$project_dir/../../../../ROT_Provisioning/OEMiROT/Images/OEMiRoT_Data_Image.xml"
+
+code_size="Firmware area size"
+data_size="Data area size"
+scratch_sector_number="Number of scratch sectors"
 
 if [ -f $appli_ld_file ]; then
     $python$applicfg linker --layout $preprocess_bl2_file -m RE_AREA_0_OFFSET -n CODE_OFFSET --vb $appli_ld_file >> $current_log_file 2>&1
@@ -154,6 +159,15 @@ if [ $? != 0 ]; then error; fi
 $python$applicfg flash --layout $preprocess_bl2_file -b data_image_number -m RE_DATA_IMAGE_NUMBER --vb $option_bytes >> $current_log_file 2>&1
 if [ $? != 0 ]; then error; fi
 
+$python$applicfg flash --layout $preprocess_bl2_file -b ext_loader -m RE_LOADER --vb $option_bytes >> $current_log_file 2>&1
+if [ $? != 0 ]; then error; fi
+
+$python$applicfg flash --layout $preprocess_bl2_file -b data_image_number -m RE_DATA_IMAGE_NUMBER --vb $provisioning >> $current_log_file 2>&1
+if [ $? != 0 ]; then error; fi
+
+$python$applicfg flash --layout $preprocess_bl2_file -b ext_loader -m RE_LOADER --vb $provisioning >> $current_log_file 2>&1
+if [ $? != 0 ]; then error; fi
+
 $python$applicfg xmlval --layout $preprocess_bl2_file -m RE_CODE_IMAGE_SIZE -c S --vb $code_xml >> $current_log_file 2>&1
 if [ $? != 0 ]; then error; fi
 
@@ -170,6 +184,18 @@ $python$applicfg xmlparam --layout $preprocess_bl2_file -m RE_OVER_WRITE -n "Wri
 if [ $? != 0 ]; then error; fi
 
 $python$applicfg xmlparam --layout $preprocess_bl2_file -m RE_OVER_WRITE -n "Write Option" -t Data -c --overwrite-only -h 1 -d "" --vb $data_xml >> $current_log_file 2>&1
+if [ $? != 0 ]; then error; fi
+
+$python"$applicfg" xmlval --layout "$preprocess_bl2_file" -m RE_FLASH_AREA_SCRATCH_SIZE -n "$scratch_sector_number" --decimal "$code_xml" --vb >> "$current_log_file"
+if [ $? != 0 ]; then error; fi
+
+$python"$applicfg" xmlval -xml "$code_xml" -nxml "$code_size" -nxml "$scratch_sector_number" --decimal -e "(((val1+1)/val2)+1)" -cond "val2" -c M "$code_xml" --vb >> "$current_log_file"
+if [ $? != 0 ]; then error; fi
+
+$python"$applicfg" xmlval --layout "$preprocess_bl2_file" -m RE_FLASH_AREA_SCRATCH_SIZE -n "$scratch_sector_number" --decimal "$data_xml" --vb >> "$current_log_file"
+if [ $? != 0 ]; then error; fi
+
+$python"$applicfg" xmlval -xml "$data_xml" -nxml "$data_size" -nxml "$scratch_sector_number" --decimal -e "(((val1+1)/val2)+1)" -cond "val2" -c M "$data_xml" --vb >> "$current_log_file"
 if [ $? != 0 ]; then error; fi
 
 $python$applicfg xmlparam --layout $preprocess_bl2_file -m RE_ENCRYPTION -n "Encryption key" -t File -c -E -h 1 -d "../Keys/OEMiRoT_Encryption.pem" --vb $code_xml >> $current_log_file 2>&1

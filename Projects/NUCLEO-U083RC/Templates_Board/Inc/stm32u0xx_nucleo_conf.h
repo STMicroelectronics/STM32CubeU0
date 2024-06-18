@@ -3,7 +3,7 @@
   ******************************************************************************
   * @file    stm32u0xx_nucleo_conf.h
   * @author  MCD Application Team
-  * @brief   STM32U0xx_Nuleo board configuration file.
+  * @brief   STM32U0xx_Nucleo board configuration file.
   *          This file should be copied to the application folder and renamed
   *          to stm32u0xx_nucleo_conf.h
   ******************************************************************************
@@ -55,8 +55,6 @@ extern "C" {
 /* IRQ priorities */
 #define BSP_BUTTON_USER_IT_PRIORITY         15U
 
-/* User button EXTI handle */
-#define H_EXTI_13                           hpb_exti[BUTTON_USER]
 /**
   * @}
   */

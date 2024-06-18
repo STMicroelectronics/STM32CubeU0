@@ -216,7 +216,6 @@
           <name>CCDefines</name>
           <state>STM32U031xx</state>
           <state>USE_HAL_DRIVER</state>
-          <state>USE_FULL_ASSERT</state>
         </option>
         <option>
           <name>CCPreprocFile</name>
@@ -1080,12 +1079,6 @@
     </group>
   </group>
   <group>
-    <name>Doc</name>
-    <file>
-        <name>$PROJ_DIR$\..\README.md</name>
-    </file>
-  </group>
-  <group>
     <name>Drivers</name>
     <group>
       <name>STM32U0xx_HAL_Driver</name>
@@ -1100,12 +1093,6 @@
       </file>
       <file>
         <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32U0xx_HAL_Driver\Src\stm32u0xx_hal_flash_ex.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32U0xx_HAL_Driver\Src\stm32u0xx_hal_rng.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32U0xx_HAL_Driver\Src\stm32u0xx_hal_rng_ex.c</name>
       </file>
       <file>
         <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32U0xx_HAL_Driver\Src\stm32u0xx_hal_gpio.c</name>
@@ -1131,6 +1118,12 @@
       <file>
         <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32U0xx_HAL_Driver\Src\stm32u0xx_hal_wwdg.c</name>
       </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32U0xx_HAL_Driver\Src\stm32u0xx_hal_rng.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32U0xx_HAL_Driver\Src\stm32u0xx_hal_rng_ex.c</name>
+      </file>
     </group>
     <group>
       <name>CMSIS</name>
@@ -1138,5 +1131,11 @@
         <name>$PROJ_DIR$\..\Src\system_stm32u0xx.c</name>
       </file>
     </group>
+  </group>
+  <group>
+    <name>Doc</name>
+    <file>
+      <name>$PROJ_DIR$\..\README.md</name>
+    </file>
   </group>
 </project>

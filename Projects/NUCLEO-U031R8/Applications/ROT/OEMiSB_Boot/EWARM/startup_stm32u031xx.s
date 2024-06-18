@@ -82,7 +82,7 @@ __vector_table
         DCD     DMA1_Channel1_IRQHandler          ; DMA1 Channel1 interrupt
         DCD     DMA1_Channel2_3_IRQHandler        ; DMA1 Channel2/Channel3 interrupt
         DCD     DMA1_Ch4_7_DMAMUX_OVR_IRQHandler  ; DMA1 Channel 4 to Channel 7, DMAMUX overrun
-        DCD     ADC_COMP1_2_IRQHandler            ; ADC and COMP1/COMP2 interrupts
+        DCD     ADC_COMP1_IRQHandler              ; ADC and COMP1 interrupts
         DCD     TIM1_BRK_UP_TRG_COM_IRQHandler    ; TIM1 break, update, trigger, commutation, error, direction change  and index interrupts
         DCD     TIM1_CC_IRQHandler                ; TIM1 Capture Compare interrupt
         DCD     TIM2_IRQHandler                   ; TIM2
@@ -100,7 +100,7 @@ __vector_table
         DCD     USART1_IRQHandler                 ; USART1 global interrupt
         DCD     USART2_LPUART2_IRQHandler         ; USART2, LPUART 2 global interrupt
         DCD     USART3_LPUART1_IRQHandler         ; USART3, LPUART 1 global interrupt
-        DCD     USART4_LPUART3_IRQHandler         ; USART4, LPUART 3 global interrupt
+        DCD     USART4_IRQHandler                 ; USART4 global interrupt
         DCD     RNG_IRQHandler                    ; RNG global interrupt
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -197,10 +197,10 @@ DMA1_Channel2_3_IRQHandler
 DMA1_Ch4_7_DMAMUX_OVR_IRQHandler
         B DMA1_Ch4_7_DMAMUX_OVR_IRQHandler
 
-        PUBWEAK ADC_COMP1_2_IRQHandler
+        PUBWEAK ADC_COMP1_IRQHandler
         SECTION .text:CODE:NOROOT:REORDER(1)
-ADC_COMP1_2_IRQHandler
-        B ADC_COMP1_2_IRQHandler
+ADC_COMP1_IRQHandler
+        B ADC_COMP1_IRQHandler
 
         PUBWEAK TIM1_BRK_UP_TRG_COM_IRQHandler
         SECTION .text:CODE:NOROOT:REORDER(1)
@@ -282,10 +282,10 @@ USART2_LPUART2_IRQHandler
 USART3_LPUART1_IRQHandler
         B USART3_LPUART1_IRQHandler
 
-        PUBWEAK USART4_LPUART3_IRQHandler
+        PUBWEAK USART4_IRQHandler
         SECTION .text:CODE:NOROOT:REORDER(1)
-USART4_LPUART3_IRQHandler
-        B USART4_LPUART3_IRQHandler
+USART4_IRQHandler
+        B USART4_IRQHandler
 
         PUBWEAK RNG_IRQHandler
         SECTION .text:CODE:NOROOT:REORDER(1)
