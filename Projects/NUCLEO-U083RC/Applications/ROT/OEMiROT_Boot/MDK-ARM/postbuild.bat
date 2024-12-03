@@ -32,10 +32,11 @@ set "python= "
 
 :postbuild
 set "preprocess_bl2_file=%projectdir%\image_macros_preprocessed_bl2.c"
-set "appli_dir=..\..\..\..\%oemirot_boot_path_project%"
+set "appli_dir=..\..\..\..\%oemirot_appli_path_project%"
 set "loader_dir=..\..\..\..\Applications\ROT\OEMiROT_Loader"
 set "option_bytes=%projectdir%\..\..\..\..\ROT_Provisioning\OEMiROT\ob_flash_programming.bat"
 set "provisioning=%projectdir%\..\..\..\..\ROT_Provisioning\OEMiROT\provisioning.bat"
+set "postbuild_file=%appli_dir%\MDK-ARM\postbuild.bat"
 
 :: Environment variable for AppliCfg
 set appli_system_file="%appli_dir%\Src\system_stm32u0xx.c"
@@ -49,9 +50,14 @@ set loader_linker_file="%loader_dir%\MDK-ARM\stm32u0xx_loader.sct"
 
 set code_xml="%projectdir%\..\..\..\..\ROT_Provisioning\OEMiROT\Images\OEMiRoT_Code_image.xml"
 set data_xml="%projectdir%\..\..\..\..\ROT_Provisioning\OEMiROT\Images\OEMiRoT_Data_Image.xml"
+set init_code_xml="%projectdir%\..\..\..\..\ROT_Provisioning\OEMiROT\Images\OEMiRoT_Init_Code_Image.xml"
+set init_data_xml="%projectdir%\..\..\..\..\ROT_Provisioning\OEMiROT\Images\OEMiRoT_Init_Data_Image.xml"
 set code_size="Firmware area size"
 set data_size="Data area size"
 set scratch_sector_number="Number of scratch sectors"
+set init_app_bin="..\..\..\Applications\ROT\OEMiROT_Appli\Binary\rot_app_init_sign.bin"
+set init_data_bin="..\Binary\data_init_sign.bin"
+set fw_out_bin="Image output file"
 
 :: Bypass configuration of appli linker file if not present
 if not exist %appli_linker_file% goto :loader_linker_file
@@ -180,11 +186,11 @@ set "command=%python%%applicfg% flash --layout %preprocess_bl2_file% -b hdp_end 
 IF !errorlevel! NEQ 0 goto :error
 
 :: Application, data and loader addresses
-set "command=%python%%applicfg% flash --layout %preprocess_bl2_file% -b appliaddress -m RE_IMAGE_PARTITION_ADDRESS %option_bytes% --vb >> %current_log_file% 2>&1"
+set "command=%python%%applicfg% flash --layout %preprocess_bl2_file% -b appliaddress -m RE_INIT_IMAGE_PARTITION_ADDRESS %option_bytes% --vb >> %current_log_file% 2>&1"
 %command%
 IF !errorlevel! NEQ 0 goto :error
 
-set "command=%python%%applicfg% flash --layout %preprocess_bl2_file% -b dataaddress -m RE_DATA_IMAGE_PARTITION_ADDRESS %option_bytes% --vb >> %current_log_file% 2>&1"
+set "command=%python%%applicfg% flash --layout %preprocess_bl2_file% -b dataaddress -m RE_INIT_DATA_IMAGE_PARTITION_ADDRESS %option_bytes% --vb >> %current_log_file% 2>&1"
 %command%
 IF !errorlevel! NEQ 0 goto :error
 
@@ -205,6 +211,10 @@ set "command=%python%%applicfg% flash --layout %preprocess_bl2_file% -b data_ima
 IF !errorlevel! NEQ 0 goto :error
 
 set "command=%python%%applicfg% flash --layout %preprocess_bl2_file% -b ext_loader -m RE_LOADER --decimal %provisioning% --vb >> %current_log_file% 2>&1"
+%command%
+IF !errorlevel! NEQ 0 goto :error
+
+set "command=%python%%applicfg% flash --layout %preprocess_bl2_file% -b primary_only -m RE_PRIMARY_ONLY --decimal %postbuild_file% --vb >> %current_log_file% 2>&1"
 %command%
 IF !errorlevel! NEQ 0 goto :error
 
@@ -257,7 +267,40 @@ set "command=%python%%applicfg% xmlparam --layout  %preprocess_bl2_file% -m RE_E
 %command%
 IF !errorlevel! NEQ 0 goto :error
 
+::xml used for init image generation
+
+copy %code_xml% %init_code_xml%
+IF !errorlevel! NEQ 0 goto :error
+
+copy %data_xml% %init_data_xml%
+IF !errorlevel! NEQ 0 goto :error
+
+set "command=%python%%applicfg% xmlparam --option add -n "Clear Image" -t Data -c -c -h 1 -d "" %init_code_xml% >> %current_log_file% 2>&1"
+%command%
+IF !errorlevel! NEQ 0 goto :error
+
+set "command=%python%%applicfg% xmlparam --option add -n "Confirm" -t Data -c --confirm -h 1 -d "" %init_code_xml% >> %current_log_file% 2>&1"
+%command%
+IF !errorlevel! NEQ 0 goto :error
+
+set "command=%python%%applicfg% xmlval -v %init_app_bin% --string -n %fw_out_bin% %init_code_xml% --vb >> %current_log_file% 2>&1"
+%command%
+IF !errorlevel! NEQ 0 goto :error
+
+set "command=%python%%applicfg% xmlparam --option add -n "Clear Image" -t Data -c -c -h 1 -d "" %init_data_xml% >> %current_log_file% 2>&1"
+%command%
+IF !errorlevel! NEQ 0 goto :error
+
+set "command=%python%%applicfg% xmlparam --option add -n "Confirm" -t Data -c --confirm -h 1 -d "" %init_data_xml% >> %current_log_file% 2>&1"
+%command%
+IF !errorlevel! NEQ 0 goto :error
+
+set "command=%python%%applicfg% xmlval -v %init_data_bin% --string -n %fw_out_bin% %init_data_xml% --vb >> %current_log_file% 2>&1"
+%command%
+IF !errorlevel! NEQ 0 goto :error
+
 exit 0
+
 
 :error
 echo.

@@ -17,7 +17,6 @@ data_hex_val="0x10000"
 subregion_val="0x0"
 rdp_value="0xAA"
 rdp_str="OB_RDP_LEVEL_0"
-oem2_key="0x11223344 0x55667788 0x99AABBCC 0xDDEEFF00"
 action=""
 
 final_execution() {
@@ -131,7 +130,6 @@ appli_binary="${project_dir}/../Applications/ROT/OEMiSB_Appli/Binary/OEMiSB_Appl
 # Sha.bin
 sha256="${project_dir}/OEMiSB/Binary/sha256.bin"
 
-# Data updated with the postbuild of OEMiSB-Boot
 hdp_end=0x3
 bootaddress="0x8000000"
 appliaddress="0x8002000"

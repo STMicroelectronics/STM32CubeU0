@@ -48,6 +48,12 @@ int main(void)
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
 
+  /* !!! To boot in a secure way, the RoT has configured and activated the Memory Protection Unit
+     In order to keep a secure environment execution, you should reconfigure the MPU to make it compatible with your application
+     In this example, MPU is disabled
+  */
+  HAL_MPU_Disable();
+
 
   /* Configure the system clock */
   SystemClock_Config();

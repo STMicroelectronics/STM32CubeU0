@@ -14,18 +14,16 @@ ext_loader=0x1
 
 # Initial configuration
 ob_flash_programming="ob_flash_programming.sh"
-appli_dir="../../"$oemirot_boot_path_project
-app_bin=../$appli_dir"/Binary/rot_app.bin"
-app_enc_sign_bin=../$appli_dir"/Binary/rot_app_enc_sign.bin"
+appli_dir="../../"$oemirot_appli_path_project
 code_xml=$projectdir"/Images/OEMiROT_Code_Image.xml"
 data_xml=$projectdir"/Images/OEMiRoT_Data_Image.xml"
+init_data_xml=$projectdir"/Images/OEMiRoT_Init_Data_Image.xml"
 boot_cfg_h="${cube_fw_path}/Projects/NUCLEO-U083RC/Applications/ROT/OEMiROT_Boot/Inc/boot_hal_cfg.h"
 provisioning_log_file="provisioning.log"
 connect_no_reset="-c port=SWD speed=fast mode=Hotplug"
 connect_reset="-c port=SWD mode=UR"
 
 rdp_str="OB_RDP_LEVEL_0"
-oem2_key="0x11223344 0x55667788 0x99AABBCC 0xDDEEFF00"
 
 applicfg="$cube_fw_path/Utilities/PC_Software/ROT_AppliConfig/AppliCfg.py"
 python="python "
@@ -140,7 +138,7 @@ step_error()
 # ========================================================== Initial instructions ==========================================================
 echo "====="
 echo "===== Provisioning of OEMiRoT boot path"
-echo "===== Application selected through env.sh: $oemirot_boot_path_project"
+echo "===== Application selected through env.sh: $oemirot_appli_path_project"
 echo "====="
 echo
 
@@ -149,7 +147,7 @@ action="Validating OEMiROT boot path project"
 
 if [ ! -d $appli_dir ]; then
   echo "====="
-  echo "===== Wrong Boot path: $oemirot_boot_path_project"
+  echo "===== Wrong Boot path: $oemirot_appli_path_project"
   echo "===== please modify the env.sh to the right path"
   step_error
 fi
@@ -166,11 +164,6 @@ echo "       Press any key to continue..."
 echo
 if [ "$mode" != "AUTO" ]; then read -p "" -n1 -s; fi
 
-python $applicfg xmlval -v $app_bin --string -n "Firmware binary input file" $code_xml
-if [ $? != "0" ]; then step_error; fi
-python $applicfg xmlval -v $app_enc_sign_bin --string -n "Image output file" $code_xml
-if [ $? != "0" ]; then step_error; fi
-
 echo "   * Application firmware image generation"
 echo "       Open the OEMiROT_Appli project with preferred toolchain and rebuild all files"
 echo "       Press any key to continue..."
@@ -185,6 +178,8 @@ if [ "$data_image_number" == "0x1" ]; then
 	echo
 	if [ "$mode" != "AUTO" ]; then read -p "" -n1 -s; fi
 	"$stm32tpccli" -pb $data_xml >> $provisioning_log_file
+	if [ $? != "0" ]; then step_error; fi
+	"$stm32tpccli" -pb $init_data_xml >> $provisioning_log_file
 	if [ $? != "0" ]; then step_error; fi
 fi
 if [ "$ext_loader" == "0x1" ]; then

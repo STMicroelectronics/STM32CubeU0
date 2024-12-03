@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    Templates/Src/main.c
+  * @file    main.c
   * @author  MCD Application Team
   * @brief   Main program body
   ******************************************************************************
@@ -69,7 +69,7 @@ PUTCHAR_PROTOTYPE
   /* Place your implementation of putchar here */
   /* e.g. write a character to the USART3 and Loop until the end of transmission */
   HAL_UART_Transmit(&uart_device, (uint8_t *)&ch, 1, 0xFFFF);
-  
+
   return ch;
 }
 
@@ -251,43 +251,40 @@ void Erase_DATA(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follows :
   *            System Clock source            = MSI
   *            SYSCLK(Hz)                     = 48000000
   *            HCLK(Hz)                       = 48000000
   *            AHB Prescaler                  = 1
   *            APB1 Prescaler                 = 1
-  *            Flash Latency(WS)              = 1
+  *            MSI Range                      = 11
+  *            MSI Frequency(Hz)              = 48000000
+  *            Flash Latency(WS)              = 2
+  * @param  None
+  * @retval None
   */
 static void SystemClock_Config(void)
 {
   RCC_ClkInitTypeDef RCC_ClkInitStruct;
   RCC_OscInitTypeDef RCC_OscInitStruct;
-   if (HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE1) != HAL_OK)
+  if (HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE1) != HAL_OK)
   {
     Error_Handler();
   }
 
   RCC_OscInitStruct.OscillatorType      = RCC_OSCILLATORTYPE_MSI;
   RCC_OscInitStruct.MSIState            = RCC_MSI_ON;
-  RCC_OscInitStruct.PLL.PLLState        = RCC_PLL_ON;
   RCC_OscInitStruct.MSICalibrationValue = RCC_MSICALIBRATION_DEFAULT;
   RCC_OscInitStruct.MSIClockRange       = RCC_MSIRANGE_11; /* MSI = 48MHz */
-  RCC_OscInitStruct.PLL.PLLSource       = RCC_PLLSOURCE_MSI;
-  RCC_OscInitStruct.PLL.PLLM            = RCC_PLLM_DIV8;
-  RCC_OscInitStruct.PLL.PLLN            = 16; 
-  RCC_OscInitStruct.PLL.PLLP            = RCC_PLLP_DIV2; /* 24MHz */
-  RCC_OscInitStruct.PLL.PLLQ            = RCC_PLLQ_DIV2; /* 24MHz */
-  RCC_OscInitStruct.PLL.PLLR            = RCC_PLLR_DIV2; /* 24MHz */
-
+  RCC_OscInitStruct.PLL.PLLState        = RCC_PLL_NONE;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
     Error_Handler();
   }
 
-  /* Select PLL as system clock source and configure the HCLK, PCLK1
+  /* Select MSI as system clock source and configure the HCLK, PCLK1
      clocks dividers */
-  RCC_ClkInitStruct.ClockType      = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 );
+  RCC_ClkInitStruct.ClockType      = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1);
   RCC_ClkInitStruct.SYSCLKSource   = RCC_SYSCLKSOURCE_MSI;
   RCC_ClkInitStruct.AHBCLKDivider  = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;

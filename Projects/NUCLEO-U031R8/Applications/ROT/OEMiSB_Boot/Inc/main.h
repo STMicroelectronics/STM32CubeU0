@@ -23,6 +23,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32u0xx_hal.h"
 #include "stm32u0xx_ll_rcc.h"
+#include "stm32u0xx_ll_system.h"
 #include <stdio.h>
 
 /* Exported types ------------------------------------------------------------*/

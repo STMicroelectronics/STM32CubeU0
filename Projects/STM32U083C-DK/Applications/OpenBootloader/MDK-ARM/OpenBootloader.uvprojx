@@ -865,6 +865,16 @@
               <FilePath>../../../../../Middlewares/ST/usbx/common/core/src/ux_utility_memory_allocate_mulv_safe.c</FilePath>
             </File>
             <File>
+              <FileName>ux_utility_memory_byte_pool_create.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\Middlewares\ST\usbx\common\core\src\ux_utility_memory_byte_pool_create.c</FilePath>
+            </File>
+            <File>
+              <FileName>ux_utility_memory_byte_pool_search.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\Middlewares\ST\usbx\common\core\src\ux_utility_memory_byte_pool_search.c</FilePath>
+            </File>
+            <File>
               <FileName>ux_utility_memory_compare.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../../../../Middlewares/ST/usbx/common/core/src/ux_utility_memory_compare.c</FilePath>
@@ -880,29 +890,9 @@
               <FilePath>../../../../../Middlewares/ST/usbx/common/core/src/ux_utility_memory_free.c</FilePath>
             </File>
             <File>
-              <FileName>ux_utility_memory_free_block_best_get.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../Middlewares/ST/usbx/common/core/src/ux_utility_memory_free_block_best_get.c</FilePath>
-            </File>
-            <File>
               <FileName>ux_utility_memory_set.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../../../../Middlewares/ST/usbx/common/core/src/ux_utility_memory_set.c</FilePath>
-            </File>
-            <File>
-              <FileName>ux_utility_pci_class_scan.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../Middlewares/ST/usbx/common/core/src/ux_utility_pci_class_scan.c</FilePath>
-            </File>
-            <File>
-              <FileName>ux_utility_pci_read.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../Middlewares/ST/usbx/common/core/src/ux_utility_pci_read.c</FilePath>
-            </File>
-            <File>
-              <FileName>ux_utility_pci_write.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../Middlewares/ST/usbx/common/core/src/ux_utility_pci_write.c</FilePath>
             </File>
             <File>
               <FileName>ux_utility_physical_address.c</FileName>

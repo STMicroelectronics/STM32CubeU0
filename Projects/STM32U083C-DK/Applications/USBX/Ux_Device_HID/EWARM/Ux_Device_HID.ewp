@@ -74,7 +74,7 @@
         </option>
         <option>
           <name>OGLastSavedByProductVersion</name>
-          <state>9.20.1.43525</state>
+          <state>9.20.4.46976</state>
         </option>
         <option>
           <name>OGChipSelectEditMenu</name>
@@ -1151,6 +1151,12 @@
     <group>
       <name>STM32U0xx_HAL_Driver</name>
       <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32U0xx_HAL_Driver\Src\stm32u0xx_hal_tim.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32U0xx_HAL_Driver\Src\stm32u0xx_hal_tim_ex.c</name>
+      </file>
+      <file>
         <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32U0xx_HAL_Driver\Src\stm32u0xx_hal_cortex.c</name>
       </file>
       <file>
@@ -1185,12 +1191,6 @@
       </file>
       <file>
         <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32U0xx_HAL_Driver\Src\stm32u0xx_hal_exti.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32U0xx_HAL_Driver\Src\stm32u0xx_hal_tim.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32U0xx_HAL_Driver\Src\stm32u0xx_hal_tim_ex.c</name>
       </file>
       <file>
         <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32U0xx_HAL_Driver\Src\stm32u0xx_hal_pcd.c</name>
@@ -1777,7 +1777,10 @@
           <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\usbx\common\core\src\ux_utility_memory_free.c</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\usbx\common\core\src\ux_utility_memory_free_block_best_get.c</name>
+          <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\usbx\common\core\src\ux_utility_memory_byte_pool_create.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\usbx\common\core\src\ux_utility_memory_byte_pool_search.c</name>
         </file>
         <file>
           <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\usbx\common\core\src\ux_utility_memory_set.c</name>
@@ -1795,13 +1798,13 @@
           <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\usbx\common\core\src\ux_utility_mutex_on.c</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\usbx\common\core\src\ux_utility_pci_class_scan.c</name>
+          <name>$PROJ_DIR$/../../../../../../Middlewares/ST/usbx/common/core/src/ux_utility_pci_class_scan.c</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\usbx\common\core\src\ux_utility_pci_read.c</name>
+          <name>$PROJ_DIR$/../../../../../../Middlewares/ST/usbx/common/core/src/ux_utility_pci_read.c</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\usbx\common\core\src\ux_utility_pci_write.c</name>
+          <name>$PROJ_DIR$/../../../../../../Middlewares/ST/usbx/common/core/src/ux_utility_pci_write.c</name>
         </file>
         <file>
           <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\usbx\common\core\src\ux_utility_physical_address.c</name>
@@ -1870,7 +1873,7 @@
           <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\usbx\common\core\src\ux_utility_timer_create.c</name>
         </file>
         <file>
-          <name>$PROJ_DIR$/../../../../../../Middlewares/ST/usbx/common/core/src/ux_utility_timer_delete.c</name>
+          <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\usbx\common\core\src\ux_utility_timer_delete.c</name>
         </file>
         <file>
           <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\usbx\common\core\src\ux_utility_unicode_to_string.c</name>

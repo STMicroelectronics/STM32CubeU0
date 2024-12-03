@@ -142,6 +142,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef* huart)
   /* USER CODE BEGIN USART2_MspInit 1 */
 
   /* USER CODE END USART2_MspInit 1 */
+
   }
 
 }
@@ -204,6 +205,8 @@ void HAL_PCD_MspInit(PCD_HandleTypeDef* hpcd)
       Error_Handler();
     }
 
+    /* Enable VDDUSB */
+    HAL_PWREx_EnableVddUSB();
     /* Peripheral clock enable */
     __HAL_RCC_USB_CLK_ENABLE();
     /* USB_DRD_FS interrupt Init */
@@ -212,6 +215,7 @@ void HAL_PCD_MspInit(PCD_HandleTypeDef* hpcd)
   /* USER CODE BEGIN USB_DRD_FS_MspInit 1 */
 
   /* USER CODE END USB_DRD_FS_MspInit 1 */
+
   }
 
 }

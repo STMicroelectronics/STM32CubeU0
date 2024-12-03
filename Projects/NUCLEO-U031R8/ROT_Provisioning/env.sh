@@ -21,7 +21,8 @@ else
     stm32programmercli="STM32_Programmer_CLI"
     stm32tpccli="STM32TrustedPackageCreator_CLI"
 fi
-
+#Configure OEM2 Key for RDP Regression
+oem2_key="0x11223344 0x55667788 0x99AABBCC 0xDDEEFF00"
 # ==============================================================================
 #                            OEMiSB boot path
 # ==============================================================================

@@ -40,7 +40,6 @@ extern ARM_DRIVER_FLASH FLASH_DEV_NAME;
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 
-#define JUMPER_ADDRESS 0x1FFF6000UL
 #define MAGIC_NUMBER 0x08192A3C
 
 #ifdef MCUBOOT_EXT_LOADER
@@ -125,7 +124,7 @@ void execute_loader(void)
     /* Check Flow control */
     FLOW_CONTROL_CHECK(uFlowProtectValue, FLOW_CTRL_STAGE_5);
 
-    jump_to_application(JUMPER_ADDRESS, MAGIC_NUMBER, LOADER_CODE_START, MPU_REGION_NUMBER5);
+    jump_to_application(BL_EXIT_SEC_MEM_BASE, MAGIC_NUMBER, LOADER_CODE_START, MPU_REGION_NUMBER5);
 
     /* Avoid compiler to pop registers after having changed MSP */
 #if !defined(__ICCARM__)
@@ -175,7 +174,7 @@ void boot_platform_quit(struct boot_arm_vector_table *vector)
 
     RNG_DeInit();
 
-    jump_to_application(JUMPER_ADDRESS, MAGIC_NUMBER, (uint32_t)vector, MPU_REGION_NUMBER5);
+    jump_to_application(BL_EXIT_SEC_MEM_BASE, MAGIC_NUMBER, (uint32_t)vector, MPU_REGION_NUMBER5);
 
     /* Avoid compiler to pop registers after having changed MSP */
 #if !defined(__ICCARM__)

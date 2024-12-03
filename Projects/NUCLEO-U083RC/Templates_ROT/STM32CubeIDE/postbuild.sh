@@ -38,12 +38,21 @@ echo "" > $current_log_file
 # arg1 is the config type (Debug, Release)
 config=$1
 
+appli_dir="../../../Applications/ROT/OEMiROT_Appli"
+app_bin=$appli_dir"/Binary/rot_app.bin"
+app_enc_sign_bin=$appli_dir"/Binary/rot_app_enc_sign.bin"
+
 code_xml="$provisioningdir/OEMiROT/Images/OEMiRoT_Code_Image.xml"
 data_xml="$provisioningdir/OEMiROT/Images/OEMiRoT_Data_Image.xml"
 code_bin="$project_dir/$config/Templates_OEMiROT_Appli.bin"
 code_dest_bin="$project_dir/../Binary/rot_app.bin"
 
 echo "Postbuild image" >> $current_log_file 2>&1
+
+$python $applicfg xmlval -v $app_bin --string -n "Firmware binary input file" $code_xml
+if [ $? != "0" ]; then error; fi
+$python $applicfg xmlval -v $app_enc_sign_bin --string -n "Image output file" $code_xml
+if [ $? != "0" ]; then error; fi
 
 echo "Copy binary to folder" >> $current_log_file 2>&1
 cp -f $code_bin $code_dest_bin >> $current_log_file 2>&1

@@ -22,15 +22,18 @@ else
     stm32tpccli="STM32TrustedPackageCreator_CLI"
     imgtool="imgtool"
 fi
-
+#Configure OEM2 Key for RDP Regression
+oem2_key="0x11223344 0x55667788 0x99AABBCC 0xDDEEFF00"
 # ==============================================================================
 #                               OEMiROT boot path
 # ==============================================================================
 # Select application project below
-#oemirot_boot_path_project="Templates_ROT"
-oemirot_boot_path_project="Applications/ROT/OEMiROT_Appli"
+#oemirot_appli_path_project="Templates_ROT"
+oemirot_appli_path_project="Applications/ROT/OEMiROT_Appli"
+oemirot_boot_path_project="Applications/ROT/OEMiROT_Boot"
 # ==============================================================================
 
 cube_fw_path=$projectdir/../../../
-oemirot_appli=rot_app_enc_sign.bin
+oemirot_appli=rot_app_init_sign.bin
+oemirot_boot=OEMiROT_Boot.bin
 rot_provisioning_path=$projectdir

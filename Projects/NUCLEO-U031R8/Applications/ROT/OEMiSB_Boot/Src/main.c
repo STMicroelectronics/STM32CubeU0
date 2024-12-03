@@ -75,36 +75,37 @@ int main(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follows :
   *            System Clock source            = MSI
   *            SYSCLK(Hz)                     = 48000000
   *            HCLK(Hz)                       = 48000000
   *            AHB Prescaler                  = 1
   *            APB1 Prescaler                 = 1
+  *            MSI Range                      = 11
+  *            MSI Frequency(Hz)              = 48000000
   *            Flash Latency(WS)              = 1
+  * @param  None
+  * @retval None
   */
-static void SystemClock_Config(void)
+void SystemClock_Config(void)
 {
   /* MSI configuration and activation */
+  LL_FLASH_SetLatency(LL_FLASH_LATENCY_1);
   LL_RCC_MSI_Enable();
-  while(LL_RCC_MSI_IsReady() != 1)
+  while (LL_RCC_MSI_IsReady() != 1)
   {
   };
+  LL_RCC_MSI_SetRange(LL_RCC_MSIRANGE_11);
 
-  /* Main PLL configuration and activation */
-  LL_RCC_PLL_ConfigDomain_SYS(LL_RCC_PLLSOURCE_MSI, LL_RCC_PLLM_DIV_1, 24, LL_RCC_PLLR_DIV_2);
-  LL_RCC_PLL_Enable();
-  LL_RCC_PLL_EnableDomain_SYS();
-  while(LL_RCC_PLL_IsReady() != 1)
-  {
-  };
-
-  /* Sysclk activation on the main PLL */
+  /* Sysclk activation on the MSI oscillator */
   LL_RCC_SetAHBPrescaler(LL_RCC_SYSCLK_DIV_1);
-  LL_RCC_SetSysClkSource(LL_RCC_SYS_CLKSOURCE_PLL);
-  while(LL_RCC_GetSysClkSource() != LL_RCC_SYS_CLKSOURCE_STATUS_PLL)
+  LL_RCC_SetSysClkSource(LL_RCC_SYS_CLKSOURCE_MSI);
+  while (LL_RCC_GetSysClkSource() != LL_RCC_SYS_CLKSOURCE_STATUS_MSI)
   {
   };
+
+  /* Set APB prescaler*/
+  LL_RCC_SetAPB1Prescaler(LL_RCC_APB1_DIV_1);
 }
 
 /**

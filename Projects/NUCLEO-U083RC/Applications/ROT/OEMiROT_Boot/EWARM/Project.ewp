@@ -1208,13 +1208,16 @@
                 <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\library\bignum.c</name>
             </file>
             <file>
+                <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\library\bignum_core.c</name>
+            </file>
+            <file>
                 <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\library\cipher.c</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\library\constant_time.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\library\ctr_drbg.c</name>
+                <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\library\hmac_drbg.c</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\library\ecdh.c</name>
@@ -1245,12 +1248,6 @@
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\library\platform_util.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\library\rsa.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\library\rsa_internal.c</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\library\sha256.c</name>
@@ -1290,9 +1287,6 @@
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mcuboot\boot\bootutil\src\image_ec256.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mcuboot\boot\bootutil\src\image_rsa.c</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mcuboot\boot\bootutil\src\image_validate.c</name>

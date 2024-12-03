@@ -5,7 +5,7 @@
   * @author  MCD Application Team
   * @brief   USBX Device descriptor header file
   ******************************************************************************
-    * @attention
+  * @attention
   *
   * Copyright (c) 2023 STMicroelectronics.
   * All rights reserved.
@@ -53,7 +53,6 @@ extern "C" {
 /* USER CODE BEGIN ET */
 
 /* USER CODE END ET */
-
 /* Enum Class Type */
 typedef enum
 {

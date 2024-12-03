@@ -4,32 +4,32 @@
 This application provides an example of Azure RTOS ThreadX stack usage, it shows how to develop an application using the ThreadX synchronization APIs.
 The main entry function tx_application_define() is called by ThreadX during kernel start, at this stage, the application creates 2 threads with the same priorities :
 
-  - 'ThreadOne' (Priority : 10; Preemption Threshold : 10)
-  - 'ThreadTwo' (Priority : 10; Preemption Threshold : 10)
+  - ThreadOne (Priority : 10; Preemption Threshold : 10)
+  - ThreadTwo (Priority : 10; Preemption Threshold : 10)
 
 The function "Led_Toggle()" is the entry function for both threads to toggle the leds.Therefore it is considered as a "critical section" that needs protection with a 'SyncObject' flag in the file "app_threadx.h"
 Each thread is running in an infinite loop as following:
 
-- 'ThreadOne':
-  + try to acquire the 'SyncObject' immediately.
-  + On Success toggle the 'LED_GREEN' each 500ms for 5 seconds.
-  + Release the 'SyncObject'
+- <b>ThreadOne</b>:
+  + try to acquire the <b>SyncObject</b> immediately.
+  + On Success toggle the <i>LED_GREEN</i> each 500ms for 5 seconds.
+  + Release the <b>SyncObject</b>
   + Sleep for 10ms.
   + repeat the steps above
 
-- 'ThreadTwo':
-  + try to acquire the 'SyncObject' immediately.
-  + On Success toggle the 'LED_GREEN' each 200ms for 2 seconds.
-  + Release the 'SyncObject'
+- <b>ThreadTwo</b>:
+  + try to acquire the <b>SyncObject</b> immediately.
+  + On Success toggle the <i>LED_GREEN</i> each 200ms for 2 seconds.
+  + Release the <b>SyncObject</b>
   + Sleep for 10ms.
   + Repeat the steps above.
 
-By default the 'SyncObject' is defined as "TX_MUTEX". It is possible to use a binary "TX_SEMAPHORE" by tuning
+By default the <i>SyncObject</i> is defined as "TX_MUTEX". It is possible to use a binary "TX_SEMAPHORE" by tuning
 the compile flags in the file "app_threadx.h".
 
 #### <b>Expected success behavior</b>
 
-  - 'LED_GREEN' toggles every 500ms for 5 seconds then toggles every 200ms for 2 seconds.
+  - <i>LED_GREEN</i> toggles every 500ms for 5 seconds then toggles every 200ms for 2 seconds.
 
   - Messages on HyperTerminal :
      + "** ThreadXXX : waiting for SyncObject !! **" : When thread is waiting for the SyncObject.

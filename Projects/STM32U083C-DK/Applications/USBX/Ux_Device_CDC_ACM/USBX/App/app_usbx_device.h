@@ -31,7 +31,6 @@ extern "C" {
 #include "ux_device_descriptors.h"
 #include "app_azure_rtos_config.h"
 #include "ux_dcd_stm32.h"
-
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "main.h"

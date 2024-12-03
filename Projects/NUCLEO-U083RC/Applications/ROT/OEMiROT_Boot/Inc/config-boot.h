@@ -51,7 +51,7 @@
 #undef MBEDTLS_ECP_NIST_OPTIM
 #define MBEDTLS_PLATFORM_ENTROPY
 #define MBEDTLS_ENTROPY_C
-#define MBEDTLS_CTR_DRBG_C
+#define MBEDTLS_HMAC_DRBG_C
 #define MBEDTLS_ENTROPY_HARDWARE_ALT
 
 
@@ -85,12 +85,10 @@
 #define MBEDTLS_MD_C
 #define MBEDTLS_OID_C
 #define MBEDTLS_SHA256_C
+#define MBEDTLS_MD_CAN_SHA256
 #define MBEDTLS_CIPHER_MODE_CTR
 #define MBEDTLS_AES_C
 #define MBEDTLS_CIPHER_C
-/* Save RAM by adjusting to our exact needs */
-#define MBEDTLS_ECP_MAX_BITS             2048
-
 
 #define MBEDTLS_MPI_MAX_SIZE              384
 
@@ -101,7 +99,8 @@
 #define MBEDTLS_SSL_CIPHERSUITES MBEDTLS_TLS_ECJPAKE_WITH_AES_128_CCM_8
 
 /* Target and application specific configurations */
-
-#include "mbedtls/check_config.h"
+/* Needed for _alt implementation compatibility */
+#define MBEDTLS_ALLOW_PRIVATE_ACCESS
+#define MBEDTLS_DEPRECATED_REMOVED
 
 #endif /* MBEDTLS_CONFIG_BOOT_H */

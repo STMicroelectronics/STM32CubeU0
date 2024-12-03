@@ -148,6 +148,12 @@ int main(int argc, char **argv)
   */
   HAL_Init();
 
+  /* !!! To boot in a secure way, the RoT has configured and activated the Memory Protection Unit
+     In order to keep a secure environment execution, you should reconfigure the MPU to make it compatible with your application
+     In this example, MPU is disabled
+  */
+  HAL_MPU_Disable();
+
   /* DeInitialize RCC to allow PLL reconfiguration when configuring system clock */
   HAL_RCC_DeInit();
 

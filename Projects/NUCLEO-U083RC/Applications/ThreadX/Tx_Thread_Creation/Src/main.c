@@ -1,8 +1,9 @@
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * @file           : main.c
-  * @brief          : Main program body
+  * @file    ThreadX/Tx_Thread_Creation/Src/main.c
+  * @author  MCD Application Team
+  * @brief   Main program body
   ******************************************************************************
   * @attention
   *
@@ -22,6 +23,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include <stdio.h>
 #if defined(__ICCARM__)
 #include <LowLevelIOInterface.h>
 #endif /* __ICCARM__ */

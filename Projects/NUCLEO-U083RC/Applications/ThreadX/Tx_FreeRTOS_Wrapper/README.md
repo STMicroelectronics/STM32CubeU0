@@ -4,17 +4,17 @@
 This application provides an example of Azure RTOS ThreadX stack usage, it shows how to develop an application using the FreeRTOS adaptation layer for ThreadX.
 
 The main entry function tx_application_define() is called by ThreadX during kernel start, at this stage, the application creates 1 thread :
-'LED_Thread' (Priority : 5).
+<i>LED_Thread</i> (Priority : 5).
 
-The 'LED_Thread' toggles the 'LED_GREEN' every 500ms.
+The <i>LED_Thread</i> toggles the <i>LED_GREEN</i> every 500ms.
 
 #### <b>Expected success behavior</b>
 
-'LED_GREEN' toggles every 500ms.
+<i>LED_GREEN</i> toggles every 500ms.
 
 #### <b>Error behaviors</b>
 
-'LED_GREEN' is turrned off and the program enters an infinite loop.
+<i>LED_GREEN</i> is turrned off and the program enters an infinite loop.
 
 #### <b>Assumptions if any</b>
 None

@@ -11,7 +11,7 @@
       span.underline{text-decoration: underline;}
       div.column{display: inline-block; vertical-align: top; width: 50%;}
   </style>
-  <link rel="stylesheet" href="../../../_htmresc/mini-st_2020.css" />
+  <link rel="stylesheet" href="../../../../_htmresc/mini-st_2020.css" />
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
@@ -88,12 +88,13 @@ If a touch is detected: The module displays the message &quot;WAKEUP TOUCH DETEC
 <ul>
 <li><h1 id="ultra-low-power-demo">Ultra Low Power Demo</h1></li>
 </ul>
-<p>Users can switch between ULP modes using the UP/DOWN joystick keys. RIGHT or SEL joystick key are used to select the ULP mode. Once ULP mode is selected, the system will enter ULP mode for ~33 seconds when goes out from ULP mode. If a user would like to exit from stop mode before the ~33 seconds, he could use the “SEL” joystick key (during ULP the “SEL” joystick key is switched to Push Button mode). During ULP mode, the Glass LCD will display the typical power consumption (no embedded measurement).</p>
+<p>Users can switch between ULP modes using the UP/DOWN joystick keys. RIGHT or SEL joystick key are used to select the ULP mode. Once ULP mode is selected, the system will enter ULP mode for ~33 seconds when goes out from ULP mode. If a user would like to exit from stop mode before the ~33 seconds, he could use the “SEL” joystick key (during ULP the “SEL” joystick key is switched to Push Button mode except for “STDBY” mode). During ULP mode, the Glass LCD will display the <strong>typical</strong> power consumption (<strong>no embedded measurement</strong>).</p>
 <p>After Wakeup from stop mode, user could switch to another demo module by pressing the LEFT joystick key for 5 seconds.</p>
 <h4 id="notes"><b>Notes</b></h4>
 <ol type="1">
 <li><p>Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds) based on variable incremented in SysTick ISR. This implies that if HAL_Delay() is called from a peripheral ISR process, then the SysTick interrupt must have higher priority (numerically lower) than the peripheral interrupt. Otherwise the caller ISR process will be blocked. To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.</p></li>
 <li><p>The application needs to ensure that the SysTick time base is always set to 1 millisecond to have correct HAL operation.</p></li>
+<li><p>To perform power consumption measurements it’s recommended to use <a href="..\..\..\NUCLEO-U083RC\Examples\PWR\PWR_ModesSelection">NUCLEO-U083RC\Examples\PWR\PWR_ModesSelection</a> or <a href="..\..\..\NUCLEO-U031R8\Examples\PWR\PWR_ModesSelection">NUCLEO-U031R8\Examples\PWR\PWR_ModesSelection</a> examples.</p></li>
 </ol>
 <h3 id="keywords"><b>Keywords</b></h3>
 <p>LCD, BSP, RTC, low power modes</p>

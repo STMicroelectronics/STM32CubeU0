@@ -39,10 +39,11 @@ echo "" > $current_log_file
 config=$1
 
 preprocess_bl2_file="$project_dir/image_macros_preprocessed_bl2.c"
-appli_dir="../../../../$oemirot_boot_path_project"
+appli_dir="../../../../$oemirot_appli_path_project"
 loader_dir="../../../../Applications/ROT/OEMiROT_Loader"
 option_bytes="$project_dir/../../../../ROT_Provisioning/OEMiROT/ob_flash_programming.sh"
 provisioning="$project_dir/../../../../ROT_Provisioning/OEMiROT/provisioning.sh"
+postbuild_file="$appli_dir/STM32CubeIDE/postbuild.sh"
 
 appli_system_file="$appli_dir/Src/system_stm32u0xx.c"
 loader_system_file="$loader_dir/Src/system_stm32u0xx.c"
@@ -56,9 +57,15 @@ loader_ld_file="$loader_dir/STM32CubeIDE/STM32U083RCIX_FLASH.ld"
 code_xml="$project_dir/../../../../ROT_Provisioning/OEMiROT/Images/OEMiRoT_Code_Image.xml"
 data_xml="$project_dir/../../../../ROT_Provisioning/OEMiROT/Images/OEMiRoT_Data_Image.xml"
 
+init_code_xml="$project_dir/../../../../ROT_Provisioning/OEMiROT/Images/OEMiRoT_Init_Code_Image.xml"
+init_data_xml="$project_dir/../../../../ROT_Provisioning/OEMiROT/Images/OEMiRoT_Init_Data_Image.xml"
+
 code_size="Firmware area size"
 data_size="Data area size"
 scratch_sector_number="Number of scratch sectors"
+fw_out_bin="Image output file"
+init_app_bin="../../../Applications/ROT/OEMiROT_Appli/Binary/rot_app_init_sign.bin"
+init_data_bin="../Binary/data_init_sign.bin"
 
 if [ -f $appli_ld_file ]; then
     $python$applicfg linker --layout $preprocess_bl2_file -m RE_AREA_0_OFFSET -n CODE_OFFSET --vb $appli_ld_file >> $current_log_file 2>&1
@@ -147,10 +154,10 @@ if [ $? != 0 ]; then error; fi
 $python$applicfg flash --layout $preprocess_bl2_file -b hdp_end -m RE_BL2_HDP_END -d 0x800 --vb $option_bytes >> $current_log_file 2>&1
 if [ $? != 0 ]; then error; fi
 
-$python$applicfg flash --layout $preprocess_bl2_file -b appliaddress -m RE_IMAGE_PARTITION_ADDRESS --vb $option_bytes >> $current_log_file 2>&1
+$python$applicfg flash --layout $preprocess_bl2_file -b appliaddress -m RE_INIT_IMAGE_PARTITION_ADDRESS --vb $option_bytes >> $current_log_file 2>&1
 if [ $? != 0 ]; then error; fi
 
-$python$applicfg flash --layout $preprocess_bl2_file -b dataaddress -m RE_DATA_IMAGE_PARTITION_ADDRESS --vb $option_bytes >> $current_log_file 2>&1
+$python$applicfg flash --layout $preprocess_bl2_file -b dataaddress -m RE_INIT_DATA_IMAGE_PARTITION_ADDRESS --vb $option_bytes >> $current_log_file 2>&1
 if [ $? != 0 ]; then error; fi
 
 $python$applicfg flash --layout $preprocess_bl2_file -b loaderaddress -m RE_LOADER_CODE_START --vb $option_bytes >> $current_log_file 2>&1
@@ -166,6 +173,9 @@ $python$applicfg flash --layout $preprocess_bl2_file -b data_image_number -m RE_
 if [ $? != 0 ]; then error; fi
 
 $python$applicfg flash --layout $preprocess_bl2_file -b ext_loader -m RE_LOADER --vb $provisioning >> $current_log_file 2>&1
+if [ $? != 0 ]; then error; fi
+
+$python$applicfg flash --layout $preprocess_bl2_file -b primary_only -m RE_PRIMARY_ONLY --vb $postbuild_file >> $current_log_file 2>&1
 if [ $? != 0 ]; then error; fi
 
 $python$applicfg xmlval --layout $preprocess_bl2_file -m RE_CODE_IMAGE_SIZE -c S --vb $code_xml >> $current_log_file 2>&1
@@ -205,6 +215,30 @@ $python$applicfg xmlparam --layout $preprocess_bl2_file -m RE_ENCRYPTION -n "Enc
 if [ $? != 0 ]; then error; fi
 
 cp $project_dir/$config/NUCLEO-U083RC_OEMiROT_Boot.bin $project_dir/../Binary/OEMiROT_Boot.bin >> $current_log_file 2>&1
+if [ $? != 0 ]; then error; fi
+
+cp $code_xml $init_code_xml >> $current_log_file 2>&1
+if [ $? != 0 ]; then error; fi
+
+cp $data_xml $init_data_xml >> $current_log_file 2>&1
+if [ $? != 0 ]; then error; fi
+
+$python$applicfg xmlparam --option add -n "Clear Image" -t Data -c -c -h 1 -d "" $init_code_xml >> $current_log_file 2>&1
+if [ $? != 0 ]; then error; fi
+
+$python$applicfg xmlparam --option add -n "Confirm" -t Data -c --confirm -h 1 -d "" $init_code_xml >> $current_log_file 2>&1
+if [ $? != 0 ]; then error; fi
+
+$python$applicfg xmlparam --option add -n "Clear Image" -t Data -c -c -h 1 -d "" $init_data_xml >> $current_log_file 2>&1
+if [ $? != 0 ]; then error; fi
+
+$python$applicfg xmlparam --option add -n "Confirm" -t Data -c --confirm -h 1 -d "" $init_data_xml >> $current_log_file 2>&1
+if [ $? != 0 ]; then error; fi
+
+$python$applicfg xmlval -v $init_app_bin --string -n "$fw_out_bin" $init_code_xml --vb >> $current_log_file 2>&1
+if [ $? != 0 ]; then error; fi
+
+$python$applicfg xmlval -v $init_data_bin --string -n "$fw_out_bin" $init_data_xml --vb >> $current_log_file 2>&1
 if [ $? != 0 ]; then error; fi
 
 exit 0

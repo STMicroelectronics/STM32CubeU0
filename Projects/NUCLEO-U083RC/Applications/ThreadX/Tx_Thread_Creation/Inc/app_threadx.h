@@ -5,7 +5,7 @@
   * @author  MCD Application Team
   * @brief   ThreadX applicative header file
   ******************************************************************************
-    * @attention
+  * @attention
   *
   * Copyright (c) 2023 STMicroelectronics.
   * All rights reserved.
@@ -45,8 +45,8 @@
 /* USER CODE END EC */
 
 /* Private defines -----------------------------------------------------------*/
-#define TX_APP_STACK_SIZE                                          512
-#define TX_APP_THREAD_PRIO                                         5
+#define TX_APP_STACK_SIZE                       512
+#define TX_APP_THREAD_PRIO                      5
 
 /* USER CODE BEGIN PD */
 #define THREAD_ONE_PRIO                          10
@@ -99,4 +99,4 @@ void MainThread_Entry(ULONG thread_input);
 #ifdef __cplusplus
 }
 #endif
-#endif /* __APP_THREADX_H__ */
+#endif /* __APP_THREADX_H */

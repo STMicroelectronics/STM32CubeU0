@@ -1,8 +1,9 @@
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * @file           : main.c
-  * @brief          : Main program body
+  * @file    ThreadX/Tx_Thread_Sync/Src/main.c
+  * @author  MCD Application Team
+  * @brief   Main program body
   ******************************************************************************
   * @attention
   *
@@ -22,6 +23,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include <stdio.h>
 #if defined(__ICCARM__)
 #include <LowLevelIOInterface.h>
 #endif /* __ICCARM__ */
@@ -34,6 +36,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -239,6 +242,7 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+
 #if defined(__ICCARM__)
 size_t __write(int file, unsigned char const *ptr, size_t len)
 {
@@ -267,7 +271,6 @@ PUTCHAR_PROTOTYPE
 
   return ch;
 }
-
 /* USER CODE END 4 */
 
 /**
@@ -302,11 +305,12 @@ void Error_Handler(void)
 
   /* Turn LED_GREEN off */
   HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_SET);
+
   /* Error message */
   printf("** Error occurred **\n\r");
+
   while (1)
   {
-
   }
   /* USER CODE END Error_Handler_Debug */
 }

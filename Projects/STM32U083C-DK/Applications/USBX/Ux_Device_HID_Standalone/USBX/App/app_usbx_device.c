@@ -50,6 +50,7 @@
 #pragma data_alignment=4
 #endif
 __ALIGN_BEGIN static UCHAR ux_device_byte_pool_buffer[UX_DEVICE_APP_MEM_POOL_SIZE] __ALIGN_END;
+
 static ULONG hid_mouse_interface_number;
 static ULONG hid_mouse_configuration_number;
 static UX_SLAVE_CLASS_HID_PARAMETER hid_mouse_parameter;
@@ -79,6 +80,7 @@ UINT MX_USBX_Device_Init(VOID)
   ULONG language_id_framework_length;
   UCHAR *string_framework;
   UCHAR *language_id_framework;
+
   UCHAR *pointer;
 
   /* USER CODE BEGIN MX_USBX_Device_Init0 */
@@ -174,7 +176,6 @@ UINT MX_USBX_Device_Init(VOID)
 ALIGN_TYPE _ux_utility_interrupt_disable(VOID)
 {
   UINT interrupt_save;
-
   /* USER CODE BEGIN _ux_utility_interrupt_disable */
   interrupt_save = __get_PRIMASK();
   __disable_irq();
@@ -191,6 +192,7 @@ ALIGN_TYPE _ux_utility_interrupt_disable(VOID)
   */
 VOID _ux_utility_interrupt_restore(ALIGN_TYPE flags)
 {
+
   /* USER CODE BEGIN _ux_utility_interrupt_restore */
   __set_PRIMASK(flags);
   /* USER CODE END _ux_utility_interrupt_restore */

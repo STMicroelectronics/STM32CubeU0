@@ -12,7 +12,7 @@ priorities and 2 message queues :
   - MsgQueueOne (shared by tx_app_thread and MsgReceiverThread)
   - MsgQueueTwo (shared by MsgSenderThreadTwo and MsgReceiverThread)
 
-<i> tx_app_thread</i> puts the message <i>TOGGLE_LED</i> on <i>MsgQueueOne</i> each 200 ms.
+<i>tx_app_thread</i> puts the message <i>TOGGLE_LED</i> on <i>MsgQueueOne</i> each 200 ms.
 
 <i>MsgSenderThreadTwo</i> puts the message <i>TOGGLE_LED</i> on <i>MsgQueueTwo</i> each 500 ms.
 

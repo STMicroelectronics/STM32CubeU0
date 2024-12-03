@@ -42,6 +42,7 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
+
 static ULONG hid_mouse_interface_number;
 static ULONG hid_mouse_configuration_number;
 static ULONG cdc_acm_interface_number;
@@ -84,6 +85,7 @@ UINT MX_USBX_Device_Init(VOID *memory_ptr)
   ULONG language_id_framework_length;
   UCHAR *string_framework;
   UCHAR *language_id_framework;
+
   UCHAR *pointer;
   TX_BYTE_POOL *byte_pool = (TX_BYTE_POOL*)memory_ptr;
 
@@ -350,7 +352,7 @@ void HAL_GPIO_EXTI_Rising_Callback(uint16_t GPIO_Pin)
 {
 
   /* Check if EXTI from User Button */
-  if (GPIO_Pin == GPIO_PIN_2)
+  if (GPIO_Pin == BUTTON_USER_Pin)
   {
     User_Button_State ^= 1U;
   }

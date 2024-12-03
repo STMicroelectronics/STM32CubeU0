@@ -70,7 +70,7 @@ static TX_BYTE_POOL ux_device_app_byte_pool;
 
 /* USER CODE END PFP */
 
-  /**
+/**
   * @brief  Define the initial system.
   * @param  first_unused_memory : Pointer to the first unused memory
   * @retval None
@@ -138,6 +138,7 @@ VOID tx_application_define(VOID *first_unused_memory)
 
     /* USER CODE END  MX_USBX_Device_Init_Success */
   }
+
 #else
 /*
  * Using dynamic memory allocation requires to apply some changes to the linker file.

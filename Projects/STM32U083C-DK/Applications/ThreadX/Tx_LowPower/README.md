@@ -7,16 +7,16 @@ The main entry function tx_application_define() is then called by ThreadX during
   - MainThread (Prio : 10; Preemption Threshold : 10)
   - Semaphore (Initial count = 0 to prevent its acquisition by the MainThread, on the application start)
 
-- 'MainThread':
-  + Main thread tries to acquire the 'Semaphore'.
-  + On Success toggles the 'LED_GREEN' each 500 ms for 5 secs.
-  + On Failure, it switches to suspended mode waiting for the 'Semaphore' to be released.
+- <b>MainThread</b>:
+  + Main thread tries to acquire the <b>Semaphore</b>.
+  + On Success toggles the <i>LED_GREEN</i> each 500 ms for 5 secs.
+  + On Failure, it switches to suspended mode waiting for the <b>Semaphore</b> to be released.
   + The steps above are repeated indefinitely.
 
-When the "tx_app_thread" is in suspended state, waiting for the 'Semaphore', the system is in idle state and the scheduler decides to enter in low power mode
+When the "tx_app_thread" is in suspended state, waiting for the <b>Semaphore</b>, the system is in idle state and the scheduler decides to enter in low power mode
 by calling the TX_LOW_POWER_USER_ENTER that makes the system enter the STOP Mode via the HAL_PWR_EnterSTOPMode() API.
 
-As soon as the User button is pressed, the 'Semaphore' is released, and the 'tx_app_thread' passes in Active state.
+As soon as the User button is pressed, the <b>Semaphore</b> is released, and the <b>tx_app_thread</b>  passes in Active state.
 
 The scheduler exits the STOP Mode by calling the TX_LOW_POWER_EXIT.
 
@@ -26,8 +26,8 @@ When exiting the STOP Mode, the MCU is in Run mode (Range 1 or Range 2 depending
 
 ####  <b>Expected success behavior</b>
 
-  - LED_GREEN is Off when system is in LowPower mode.
-  - LED_GREEN toggles every 500ms for 5 seconds each time user press the User button.
+  - <i>LED_GREEN</i> is Off when system is in LowPower mode.
+  - <i>LED_GREEN</i> toggles every 500ms for 5 seconds each time user press the User button.
 
 #### <b>Error behaviors</b>
 
@@ -95,16 +95,16 @@ For keeping track of time while in low power mode, there are two possibilities:
    This requires changes in the linker files to expose this memory location.
     + For EWARM add the following section into the .icf file:
      ```
-         place in RAM_region    { last section FREE_MEM };
-         ```
+	 place in RAM_region    { last section FREE_MEM };
+	 ```
     + For MDK-ARM:
-        ```
+     ```
     either define the RW_IRAM1 region in the ".sct" file
     or modify the line below in "tx_initialize_low_level.S" to match the memory region being used
         LDR r1, =|Image$$RW_IRAM1$$ZI$$Limit|
-        ```
+     ```
     + For STM32CubeIDE add the following section into the .ld file:
-        ```
+     ```
     ._threadx_heap :
       {
          . = ALIGN(8);
@@ -112,7 +112,7 @@ For keeping track of time while in low power mode, there are two possibilities:
          . = . + 64K;
          . = ALIGN(8);
        } >RAM_D1 AT> RAM_D1
-        ```
+     ```
 
        The simplest way to provide memory for ThreadX is to define a new section, see ._threadx_heap above.
        In the example above the ThreadX heap size is set to 64KBytes.

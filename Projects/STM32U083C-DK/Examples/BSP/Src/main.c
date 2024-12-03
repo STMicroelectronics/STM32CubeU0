@@ -157,13 +157,14 @@ extern __IO uint8_t bLCDGlass_KeyPressed;
     
     if(joystickstatus  == JOY_RIGHT)
     {
+      DemoIndex++;
       for(i = 0; i < DEMO_NAME_CHAR_NB; i++)
       {
         menudisplay[i+5] = BSP_examples[DemoIndex].DemoName[i];
       }
-      
+
       BSP_LCD_GLASS_ScrollSentence(menudisplay, 1, SCROLL_SPEED_HIGH);
-      DemoIndex++;
+
       if(DemoIndex >= COUNT_OF_EXAMPLE(BSP_examples))
       {
         DemoIndex = 0U;

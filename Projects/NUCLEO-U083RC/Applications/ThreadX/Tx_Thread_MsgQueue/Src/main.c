@@ -1,8 +1,9 @@
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * @file           : main.c
-  * @brief          : Main program body
+  * @file    ThreadX/Tx_Thread_MsgQueue/Src/main.c
+  * @author  MCD Application Team
+  * @brief   Main program body
   ******************************************************************************
   * @attention
   *
@@ -22,6 +23,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include <stdio.h>
 #if defined(__ICCARM__)
 #include <LowLevelIOInterface.h>
 #endif /* __ICCARM__ */
@@ -240,6 +242,7 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+
 #if defined(__ICCARM__)
 size_t __write(int file, unsigned char const *ptr, size_t len)
 {
@@ -268,7 +271,6 @@ PUTCHAR_PROTOTYPE
 
   return ch;
 }
-
 /* USER CODE END 4 */
 
 /**

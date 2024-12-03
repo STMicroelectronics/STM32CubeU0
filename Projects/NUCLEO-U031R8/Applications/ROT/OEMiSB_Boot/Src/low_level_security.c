@@ -344,7 +344,7 @@ uint32_t LL_SECU_CheckApplicationIntegrity(void)
 
   /* Compute sha256 on the application area */
 
-  mbedtls_sha256_ret((unsigned char const *)(FLASH_BASE + FLASH_BOOT_AREA_SIZE), appli_size, application_computed_sha256, 0);
+  mbedtls_sha256((unsigned char const *)(FLASH_BASE + FLASH_BOOT_AREA_SIZE), appli_size, application_computed_sha256, 0);
 
   FLOW_CONTROL_STEP(uFlowProtectValue, FLOW_STEP_HASH_CH_R1, FLOW_CTRL_HASH_CH_R1);
 

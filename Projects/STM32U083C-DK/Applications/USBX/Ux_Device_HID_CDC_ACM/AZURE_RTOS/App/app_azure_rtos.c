@@ -5,7 +5,7 @@
   * @author  MCD Application Team
   * @brief   app_azure_rtos application implementation file
   ******************************************************************************
-    * @attention
+  * @attention
   *
   * Copyright (c) 2023 STMicroelectronics.
   * All rights reserved.
@@ -70,7 +70,7 @@ static TX_BYTE_POOL ux_device_app_byte_pool;
 
 /* USER CODE END PFP */
 
-  /**
+/**
   * @brief  Define the initial system.
   * @param  first_unused_memory : Pointer to the first unused memory
   * @retval None
@@ -87,7 +87,9 @@ VOID tx_application_define(VOID *first_unused_memory)
   if (tx_byte_pool_create(&tx_app_byte_pool, "Tx App memory pool", tx_byte_pool_buffer, TX_APP_MEM_POOL_SIZE) != TX_SUCCESS)
   {
     /* USER CODE BEGIN TX_Byte_Pool_Error */
-
+    while(1)
+    {
+    }
     /* USER CODE END TX_Byte_Pool_Error */
   }
   else
@@ -115,7 +117,9 @@ VOID tx_application_define(VOID *first_unused_memory)
   if (tx_byte_pool_create(&ux_device_app_byte_pool, "Ux App memory pool", ux_device_byte_pool_buffer, UX_DEVICE_APP_MEM_POOL_SIZE) != TX_SUCCESS)
   {
     /* USER CODE BEGIN UX_Device_Byte_Pool_Error */
-
+    while(1)
+    {
+    }
     /* USER CODE END UX_Device_Byte_Pool_Error */
   }
   else
@@ -138,6 +142,7 @@ VOID tx_application_define(VOID *first_unused_memory)
 
     /* USER CODE END  MX_USBX_Device_Init_Success */
   }
+
 #else
 /*
  * Using dynamic memory allocation requires to apply some changes to the linker file.

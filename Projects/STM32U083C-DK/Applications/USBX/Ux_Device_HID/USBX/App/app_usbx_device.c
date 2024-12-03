@@ -42,6 +42,7 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
+
 static ULONG hid_mouse_interface_number;
 static ULONG hid_mouse_configuration_number;
 static UX_SLAVE_CLASS_HID_PARAMETER hid_mouse_parameter;
@@ -79,6 +80,7 @@ UINT MX_USBX_Device_Init(VOID *memory_ptr)
   ULONG language_id_framework_length;
   UCHAR *string_framework;
   UCHAR *language_id_framework;
+
   UCHAR *pointer;
   TX_BYTE_POOL *byte_pool = (TX_BYTE_POOL*)memory_ptr;
 

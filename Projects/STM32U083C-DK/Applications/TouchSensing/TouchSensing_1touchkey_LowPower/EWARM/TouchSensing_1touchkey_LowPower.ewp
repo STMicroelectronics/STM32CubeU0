@@ -1128,6 +1128,12 @@
     <group>
       <name>STM32U0xx_HAL_Driver</name>
       <file>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32U0xx_HAL_Driver/Src/stm32u0xx_hal_tim.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32U0xx_HAL_Driver/Src/stm32u0xx_hal_tim_ex.c</name>
+      </file>
+      <file>
         <name>$PROJ_DIR$/../../../../../../Drivers/STM32U0xx_HAL_Driver/Src/stm32u0xx_hal_lcd.c</name>
       </file>
       <file>
@@ -1183,12 +1189,6 @@
       </file>
       <file>
         <name>$PROJ_DIR$/../../../../../../Drivers/STM32U0xx_HAL_Driver/Src/stm32u0xx_hal_rtc_ex.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$/../../../../../../Drivers/STM32U0xx_HAL_Driver/Src/stm32u0xx_hal_tim.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$/../../../../../../Drivers/STM32U0xx_HAL_Driver/Src/stm32u0xx_hal_tim_ex.c</name>
       </file>
       <file>
         <name>$PROJ_DIR$/../../../../../../Drivers/STM32U0xx_HAL_Driver/Src/stm32u0xx_hal_tsc.c</name>

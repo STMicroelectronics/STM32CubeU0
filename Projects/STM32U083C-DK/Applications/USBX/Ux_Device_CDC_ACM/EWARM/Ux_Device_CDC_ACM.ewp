@@ -1152,6 +1152,12 @@
     <group>
       <name>STM32U0xx_HAL_Driver</name>
       <file>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32U0xx_HAL_Driver/Src/stm32u0xx_hal_tim.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32U0xx_HAL_Driver/Src/stm32u0xx_hal_tim_ex.c</name>
+      </file>
+      <file>
         <name>$PROJ_DIR$/../../../../../../Drivers/STM32U0xx_HAL_Driver/Src/stm32u0xx_hal_cortex.c</name>
       </file>
       <file>
@@ -1186,12 +1192,6 @@
       </file>
       <file>
         <name>$PROJ_DIR$/../../../../../../Drivers/STM32U0xx_HAL_Driver/Src/stm32u0xx_hal_exti.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$/../../../../../../Drivers/STM32U0xx_HAL_Driver/Src/stm32u0xx_hal_tim.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$/../../../../../../Drivers/STM32U0xx_HAL_Driver/Src/stm32u0xx_hal_tim_ex.c</name>
       </file>
       <file>
         <name>$PROJ_DIR$/../../../../../../Drivers/STM32U0xx_HAL_Driver/Src/stm32u0xx_hal_uart.c</name>
@@ -1835,7 +1835,10 @@
           <name>$PROJ_DIR$/../../../../../../Middlewares/ST/usbx/common/core/src/ux_utility_memory_free.c</name>
         </file>
         <file>
-          <name>$PROJ_DIR$/../../../../../../Middlewares/ST/usbx/common/core/src/ux_utility_memory_free_block_best_get.c</name>
+          <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\usbx\common\core\src\ux_utility_memory_byte_pool_create.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\usbx\common\core\src\ux_utility_memory_byte_pool_search.c</name>
         </file>
         <file>
           <name>$PROJ_DIR$/../../../../../../Middlewares/ST/usbx/common/core/src/ux_utility_memory_set.c</name>

@@ -176,15 +176,15 @@ void MsgSenderThreadOne_Entry(ULONG thread_input)
   */
 void MX_ThreadX_Init(void)
 {
-  /* USER CODE BEGIN  Before_Kernel_Start */
+  /* USER CODE BEGIN Before_Kernel_Start */
 
-  /* USER CODE END  Before_Kernel_Start */
+  /* USER CODE END Before_Kernel_Start */
 
   tx_kernel_enter();
 
-  /* USER CODE BEGIN  Kernel_Start_Error */
+  /* USER CODE BEGIN Kernel_Start_Error */
 
-  /* USER CODE END  Kernel_Start_Error */
+  /* USER CODE END Kernel_Start_Error */
 }
 
 /* USER CODE BEGIN 1 */

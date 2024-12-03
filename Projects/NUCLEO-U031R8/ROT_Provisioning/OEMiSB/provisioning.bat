@@ -10,7 +10,6 @@ set appli_binary=%projectdir%..\..\Applications\ROT\OEMiSB_Appli\Binary\OEMiSB_A
 :: Sha.bin
 set sha256=%projectdir%\Binary\sha256.bin
 
-:: Data updated with the postbuild of OEMiSB-Boot
 set hdp_end=0x3
 set bootaddress=0x8000000
 set appliaddress=0x8002000
@@ -18,8 +17,6 @@ set shaaddress=0x8001FC0
 :: CubeProgammer connection
 set connect_no_reset=-c port=SWD mode=Hotplug
 set connect_reset=-c port=SWD mode=UR
-:: OEM2 key
-set oem2_key=0x11223344 0x55667788 0x99AABBCC 0xDDEEFF00
 
 :: =============================================== Remove protections and initialize Option Bytes  ==========================================
 set remove_protect_init=-ob WRP1A_STRT=0x1f WRP1A_END=0 WRP1B_STRT=0x1f WRP1B_END=0 HDP1_PEND=0 HDP1EN=0xB4 BOOT_LOCK=0

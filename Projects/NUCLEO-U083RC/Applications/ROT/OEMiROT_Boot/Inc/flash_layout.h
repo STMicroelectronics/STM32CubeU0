@@ -88,11 +88,6 @@
 #define FLASH_AREA_PERSO_OFFSET         (FLASH_AREA_BL2_OFFSET + FLASH_AREA_BL2_SIZE)
 #define FLASH_AREA_PERSO_SIZE           (0x800)
 
-/* control area for BL2 code protected by hdp */
-#if ((FLASH_AREA_SCRATCH_OFFSET + FLASH_AREA_SCRATCH_SIZE) % FLASH_AREA_IMAGE_SECTOR_SIZE) != 0
-#error "HDP area must be aligned on FLASH_AREA_IMAGE_SECTOR_SIZE"
-#endif /* ((FLASH_AREA_SCRATCH_OFFSET + FLASH_AREA_SCRATCH_SIZE) % FLASH_AREA_IMAGE_SECTOR_SIZE) != 0 */
-
 /* control area under WRP protection */
 #if ((FLASH_AREA_PERSO_OFFSET + FLASH_AREA_PERSO_SIZE) % FLASH_AREA_IMAGE_SECTOR_SIZE) != 0
 #error "Perso area not aligned on FLASH_AREA_IMAGE_SECTOR_SIZE"

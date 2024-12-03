@@ -14,9 +14,9 @@ This later is calling the HAL_TSC_MspInit()function which core is implementing
 the configuration of the needed TSC resources according to the used hardware (CLOCK,
 GPIO and NVIC). You may update this function to change TSC configuration.
 
-The Touchsensing module allows the detection of a touch on the Touchsensor button TS1,
-to emulate a real example, this application is composed of 2 phases (Active and Idle)
-which will help decreasing the consumption when not using the Touch sensor for a while.
+The Touchsensing module allows the detection of a touch on the Touchsensor physical button TS1, and a touch on
+the Touchsensor virtual button TS2 to emulate a real example with 2 touch keys, this application is composed
+of 2 phases (Active and Idle) which will help decreasing the consumption when not using the Touch sensor for a while.
 
 In this specific STM32U0xx series, some Touch IO pins are interconnected with the Comparator module
 which gives us the the possibility to change the detection voltage level.
@@ -26,7 +26,7 @@ of the comparator input.
 This means that the lower the level the less time you will need to reach it and thus an acquisition cycle is smaller.
 In other words you will detect a physical touch quicker and this will also help reducing the current compsumption as well
 
-The inputP of the comparator is connected to the button TS1 IO group, and the inputM is connected
+The inputP of the comparator is connected to the physical button TS1 IO group, and the inputM is connected
 to the available VREF level (1/4Vref, 1/2Vref, 3/4Vref, Vref).
 
 In this example, the inputP is connected to TSC_G6_IO1 (COMP_INPUT_PLUS_IO4) and the inputM to VREFINT.
@@ -45,12 +45,13 @@ The touchsensing module software is composed of different steps:
    through respectively MX_TSC_Init(), MX_COMP2_Init(), MX_RTC_Init() and MX_TOUCHSENSING_Init().
 
    Then, the Touchsensing/TouchWakeup module initiate the calibration of the TSC, this phase is around 10 seconds.
-   This phase is decomposed in two steps, the first one for the calibration of the TS1 virtual button without usage of the comparator.
-   And a second step for the calibration of TS2 button with usage of the comparator.
+   This phase is decomposed in two steps, the first one for the calibration of the TS1 physical button
+   without usage of the comparator.
+   And a second step for the calibration of TS2 virtual button with usage of the comparator.
 
    The LED3 (green) and LED4 (blue) are ON before initiate the calibration.
-   Then when the calibration of TS1 is terminated, the LED3 is OFF.
-   Then when the calibration of TS2 is terminated, the LED4 is OFF
+   Then when the calibration of TS1 physical button is terminated, the LED3 is OFF.
+   Then when the calibration of TS2 virtual button is terminated, the LED4 is OFF
 
    Finally, after starting, the RTC wakeup the MCU each 10ms, in a while loop the Touchsensing/TouchWakeup
    module manage a detection and no detection in this way:
@@ -60,12 +61,12 @@ The touchsensing module software is composed of different steps:
 
    There are 2 phases in this example:
 
-   Idle Phase (TS2):
+   Idle Phase (virtual TS2):
    RTC wake up the MCU each 250ms and check for a touch.
    If a touch is detected, the LED4 is ON and the application switch to the Active Phase.
-   LED4 is then OFF when TS2 is released.
+   LED4 is then OFF when virtual TS2 is released.
 
-   Active Phase (TS1):
+   Active Phase (physical TS1):
    RTC wake up the MCU each 10ms and check for a touch this allows for a more sensitive button.
 
    If it is in the Active state and no touch is detected for 5 seconds (through define NO_ACTIVITY_TIME):
@@ -79,8 +80,8 @@ STM32U083C-DK's LEDs can be used to monitor the Touch detection status:
 
 After calibration phase:
 
-- LED3 is ON when a touch on TS1 (Active phase without comparator) is detected.
-- LED4 is ON when a touch on TS2 (Idle phase with comparator) is detected.
+- LED3 is ON when a touch on physical TS1 (Active phase without comparator) is detected.
+- LED4 is ON when a touch on virtual TS2 (Idle phase with comparator) is detected.
 - LED4 and LED 3 are OFF when STM32U083C-DK enter in low power stop 2 mode.
 - LED5 toggles when an error occurs.
 
@@ -125,6 +126,8 @@ System, Touch sensing, TSC, Input, Output, Alternate function, Toggle, Glass LCD
   - This example has been tested with STM32U083C-DK (MB1933) board and can be
     easily tailored to any other supported device and development board.
 
+  - The particularity of this example is to use the physical TS1 button for an active phase and
+    a virtual TS2 button for an idle phase (low power).
 
 ### <b>How to use it ?</b>
 

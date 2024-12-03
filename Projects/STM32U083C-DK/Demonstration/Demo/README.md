@@ -122,8 +122,8 @@ To switch to another demo module, the user could press the LEFT joystick key for
 
 Users can switch between ULP modes using the UP/DOWN joystick keys. RIGHT or SEL joystick key are used to select the ULP mode.
 Once ULP mode is selected, the system will enter ULP mode for ~33 seconds when goes out from ULP mode.
-If a user would like to exit from stop mode before the ~33 seconds, he could use the "SEL" joystick key (during ULP the "SEL" joystick key is switched to Push Button mode). 
-During ULP mode, the Glass LCD will display the typical power consumption (no embedded measurement).
+If a user would like to exit from stop mode before the ~33 seconds, he could use the "SEL" joystick key (during ULP the "SEL" joystick key is switched to Push Button mode execpt for "STDBY" mode).
+During ULP mode, the Glass LCD will display the **typical** power consumption (**no embedded measurement**).
 
 After Wakeup from stop mode, user could switch to another demo module by pressing the LEFT joystick key for 5 seconds.
 
@@ -138,6 +138,8 @@ After Wakeup from stop mode, user could switch to another demo module by pressin
 
  2. The application needs to ensure that the SysTick time base is always set to 1 millisecond
     to have correct HAL operation.
+
+ 3. To perform power consumption measurements it's recommended to use [NUCLEO-U083RC\\Examples\\PWR\\PWR_ModesSelection](..\\..\\..\\NUCLEO-U083RC\Examples\PWR\PWR_ModesSelection) or [NUCLEO-U031R8\\Examples\\PWR\\PWR_ModesSelection](..\\..\\..\\NUCLEO-U031R8\Examples\PWR\PWR_ModesSelection) examples.
 
 ### <b>Keywords</b>
 

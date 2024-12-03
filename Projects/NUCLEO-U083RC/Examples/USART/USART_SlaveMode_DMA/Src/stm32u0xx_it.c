@@ -175,7 +175,7 @@ void DMA1_Channel2_3_IRQHandler(void)
 }
 
 /**
-  * @brief This function handles DMAMUX_OVR_IT + DMA1 channel 4 to 7 +  DMA2 channel 1 to 5.
+  * @brief This function handles DMAMUX_OVR_IT + DMA1 channel 4 to 7 + DMA2 channel 1 to 5.
   */
 void DMA1_Ch4_7_DMA2_Ch1_5_DMAMUX_OVR_IRQHandler(void)
 {

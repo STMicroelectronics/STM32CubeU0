@@ -5,12 +5,14 @@ wrp1a_end=0x20
 wrp1b_start=0x30
 wrp1b_end=0x37
 hdp_end=0x2F
+bootaddress=0x8000000
 appliaddress=0x8030000
 dataaddress=0x801E000
 loaderaddress=0x8018000
 data_image_number=0x1
 ext_loader=0x1
 code_image=$oemirot_appli
+boot_image=$oemirot_boot
 
 connect_no_reset="-c port=SWD speed=fast mode=Hotplug"
 connect_reset="-c port=SWD speed=fast mode=UR"
@@ -41,20 +43,20 @@ echo "Images programming"
 
 action="Write OEMiROT_Boot"
 echo "$action"
-"$stm32programmercli" $connect_reset -d "$cube_fw_path/Projects/NUCLEO-U083RC/Applications/ROT/OEMiROT_Boot/Binary/OEMiROT_Boot.bin" 0x8000000 -v
+"$stm32programmercli" $connect_reset -d "../../"$oemirot_boot_path_project"/Binary/"$boot_image $bootaddress -v
 if [ $? -ne 0 ]; then error; return 1; fi
 echo "OEMiROT_Boot Written"
 
 action="Write OEMiROT_Appli"
 echo "$action"
-"$stm32programmercli" $connect_reset -d "../../"$oemirot_boot_path_project"/Binary/"$code_image $appliaddress -v
+"$stm32programmercli" $connect_reset -d "../../"$oemirot_appli_path_project"/Binary/"$code_image $appliaddress -v
 if [ $? -ne 0 ]; then error; return 1; fi
 echo "OEMiROT_Appli Written"
 
 if [ "$data_image_number" == "0x1" ]; then
 	action="Write OEMiROT_Data"
 	echo "$action"
-	"$stm32programmercli" $connect_reset -d "$rot_provisioning_path/OEMiROT/Binary/data_enc_sign.bin" $dataaddress -v
+	"$stm32programmercli" $connect_reset -d "$rot_provisioning_path/OEMiROT/Binary/data_init_sign.bin" $dataaddress -v
 	if [ $? -ne 0 ]; then error; return 1; fi
 fi
 

@@ -1,7 +1,7 @@
 ## <b>Ux_Device_HID_CDC_ACM Application Description</b>
 
 This application provides an example of Azure RTOS USBX stack usage on STM32U083C-DK board, it shows how to develop a composite USB Device communication
-Class "HID" and "CDC_ACM" based application.
+class "HID" and "CDC_ACM" based application.
 The application is designed to emulate an USB HID mouse device and USB-to-UART bridge following the Virtual COM Port (VCP) implementations,
 the code provides all required device descriptors framework and associated to both Classes descriptor report to build a composite compliant USB HID_CDC_ACM device.
 At the beginning ThreadX call the entry function tx_application_define(), at this stage, all USBx resources are initialized, the CDC_ACM and HID Class driver is
@@ -28,8 +28,8 @@ During enumeration phase, four communication pipes "endpoints" are declared in t
 
 In CDC_ACM application, two requests are implemented:
 
-    - Set line: Set the bit rate, number of Stop bits, parity, and number of data bits
-    - Get line: Get the bit rate, number of Stop bits, parity, and number of data bits
+    - Set line: set the bit rate, number of stop bits, parity, and number of data bits
+    - Get line: get the bit rate, number of stop bits, parity, and number of data bits
     The other requests (send break, control line state) are not implemented.
 
 - 1 x Interrupt IN endpoint for setting the HID position:
@@ -48,20 +48,20 @@ The support of the VCP interface is managed through the ST Virtual COM Port driv
 
 #### <b>Expected success behavior</b>
 
-When plugged to PC host, the STM32U083MCTx must be properly enumerated a composite device as an HID ,USB Serial device and an STlink Com port.
-During the enumeration phase, device provides host with the requested descriptors (Device, configuration, string).
+When plugged to PC host, the STM32U083MCTx must be properly enumerated a composite device as an HID ,USB Serial device and an STlink COM port.
+During the enumeration phase, device provides host with the requested descriptors (device, configuration, string).
 Those descriptors are used by host driver to identify the device capabilities.
 Once STM32U083MCTx USB device successfully completed the enumeration phase.
-Connect USB cable to Host , Open two hyperterminals (USB com port and UART com port) to send/receive data to/from host to/from device.
+Connect USB cable to Host , Open two hyperterminals (USB COM port and UART COM port) to send/receive data to/from host to/from device.
 When USER_Button is pressed, the device sneds a HID report. Each report sent should move the PC host machine mouse cursor by one step.
 
 #### <b>Error behaviors</b>
 
-Host PC shows that USB device does not operate as designed (Enumeration failed, for example PC Cursor doesn't move or Com port enumeration failed).
+Host PC shows that USB device does not operate as designed (enumeration failed, for example PC Cursor doesn't move or Com port enumeration failed).
 
 #### <b>Assumptions if any</b>
 
-User is familiar with USB 2.0 "Universal Serial BUS" Specification and CDC_ACM class Specification.
+User is familiar with USB 2.0 "Universal Serial BUS" specification and CDC_ACM class specification.
 
 #### <b>Known limitations</b>
 
@@ -117,8 +117,8 @@ RTOS, ThreadX, USBXDevice, USB_DRD, Full Speed, CDC, HID, VCP, USART, DMA, Mouse
 
 ### <b>Hardware and Software environment</b>
 
-  - This example runs on STM32U083MCTx devices.
-  - This example has been tested with STMicroelectronics STM32U083C-DK boards Revision MB1933-U083C-B01 and can be easily tailored to any other supported device and development board.
+  - This application runs on STM32U083MCTx devices.
+  - This application has been tested with STMicroelectronics STM32U083C-DK boards revision MB1933-U083C-B01 and can be easily tailored to any other supported device and development board.
   - STM32U083C-DK Set-up
   - Connect the STM32U083C-DK board CN1 to the PC through "TYPE-C" to "Standard A" cable.
   - For VCP the configuration is dynamic for example it can be :

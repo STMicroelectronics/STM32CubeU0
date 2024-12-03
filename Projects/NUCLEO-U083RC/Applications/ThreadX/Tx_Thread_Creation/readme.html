@@ -61,16 +61,16 @@ is redone. After repeating the sequence above 3 times, the
 and toggles the <em>LED_GREEN</em> each 1 second for ever.</p>
 <h4 id="expected-success-behavior"><b>Expected success behavior</b></h4>
 <ul>
-<li>LED_GREEN toggles every 500ms for 5 seconds</li>
-<li>LED_GREEN toggles every 200ms for 5 seconds</li>
-<li>Success status (After 3 times) : ‘LED_GREEN’ toggles every 1 second
-for ever.</li>
+<li><i>LED_GREEN</i> toggles every 500ms for 5 seconds</li>
+<li><i>LED_GREEN</i> toggles every 200ms for 5 seconds</li>
+<li>Success status (After 3 times) : <i>LED_GREEN</i> toggles every 1 second
+forever.</li>
 </ul>
 <h4 id="error-behaviors"><b>Error behaviors</b></h4>
-<p>On failure, an error message is printed to the serial port.</p>
+<p>On failure, an error message is printed to the serial port while the <i>LED_GREEN</i> is turned OFF.</p>
 <h4 id="assumptions-if-any"><b>Assumptions if any</b></h4>
 <p>None</p>
-<h4 id="known-limitations"><b>Known limitations</b></h4>
+<h4 id="known-limitations"><b>Known limitations </b></h4>
 <p>None</p>
 <h3 id="notes"><b>Notes</b></h3>
 <p>To optimize the application footprint, the following ThreadX
@@ -94,9 +94,9 @@ configuration options should be enabled in the tx_user.h file:</p>
 HAL uses a separate time base through the TIM IPs.</li>
 <li>ThreadX is configured with 100 ticks/sec by default, this should be
 taken into account when using delays or timeouts at application. It is
-always possible to reconfigure it in the “tx_user.h”, the
-“TX_TIMER_TICKS_PER_SECOND” define,but this should be reflected in
-“tx_initialize_low_level.s” file too.</li>
+always possible to reconfigure it, by updating the
+“TX_TIMER_TICKS_PER_SECOND” define in the “tx_user.h” file. The update
+should be reflected in “tx_initialize_low_level.S” file too.</li>
 <li>ThreadX is disabling all interrupts during kernel start-up to avoid
 any unexpected behavior, therefore all system related calls (HAL, BSP)
 should be done either at the beginning of the application or inside the
@@ -109,7 +109,7 @@ way contain a system API call (HAL or BSP).</li>
 <li>Using dynamic memory allocation requires to apply some changes to
 the linker file. ThreadX needs to pass a pointer to the first free
 memory location in RAM to the tx_application_define() function, using
-the “first_unused_memory” argument. This require changes in the linker
+the “first_unused_memory” argument. This requires changes in the linker
 files to expose this memory location.
 <ul>
 <li>For EWARM add the following section into the .icf file:</li>
@@ -137,7 +137,7 @@ The ._threadx_heap must be located between the .bss and the ._user_heap_stack se
 Caution: Make sure that ThreadX does not need more than the provided heap memory (64KBytes in this example).
 Read more in STM32CubeIDE User Guide, chapter: &quot;Linker script&quot;.</code></pre>
 <ul>
-<li>The “tx_initialize_low_level.s” should be also modified to enable
+<li>The “tx_initialize_low_level.S” should be also modified to enable
 the “USE_DYNAMIC_MEMORY_ALLOCATION” flag.</li>
 </ul></li>
 </ul>
@@ -146,9 +146,9 @@ the “USE_DYNAMIC_MEMORY_ALLOCATION” flag.</li>
 <h3 id="hardware-and-software-environment"><b>Hardware and Software
 environment</b></h3>
 <ul>
-<li>This example runs on STM32U083RCTx devices</li>
-<li>This example has been tested with STMicroelectronics
-NUCLEO-U083RC boards Revision MB1932-U083RC-B01 and can be easily tailored
+<li>This application runs on STM32U083RCTx devices</li>
+<li>This application has been tested with STMicroelectronics
+NUCLEO-U083RC boards revision MB1932-U083RC-B01 and can be easily tailored
 to any other supported device and development board.</li>
 <li>A virtual COM port appears in the HyperTerminal:
 <ul>

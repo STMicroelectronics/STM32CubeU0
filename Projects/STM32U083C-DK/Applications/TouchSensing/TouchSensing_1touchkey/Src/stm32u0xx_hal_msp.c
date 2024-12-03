@@ -136,6 +136,7 @@ void HAL_TSC_MspInit(TSC_HandleTypeDef* htsc)
   /* USER CODE BEGIN TSC_MspInit 1 */
 
   /* USER CODE END TSC_MspInit 1 */
+
   }
 
 }

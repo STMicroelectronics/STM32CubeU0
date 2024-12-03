@@ -8,12 +8,14 @@ set wrp1a_end=0x20
 set wrp1b_start=0x30
 set wrp1b_end=0x37
 set hdp_end=0x2F
+set bootaddress=0x8000000
 set appliaddress=0x8030000
 set dataaddress=0x801E000
 set loaderaddress=0x8018000
 set data_image_number=1
 set ext_loader=1
 set code_image=%oemirot_appli%
+set boot_image=%oemirot_boot%
 
 :: STM32CubeProgammer connection
 set connect_no_reset=-c port=SWD mode=Hotplug
@@ -38,20 +40,20 @@ echo "Images programming"
 
 set "action=Write OEMiROT_Boot"
 echo %action%
-%stm32programmercli% %connect_no_reset% -d %cube_fw_path%\Projects\NUCLEO-U083RC\Applications\ROT\OEMiROT_Boot\Binary\OEMiROT_Boot.bin 0x8000000 -v
+%stm32programmercli% %connect_no_reset% -d ../../%oemirot_boot_path_project%/Binary/%boot_image% %bootaddress% -v
 IF !errorlevel! NEQ 0 goto :error
 echo "OEMiROT_Boot Written"
 
 set "action=Write OEMiROT_Appli"
 echo %action%
-%stm32programmercli% %connect_no_reset% -d ../../%oemirot_boot_path_project%/Binary/%code_image% %appliaddress% -v
+%stm32programmercli% %connect_no_reset% -d ../../%oemirot_appli_path_project%/Binary/%code_image% %appliaddress% -v
 IF !errorlevel! NEQ 0 goto :error
 echo "OEMiROT_Appli Written"
 
 if  "%data_image_number%" == "1" (
 set "action=Write OEMiROT_Data"
 echo %action%
-%stm32programmercli% %connect_no_reset% -d %cube_fw_path%\Projects\NUCLEO-U083RC\ROT_Provisioning\OEMiROT\Binary\data_enc_sign.bin %dataaddress% -v
+%stm32programmercli% %connect_no_reset% -d %cube_fw_path%\Projects\NUCLEO-U083RC\ROT_Provisioning\OEMiROT\Binary\data_init_sign.bin %dataaddress% -v
 IF !errorlevel! NEQ 0 goto :error
 echo "OEMiROT_Data Written"
 )

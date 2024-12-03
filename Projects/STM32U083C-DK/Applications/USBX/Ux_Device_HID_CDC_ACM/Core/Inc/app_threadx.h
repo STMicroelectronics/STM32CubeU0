@@ -5,7 +5,7 @@
   * @author  MCD Application Team
   * @brief   ThreadX applicative header file
   ******************************************************************************
-    * @attention
+  * @attention
   *
   * Copyright (c) 2023 STMicroelectronics.
   * All rights reserved.
@@ -75,4 +75,4 @@ void MX_ThreadX_Init(void);
 #ifdef __cplusplus
 }
 #endif
-#endif /* __APP_THREADX_H__ */
+#endif /* __APP_THREADX_H */
