@@ -24,7 +24,7 @@
 <section id="tim_pwminput-example-description" class="col-sm-12 col-lg-8">
 <h2><b>TIM_PWMInput Example Description</b></h2>
 <p>How to use the TIM peripheral to measure the frequency and duty cycle of an external signal.</p>
-<p>The TIM3CLK frequency is set to SystemCoreClock (Hz), the Prescaler is 0 so the counter clock is SystemCoreClock (Hz). SystemCoreClock is set to 48 MHz for STM32U031R8Ix Devices.</p>
+<p>The TIM3CLK frequency is set to SystemCoreClock (Hz), the Prescaler is 0 so the counter clock is SystemCoreClock (Hz). SystemCoreClock is set to 48 MHz for STM32U031R8Tx Devices.</p>
 <p>TIM3 is configured in PWM Input Mode: the external signal is connected to TIM3 Channel2 used as input pin. To measure the frequency and the duty cycle, we use the TIM3 CC2 interrupt request, so in the timer IRQ routine (via call to function HAL_TIM_IC_CaptureCallback() ), the frequency and the duty cycle of the external signal are computed.</p>
 <p>“uwFrequency” variable contains the external signal frequency:</p>
 <p>TIM3 counter clock = SystemCoreClock,</p>
@@ -55,7 +55,7 @@
 </ul>
 <h3 id="hardware-and-software-environment"><b>Hardware and Software environment</b></h3>
 <ul>
-<li><p>This example runs on STM32U031R8Ix devices.</p></li>
+<li><p>This example runs on STM32U031R8Tx devices.</p></li>
 <li><p>This example has been tested with STMicroelectronics NUCLEO-U031R8 board and can be easily tailored to any other supported device and development board.</p></li>
 <li><p>NUCLEO-U031R8 Set-up</p>
 <ul>

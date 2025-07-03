@@ -35,99 +35,87 @@
 <div class="col-sm-12 col-lg-8">
 <h2 id="rot_provisioning-description"><b>ROT_Provisioning
 Description</b></h2>
-<p>This section provides available configuration scripts for OEMiROT
-example.</p>
-<p>To ease the configuration process, a keygen, ob_flash_programming and
-provisioning scripts are used. The keygen is in charge of preparing the
-authentication and encryption keys. The ob_flash_programming is in
-charge of Initializing Option Bytes and Image download. The provisioning
-script is in charge of target provisioning.</p>
+<p>This section provides an overview of the available scripts for
+OEMiROT boot path.</p>
+<p>OEMiROT stands for OEM Immutable Root of Trust and it provides two
+services:</p>
+<ul>
+<li>Secure Boot: Verification of the integrity, and authenticity of the
+application code before any execution.</li>
+<li>Secure Firmware Update: If a new firmware image is available on
+detection, check of its authenticity. Once the firmware is decrypted,
+check of the integrity of the code before installing it.</li>
+</ul>
 <h3 id="keywords"><b>Keywords</b></h3>
 <p>OEMiROT, boot path, Root Of Trust, Security, mcuboot</p>
-<h3 id="directory-contents"><strong>Directory contents</strong></h3>
+<h3 id="directory-contents"><b>Directory contents</b></h3>
+<p><b>Sub-directories</b></p>
 <ul>
-<li>OEMiROT/keygen.bat/.sh Configuring keys for authentication and
+<li>OEMiROT/Binary Output binaries and generated images.</li>
+<li>OEMiROT/Image Image configuration files.</li>
+<li>OEMiROT/Keys Keys for firmware image authentication and
 encryption.</li>
-<li>OEMiROT/ob_flash_programming.bat/.sh Option bytes Initialization and
-Image download.</li>
-<li>OEMiROT/provisioning.bat/.sh Target provisioning.</li>
-<li>OEMiROT/Images/OEMiRoT_Code_Image.xml Configuration file for
-Firmware image generation.</li>
-<li>OEMiROT/Images/OEMiRoT_Data_Image.xml Configuration file for Data
-image generation.</li>
-<li>OEMiROT/Keys/OEMiRoT_Authentication.pem Private key for
-authentication.</li>
-<li>OEMiROT/Keys/OEMiRoT_Encryption.pem Private key for Encryption.</li>
-<li>OEMiROT/Keys/OEMiRoT_Encryption_Pub.pem Public key for
-Encryption.</li>
+</ul>
+<p><b>Scripts</b></p>
+<ul>
+<li>OEMiROT/ob_flash_programming.bat/.sh Programs option bytes and
+firmware image on the device.</li>
+<li>OEMiROT/provisioning.bat/.sh Performs device provisioning
+process.</li>
+<li>OEMiROT/regression.bat/.sh Performs full regression of the device.</li>
+<li>OEMiROT/keygen.bat/.sh Configuring keys for authentication and encryption.</li>
 </ul>
 <h3 id="hardware-and-software-environment"><strong>Hardware and Software
 environment</strong></h3>
 <ul>
-<li>This example runs on STM32U083xx devices.</li>
-<li>This example has been tested with STMicroelectronics NUCLEO-U083RC
+<li>This example runs on <strong>STM32U083xx</strong> devices.</li>
+<li>This example has been tested with STMicroelectronics <strong>NUCLEO-U083RC</strong>
 (MB1932) board and can be easily tailored to any other supported device
 and development board.</li>
 </ul>
-<h3 id="how-to-use-it"><strong>How to use it?</strong></h3>
-<p>Before compiling the OEMiROT project, you should first start the
-provisioning process. During the provisioning process, the linker files
-of project as well as the postbuild commands will be automatically
-updated.</p>
-<p>All scripts are relying on env.bat/env.sh for tool path and
-application path.</p>
+<h3 id="how-to-use-it"><b>How to use it?</b></h3>
+<p>To use OEMiRoT bootpath, you should first configure
+ROT_Provisioning/env.bat/.sh script (tools path, application path.
+The .bat scripts are designed for Windows,
+whereas the .sh scripts are designed for Linux and Mac-OS.</p>
+<p><strong> - provisioning.bat/.sh</strong></p>
+<ul>
+<p>This script performs the <strong>provisioning process</strong>.</p>
+<p>During the <strong>provisioning process</strong>, the programming scripts and the application files will
+be automatically updated according to OEMiSB configuration, and user answers.</p>
 <p>The <strong>provisioning process</strong>
-(ROT_Provisioning/OEMiROT/provisioning.bat/.sh) is divided into 4 majors
-steps :</p>
+(OEMiROT/provisioning.bat/.sh) is divided into 3 majors steps:</p>
 <ul>
-<li><p>Step 1 : Selecting the RDP level</p>
-<ul>
-<li>Select RDP Level</li>
-</ul></li>
-<li><p>Step 2 : Boot, Appli and local loader building</p>
-<ul>
-<li>OEMiROT boot binary: build OEMiROT_Boot project</li>
-<li>OEMiROT Appli binary: build OEMiROT_Appli project</li>
-<li>OEMiROT Loader binary: build OEMiROT_Loader project</li>
-</ul></li>
-<li><p>Step 3 : Images generation</p>
-<ul>
-<li>Code firmware image generation: automatically generated at the end
-of compilation (postbuild command)</li>
-<li>Data image generation with TrustedPackageCreator, if data image
-enabled</li>
-</ul></li>
-<li><p>Step 4 : Provisioning</p>
-<ul>
-<li>Programming the Option Bytes</li>
-<li>Flashing the images</li>
-<li>Setting the RDP level</li>
-</ul></li>
+<li>Step 1: Product configuration</li>
+<li>Step 2: Image generations</li>
+<li>Step 3: Provisioning</li>
+
+The provisioning script is relying on ob_flash_programming script.
 </ul>
-<p>The provisioning script is relying on ob_flash_programming script. It
-is possible to run ob_flash_programming directly(advanced mode).</p>
-<p>The <strong>ob_flash_programming process</strong>
-(ROT_Provisioning/OEMiROT/ob_flash_programming.bat/.sh) include :</p>
-<ul>
-<li><p>Step 1 : Initialize option bytes</p></li>
-<li><p>Step 2 : Configure the option Bytes</p>
-<ul>
-<li>Remove Protection and erase all.</li>
-<li>Configure option Bytes.</li>
-</ul></li>
-<li><p>Step 3 : Download Images</p>
-<ul>
-<li>Download boot image.</li>
-<li>Download Appli image</li>
-<li>Download data image, if data image enabled.</li>
-<li>Download loader image, if loader enabled.</li>
-</ul></li>
 </ul>
-<p>The <strong>keygen process</strong>
-(ROT_Provisioning/OEMiROT/keygen.bat/.sh) include :</p>
+<p><strong> - regression.bat/.sh</strong></p>
 <ul>
-<li><p>Step 1 : ECC 256 authentication key generation.</p></li>
-<li><p>Step 2 : Generation of private key to encode images.</p></li>
+<p>This script performs the full regression of the device: erases the user flash memory and resets
+the RDP level to 0.<br>
+</ul>
+<p></P>
+<p>For more details, refer to STM32U0 Wiki articles below:p>
+<ul>
+<p><a
+href="https://wiki.st.com/stm32mcu/wiki/Security:OEMiRoT_for_STM32U0">OEMiRoT for STM32U0</a></p>
+<p><a
+href="https://wiki.st.com/stm32mcu/wiki/Security:How_to_start_with_OEMiRoT_on_STM32U0">How to start with OEMiRoT on STM32U0</a></>
+</ul>
+<h3 id="Notes"><strong>Notes</strong></h3>
+<p>Two versions of AppliCfg (used during <strong>provisioning process</strong>) are available: windows executable and python version.
+On Windows environment, the executable is used. On other environment, the python version is automatically used.
+To use Python version, it is needed to:</p>
+<ul>
+<li><p>have python installed (Python 3.6 or newer) and available in execution path variable</p>
+<li><p>have required python modules installed (Utilities/PC_Software/ROT_AppliConfig/requirements.txt):</p>
+<ul>
+    - pip install -r requirements.txt
+</ul>
 </ul>
 </body>
 </html>

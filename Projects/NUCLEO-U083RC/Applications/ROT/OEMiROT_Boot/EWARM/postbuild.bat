@@ -18,7 +18,7 @@ goto exe:
 goto py:
 :exe
 ::line for window executable
-set "applicfg=%cube_fw_path%\Utilities\PC_Software\ROT_AppliConfig\dist\AppliCfg.exe"
+set applicfg="%cube_fw_path%\Utilities\PC_Software\ROT_AppliConfig\dist\AppliCfg.exe"
 set "python="
 if exist %applicfg% (
 echo run config Appli with windows executable
@@ -27,16 +27,16 @@ goto postbuild
 :py
 ::line for python
 echo run config Appli with python script
-set "applicfg=%cube_fw_path%\Utilities\PC_Software\ROT_AppliConfig\AppliCfg.py"
+set applicfg="%cube_fw_path%\Utilities\PC_Software\ROT_AppliConfig\AppliCfg.py"
 set "python= "
 
 :postbuild
-set "preprocess_bl2_file=%projectdir%\image_macros_preprocessed_bl2.c"
+set preprocess_bl2_file="%projectdir%\image_macros_preprocessed_bl2.c"
 set "appli_dir=..\..\..\..\%oemirot_appli_path_project%"
 set "loader_dir=..\..\..\..\Applications\ROT\OEMiROT_Loader"
-set "option_bytes=%projectdir%\..\..\..\..\ROT_Provisioning\OEMiROT\ob_flash_programming.bat"
-set "provisioning=%projectdir%\..\..\..\..\ROT_Provisioning\OEMiROT\provisioning.bat"
-set "postbuild_file=%appli_dir%\EWARM\postbuild.bat"
+set option_bytes="%projectdir%\..\..\..\..\ROT_Provisioning\OEMiROT\ob_flash_programming.bat"
+set provisioning="%projectdir%\..\..\..\..\ROT_Provisioning\OEMiROT\provisioning.bat"
+set postbuild_file="%appli_dir%\EWARM\postbuild.bat"
 
 :: Environment variable for AppliCfg
 set appli_system_file="%appli_dir%\Src\system_stm32u0xx.c"
@@ -51,8 +51,8 @@ set loader_linker_file="%loader_dir%\EWARM\stm32u083xx_flash.icf"
 set code_xml="%projectdir%\..\..\..\..\ROT_Provisioning\OEMiROT\Images\OEMiRoT_Code_image.xml"
 set data_xml="%projectdir%\..\..\..\..\ROT_Provisioning\OEMiROT\Images\OEMiRoT_Data_Image.xml"
 
-set init_code_xml="%projectdir%\..\..\..\..\ROT_Provisioning\OEMiROT\Images\OEMiRoT_Init_Code_Image.xml"
-set init_data_xml="%projectdir%\..\..\..\..\ROT_Provisioning\OEMiROT\Images\OEMiRoT_Init_Data_Image.xml"
+set init_code_xml="%projectdir%\..\..\..\..\ROT_Provisioning\OEMiROT\Images\OEMiRoT_Code_Init_Image.xml"
+set init_data_xml="%projectdir%\..\..\..\..\ROT_Provisioning\OEMiROT\Images\OEMiRoT_Data_Init_Image.xml"
 
 set code_size="Firmware area size"
 set data_size="Data area size"

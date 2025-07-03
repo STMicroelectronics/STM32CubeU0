@@ -14,6 +14,16 @@ default_ob="-ob BOOT_LOCK=0"
 
 
 echo "Regression to RDP 0"
+#RDP Regression
+echo "Regression to RDP 0"
+# Unlock RDP 2 to switch in RDP 1
+"$stm32programmercli" $connect_reset -hardRst -unlockRDP2 $oem2_key
+echo "Please unplug USB cable and plug it again to recover SWD Connection."
+echo "Press any key to continue..."
+echo
+if [ "$1" != "AUTO" ]; then read -p "" -n1 -s; fi
+
+# Switch RDP 1 to RDP 0
 "$stm32programmercli" $connect_no_reset $rdp_0
 ret=$?
 if [ $ret != 0 ]; then

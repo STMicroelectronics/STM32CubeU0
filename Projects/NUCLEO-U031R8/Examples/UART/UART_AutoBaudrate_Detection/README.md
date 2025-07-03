@@ -107,9 +107,9 @@ Connectivity, UART/USART, baud rate, RS-232, full-duplex, parity, stop bit, Rece
 
 ### <b>Hardware and Software environment</b>
 
-  - This example runs on STM32U031R8Ix devices.
+  - This example runs on STM32U031R8Tx devices.
   - This example has been tested with one NUCLEO-U031R8 board embedding
-    a STM32U031R8Ix device and can be easily tailored to any other supported device
+    a STM32U031R8Tx device and can be easily tailored to any other supported device
     and development board.
 
   - NUCLEO-U031R8 Set-up

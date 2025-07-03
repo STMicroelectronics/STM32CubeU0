@@ -186,7 +186,7 @@ struct mpu_region_cfg_t mpu_region_boot_cfg[] =
       MPU_REGION_SIZE_128KB,
       0,
       MPU_TEX_LEVEL0,
-      MPU_REGION_PRIV_RW,
+      MPU_REGION_PRIV_RO,
       MPU_INSTRUCTION_ACCESS_ENABLE,
       MPU_ACCESS_NOT_SHAREABLE,
       MPU_ACCESS_CACHEABLE,
@@ -332,7 +332,7 @@ void LL_SECU_CheckStaticProtections(void)
       || (flash_option_bytes.WRPStartOffset != 0)
       || (flash_option_bytes.WRPEndOffset != end))
   {
-    printf("Unexpected value for write protection A [0, %ld] : OB [%ld, %ld]\n",
+    BOOT_LOG_INF("Unexpected value for write protection A [0, %ld] : OB [%ld, %ld]\n",
                  (unsigned long int)end,
                  (unsigned long int)flash_option_bytes.WRPStartOffset,
                  (unsigned long int)flash_option_bytes.WRPEndOffset);
@@ -346,7 +346,7 @@ void LL_SECU_CheckStaticProtections(void)
       || (flash_option_bytes2.WRPStartOffset != start)
       || (flash_option_bytes2.WRPEndOffset != end))
   {
-    printf("Unexpected value for write protection B [%ld, %ld] : OB [%ld, %ld]\n",
+    BOOT_LOG_INF("Unexpected value for write protection B [%ld, %ld] : OB [%ld, %ld]\n",
                  (unsigned long int)start,
                  (unsigned long int)end,
                  (unsigned long int)flash_option_bytes2.WRPStartOffset,
@@ -362,7 +362,7 @@ void LL_SECU_CheckStaticProtections(void)
   if ((end != flash_option_bytes.HDPEndPage)
    || (flash_option_bytes.HDPState == 0xB4))
   {
-    printf("Unexpected value for hide protection 0xB4 [%ld] : OB %ld [%ld]\n",
+    BOOT_LOG_INF("Unexpected value for hide protection 0xB4 [%ld] : OB %ld [%ld]\n",
                  (unsigned long int)end,
                  (unsigned long int)flash_option_bytes.HDPState,
                  (unsigned long int)flash_option_bytes.HDPEndPage);
@@ -373,8 +373,8 @@ void LL_SECU_CheckStaticProtections(void)
   /* Check Boot lock protection */
   if (flash_option_bytes.BootLock != OB_BOOT_ENTRY_FORCED_FLASH)
   {
-    printf("BootLock 0x%lx\n", (unsigned long int)flash_option_bytes.BootLock);
-    printf("Unexpected value for BOOT LOCK\n");
+    BOOT_LOG_INF("BootLock 0x%lx\n", (unsigned long int)flash_option_bytes.BootLock);
+    BOOT_LOG_INF("Unexpected value for BOOT LOCK\n");
     Error_Handler();
   }
 

@@ -6,6 +6,15 @@
   *          LevelX low level drivers for STM32 devices.
   ******************************************************************************
   */
+## V3.2.0 / 09-09-2024 ###
+=================================
+Main changes
+-------------
+-  Add xspi NOR flash driver and its respective template files
+ + lx_stm32_xspi_driver.c
+ + template/lx_stm32_xspi_driver.h
+ + template/lx_stm32_xspi_driver_glue.c
+
 ## V3.1.0 / 17-May-2024 ###
 =================================
 Main changes

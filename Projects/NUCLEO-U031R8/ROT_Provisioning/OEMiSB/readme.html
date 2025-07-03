@@ -42,42 +42,63 @@ example.</p>
 <p>OEMiSB, boot path, Root Of Trust, Security, mcuboot</p>
 <h3 id="directory-contents"><strong>Directory contents</strong></h3>
 <ul>
-<li>OEMiSB/provisioning.bat/.sh Target provisioning.</li>
+<p><b>Sub-directories</b></p>
+<li>OEMiSB/Binary Output binaries.</li>
+<p><b>Scripts</b></p>
+<li>provisioning.bat/.sh Performs device provisioning process.</li>
+<li>regression.bat/.sh Performs full regression of the device.</li>
 </ul>
 <h3 id="hardware-and-software-environment"><strong>Hardware and Software
 environment</strong></h3>
 <ul>
-<li>This example runs on STM32U031xx devices.</li>
-<li>This example has been tested with STMicroelectronics NUCLEO-U031R8
+<li>This example runs on <strong>STM32U031xx</strong> devices.</li>
+<li>This example has been tested with STMicroelectronics <strong>NUCLEO-U031R8</strong>
 board and can be easily tailored to any other supported device and
 development board.</li>
 </ul>
 <h3 id="how-to-use-it"><strong>How to use it?</strong></h3>
-<p>Before compiling the OEMiSB project, you should first start the
-provisioning process. During the provisioning process, the linker files
-of project will be automatically updated.</p>
-<p>All scripts are relying on env.bat/env.sh for tool path and
-application path.</p>
+<p>To use OEMiSB bootpath, you should first configure ROT_Provisioning/env.bat/.sh script
+(tools path, application path).</p>
+<p>The .bat scripts are designed for Windows, whereas the .sh scripts are designed for Linux and Mac-OS.</p>
+
+<p><strong> - provisioning.bat/.sh</strong></p>
+<ul>
+<p>This script performs the <strong>provisioning process</strong>.</p>
+<p>During the <strong>provisioning process</strong>, the programming scripts and the application files will
+be automatically updated according to OEMiSB configuration, and user answers.</p>
 <p>The <strong>provisioning process</strong>
-(ROT_Provisioning/OEMiSB/provisioning.bat/.sh) is divided in 3 majors
-steps :</p>
+(ROT_Provisioning/OEMiSB/provisioning.bat/.sh) is divided in 3 majors steps :</p>
 <ul>
 <li><p>Step 1 : Product configuration</p>
-<ul>
-<li>Select RDP Level</li>
-<li>Select data area size</li>
-</ul></li>
 <li><p>Step 2 : Image generation</p>
-<ul>
-<li>Build OEMiSB_Boot project</li>
-<li>Build OEMiSB_Appli project</li>
-</ul></li>
 <li><p>Step 3 : Provisioning</p>
+</ul>
+</ul>
+<p><strong> - regression.bat/.sh</strong></p>
 <ul>
-<li>Programming the option bytes</li>
-<li>Flashing the images</li>
-<li>Setting the RDP level</li>
+<p>This script performs the full regression of the device: erases the user flash memory and resets
+the RDP level to 0.<br>
+</ul>
+<p></P>
+<p>For more details, refer to STM32U0 Wiki articles provided below</p>
+<ul>
 </ul></li>
+</ul>
+<p><a
+href="https://wiki.st.com/stm32mcu/wiki/Security:OEMiSB_for_STM32U0">OEMiSB for STM32U0</a></p>
+<p><a
+href="https://wiki.st.com/stm32mcu/wiki/Security:How_to_start_with_OEMiSB_on_STM32U0">How to start with OEMiSB on STM32U0</a></>
+</ul>
+<h3 id="Notes"><strong>Notes</strong></h3>
+<p>Two versions of AppliCfg (used during **provisioning process**) are available: windows executable and python version.
+On Windows environment, the executable is used. On other environment, the python version is automatically used.
+To use Python version, it is needed to:</p>
+<ul>
+<li><p>have python installed (Python 3.6 or newer) and available in execution path variable</p>
+<li><p>have required python modules installed (Utilities/PC_Software/ROT_AppliConfig/requirements.txt):</p>
+<ul>
+    - pip install -r requirements.txt
+</ul>
 </ul>
 </body>
 </html>

@@ -86,37 +86,37 @@ void Error_Handler(void);
 
 /* USER CODE BEGIN Private defines */
 
-#if defined(__ARMCC_VERSION)
+#if defined(__ARMCC_VERSION) || defined ( __clang__ )
 #define DEVICE_ID "Device ID = 0x%X"
 #else
 #define DEVICE_ID "Device ID = 0x%lX"
-#endif /* defined(__ARMCC_VERSION) */
+#endif /* defined(__ARMCC_VERSION) || defined ( __clang__ ) */
 
-#if defined(__ARMCC_VERSION)
+#if defined(__ARMCC_VERSION) || defined ( __clang__ )
 #define REVISION_ID "Revision ID = 0x%X"
 #else
 #define REVISION_ID "Revision ID = 0x%lX"
-#endif /* defined(__ARMCC_VERSION) */
+#endif /* defined(__ARMCC_VERSION) || defined ( __clang__ ) */
 
-#if defined(__ARMCC_VERSION)
+#if defined(__ARMCC_VERSION) || defined ( __clang__ )
 #define COORDINATES "X and Y coordinates = 0x%X"
 #else
 #define COORDINATES "X and Y coordinates = 0x%lX"
-#endif /* defined(__ARMCC_VERSION) */
+#endif /* defined(__ARMCC_VERSION) || defined ( __clang__ ) */
 
 #define WAFER_NB "Wafer NB = 0x%X"
 
-#if defined(__ARMCC_VERSION)
+#if defined(__ARMCC_VERSION) || defined ( __clang__ )
 #define LOT_NB "Lot NB = 0x%X"
 #else
 #define LOT_NB "Lot NB = 0x%lX"
-#endif /* defined(__ARMCC_VERSION) */
+#endif /* defined(__ARMCC_VERSION) || defined ( __clang__ ) */
 
-#if defined(__ARMCC_VERSION)
+#if defined(__ARMCC_VERSION) || defined ( __clang__ )
 #define SIZE "0x%X"
 #else
 #define SIZE "0x%lX"
-#endif /* defined(__ARMCC_VERSION) */
+#endif /* defined(__ARMCC_VERSION) || defined ( __clang__ ) */
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

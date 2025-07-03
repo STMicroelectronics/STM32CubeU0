@@ -19,7 +19,16 @@ set erase_all=-e all
 
 ::RDP Regression
 echo Regression to RDP 0
-%stm32programmercli% %connect_reset% %rdp_0%
+:: Unlock RDP 2 to switch in RDP 1
+%stm32programmercli% %connect_reset% -hardRst -unlockRDP2 %oem2_key%
+echo Please unplug USB cable and plug it again to recover SWD Connection.
+echo Press any key to continue...
+echo.
+IF [%1] neq [AUTO] pause >nul
+
+:: Switch RDP 1 to RDP 0
+%stm32programmercli% %connect_no_reset% %rdp_0%
+IF %errorlevel% NEQ 0 %stm32programmercli% %connect_reset% %rdp_0%
 IF !errorlevel! NEQ 0 goto :step_error
 
 ::Provisioning default OEM2 key

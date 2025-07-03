@@ -14,6 +14,7 @@ set oem2_key=0x11223344 0x55667788 0x99AABBCC 0xDDEEFF00
 ::                              OEMiROT boot path
 :: ==============================================================================
 :: Select application project below
+:: Give relative path of application and boot from NUCLEO-U083RC folder
 ::set oemirot_appli_path_project=Templates_ROT
 set oemirot_appli_path_project=Applications/ROT/OEMiROT_Appli
 set oemirot_boot_path_project=Applications/ROT/OEMiROT_Boot

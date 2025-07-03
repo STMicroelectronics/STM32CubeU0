@@ -5,7 +5,7 @@ duty cycle of an external signal.
 
 The TIM3CLK frequency is set to SystemCoreClock (Hz), the Prescaler is 0 so the 
 counter clock is SystemCoreClock (Hz).
-SystemCoreClock is set to 48 MHz for STM32U031R8Ix Devices.
+SystemCoreClock is set to 48 MHz for STM32U031R8Tx Devices.
 
 TIM3 is configured in PWM Input Mode: the external signal is connected to 
 TIM3 Channel2 used as input pin.
@@ -58,7 +58,7 @@ Timer, TIM, Input, signals, PWM, External signal, Frequency, Duty cycle, Measure
 
 ### <b>Hardware and Software environment</b>
 
-  - This example runs on STM32U031R8Ix devices.
+  - This example runs on STM32U031R8Tx devices.
     
   - This example has been tested with STMicroelectronics NUCLEO-U031R8 
     board and can be easily tailored to any other supported device 

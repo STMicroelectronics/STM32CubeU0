@@ -82,7 +82,7 @@
           <AfterMake>
             <RunUserProg1>1</RunUserProg1>
             <RunUserProg2>1</RunUserProg2>
-            <UserProg1Name>fromelf #L --bin --output=$L"\..\..\..\Binary\OEMiROT_Boot.bin"</UserProg1Name>
+            <UserProg1Name>fromelf "#L" --bin --output="$L\..\..\..\Binary\OEMiROT_Boot.bin"</UserProg1Name>
             <UserProg2Name>postbuild.bat</UserProg2Name>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
@@ -338,7 +338,7 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>STM32U083xx,USE_HAL_DRIVER,NDEBUG,MCUBOOT_TARGET_CONFIG=&lt;flash_layout.h&gt;,MBEDTLS_CONFIG_FILE=&lt;config-boot.h&gt;,MCUBOOT_DOUBLE_SIGN_VERIF,FLOW_CONTROL,BL2,DEFAULT_UART_BAUDRATE=115200,OEMIROT_DEV_MODE,BOOT_MAX_ALIGN=16,MULADDC_CANNOT_USE_R7</Define>
+              <Define>STM32U083xx,USE_HAL_DRIVER,NDEBUG,MCUBOOT_TARGET_CONFIG=&lt;flash_layout.h&gt;,MBEDTLS_CONFIG_FILE=&lt;mbedtls_config.h&gt;,MCUBOOT_DOUBLE_SIGN_VERIF,FLOW_CONTROL,BL2,DEFAULT_UART_BAUDRATE=115200,OEMIROT_DEV_MODE,BOOT_MAX_ALIGN=16,MULADDC_CANNOT_USE_R7</Define>
               <Undefine></Undefine>
               <IncludePath>..\Inc;..\..\..\..\..\..\Drivers\CMSIS\Include;..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32U0xx\Include;..\..\..\..\..\..\Drivers\STM32U0xx_HAL_Driver\Inc;..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\include;..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\include\psa;..\..\..\..\..\..\Middlewares\Third_Party\mcuboot;..\..\..\..\..\..\Middlewares\Third_Party\mcuboot\bl2\include;..\..\..\..\..\..\Middlewares\Third_Party\mcuboot\platform\ext\common;..\..\..\..\..\..\Middlewares\Third_Party\mcuboot\platform\ext\driver;..\..\..\..\..\..\Middlewares\Third_Party\mcuboot\bl2\ext\mcuboot\include;..\..\..\..\..\..\Middlewares\Third_Party\mcuboot\boot\bootutil\include;..\..\..\..\..\..\Middlewares\Third_Party\mcuboot\boot\bootutil\src;..\..\..\..\..\..\Middlewares\Third_Party\mcuboot\ext\tinycrypt\lib\include</IncludePath>
             </VariousControls>

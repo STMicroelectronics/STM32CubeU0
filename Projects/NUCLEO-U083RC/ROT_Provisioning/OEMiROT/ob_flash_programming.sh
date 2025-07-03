@@ -1,6 +1,7 @@
 #!/bin/bash
 source ../env.sh
 
+# Data updated with the postbuild of OEMiROT-Boot
 wrp1a_end=0x20
 wrp1b_start=0x30
 wrp1b_end=0x37
@@ -14,8 +15,9 @@ ext_loader=0x1
 code_image=$oemirot_appli
 boot_image=$oemirot_boot
 
-connect_no_reset="-c port=SWD speed=fast mode=Hotplug"
-connect_reset="-c port=SWD speed=fast mode=UR"
+# STM32CubeProgammer connection
+connect_no_reset="-c port=SWD mode=HotPlug"
+connect_reset="-c port=SWD mode=UR"
 
 error()
 {
@@ -35,7 +37,6 @@ boot_lock="BOOT_LOCK=1"
 # ========================================================= Configure Option Bytes =========================================================
 action="Remove protections and mass erase"
 echo "$action"
-echo "$stm32programmercli" $connect_reset $remove_protect_init $erase_all
 "$stm32programmercli" $connect_reset $remove_protect_init $erase_all
 if [ $? -ne 0 ]; then error; return 1; fi
 # ============================================================ Download images =============================================================

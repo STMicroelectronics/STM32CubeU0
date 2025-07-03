@@ -1,10 +1,8 @@
 /**
   ******************************************************************************
-  * @file    stm32u083c_dk_conf_template.h
+  * @file    stm32u083c_discovery_conf_template.h
   * @author  MCD Application Team
-  * @brief   configuration file.
-  *          This file should be copied to the application folder and renamed
-  *          to stm32u083c_dk_conf.h
+  * @brief   STM32U083C-DK board configuration file.
   ******************************************************************************
   * @attention
   *

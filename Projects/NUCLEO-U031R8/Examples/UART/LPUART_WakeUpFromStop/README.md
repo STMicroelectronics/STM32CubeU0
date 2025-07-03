@@ -3,7 +3,7 @@
 Configuration of an LPUART to wake up the MCU from Stop mode
 when a given stimulus is received.
 
-Board:  NUCLEO-U031R8 (embeds a STM32U031R8Ix device)
+Board:  NUCLEO-U031R8 (embeds a STM32U031R8Tx device)
 Tx Pin: PC1, Pin 36 of CN7 connector
 Rx Pin: PC0, Pin 38 of CN7 connector
 
@@ -117,10 +117,10 @@ Transmitter, Receiver, Asynchronous, Low Power, Wake Up
 
 ### <b>Hardware and Software environment</b>t
 
-  - This example runs on STM32U031R8Ix devices.
+  - This example runs on STM32U031R8Tx devices.
 
   - This example has been tested with a couple of NUCLEO-U031R8 boards embedding a
-    STM32U031R8Ix device and can be easily tailored to any other supported device
+    STM32U031R8Tx device and can be easily tailored to any other supported device
     and development board.
 
   - NUCLEO-U031R8 set-up

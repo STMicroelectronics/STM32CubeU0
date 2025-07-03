@@ -5,8 +5,8 @@ if [ $# -ge 1 ]; then mode=$1; else mode=MANUAL; fi
 source ../env.sh NULL
 
 # Environment variable for AppliCfg
-SCRIPT=$(readlink -f $0)
-projectdir=`dirname $SCRIPT`
+SCRIPT=$(readlink -f "$0")
+projectdir=$(dirname "$SCRIPT")
 
 #Updated with boot postbuild
 data_image_number=0x1
@@ -15,9 +15,9 @@ ext_loader=0x1
 # Initial configuration
 ob_flash_programming="ob_flash_programming.sh"
 appli_dir="../../"$oemirot_appli_path_project
-code_xml=$projectdir"/Images/OEMiROT_Code_Image.xml"
-data_xml=$projectdir"/Images/OEMiRoT_Data_Image.xml"
-init_data_xml=$projectdir"/Images/OEMiRoT_Init_Data_Image.xml"
+code_xml="\"$projectdir/Images/OEMiROT_Code_Image.xml\""
+data_xml="\"$projectdir/Images/OEMiRoT_Data_Image.xml\""
+init_data_xml="\"$projectdir/Images/OEMiRoT_Data_Init_Image.xml\""
 boot_cfg_h="${cube_fw_path}/Projects/NUCLEO-U083RC/Applications/ROT/OEMiROT_Boot/Inc/boot_hal_cfg.h"
 provisioning_log_file="provisioning.log"
 connect_no_reset="-c port=SWD speed=fast mode=Hotplug"
@@ -59,6 +59,7 @@ rdp_level_choice()
     echo
     rdp_value=0xCC
     rdp_str="OB_RDP_LEVEL_2"
+    set_oem2_key  # OEM2 key Setting
     return
   fi
 
@@ -69,16 +70,27 @@ rdp_level_choice()
 # =================================================== Option Bytes and flash programming ===================================================
 set_oem2_key()
 {
-  action="Provisioning of OEM2 key : "$oem2_key
-  echo "   * $action"
-  "$stm32programmercli" $connect_reset -lockRDP2 $oem2_key > "provisioning.log"
+  # Step to configure OEM2 key
+  echo "   * OEM2 key setup"
+  echo "       Default oem2_password is kept in env.sh"
+  echo "       Warning: Default OEM2 keys must NOT be used in a product. Make sure to regenerate your own OEM2 keys!"
+  echo "       If you do not want to use Default OEM2 keys, then replace new OEM2 keys in env.sh, close this script and start again"
+  echo "       Press any key to continue with default oem2 keys..."
   echo
-  if [ $? -ne 0 ]; then step_error; fi
+  if [ "$mode" != "AUTO" ]; then read -p "" -n1 -s; fi
 }
 
 change_rdp_level_in_boot_cfg()
 {
-  $python$applicfg modifyfilevalue --variable OEMIROT_OB_RDP_LEVEL_VALUE --value "${rdp_str}" "${boot_cfg_h}" --str
+  eval $python"\"$applicfg\"" modifyfilevalue --variable OEMIROT_OB_RDP_LEVEL_VALUE --value "\"${rdp_str}\"" "\"${boot_cfg_h}\"" --str
+}
+
+oem2_key_provisioning()
+{
+  "$stm32programmercli" $connect_reset -hardRst -lockRDP2 $oem2_key > "provisioning.log"
+  if [ $? -ne 0 ]; then step_error; fi
+  echo "   * Provisioning of OEM2 key Done"
+  echo
 }
 
 set_rdp_level()
@@ -115,9 +127,12 @@ final_step()
   echo "====="
   echo "===== The board is correctly configured."
   echo "===== Connect UART console (115200 baudrate) to get application menu."
-  echo "====="
+  no_menu
+}
 
-  if [ "$mode" != "AUTO" ]; then $SHELL; fi
+no_menu()
+{
+  echo "====="
   exit 0
 }
 
@@ -177,9 +192,9 @@ if [ "$data_image_number" == "0x1" ]; then
 	echo "       Press any key to continue..."
 	echo
 	if [ "$mode" != "AUTO" ]; then read -p "" -n1 -s; fi
-	"$stm32tpccli" -pb $data_xml >> $provisioning_log_file
+	eval "\"$stm32tpccli\"" -pb $data_xml >> $provisioning_log_file
 	if [ $? != "0" ]; then step_error; fi
-	"$stm32tpccli" -pb $init_data_xml >> $provisioning_log_file
+	eval "\"$stm32tpccli\"" -pb $init_data_xml >> $provisioning_log_file
 	if [ $? != "0" ]; then step_error; fi
 fi
 if [ "$ext_loader" == "0x1" ]; then
@@ -189,8 +204,8 @@ if [ "$ext_loader" == "0x1" ]; then
 	echo
 	if [ "$mode" != "AUTO" ]; then read -p "" -n1 -s; fi
 fi
-# ========================================================= OEM2 key provisioning ==========================================================
-set_oem2_key
+# ============================================================ OEM2 key provisioning ======================================================
+oem2_key_provisioning
 
 # =================================================== Option Bytes and flash programming ===================================================
 ob_programming

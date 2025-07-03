@@ -101,8 +101,8 @@
 #define CRC_POLYNOMIAL_LENGTH   LL_CRC_POLYLENGTH_16B /* CRC polynomial length 16 bits */
 #define CRC_POLYNOMIAL_VALUE    0x8005U /* Polynomial to use for CRC calculation */
 #define NVCNT_ELEMENT_TYPE uint64_t
-/* only 64bits are used to store data , information is stored only in lsb other 64 bits area is useless */
-#define NVCNT_ELEMENT_SIZE 2*sizeof(NVCNT_ELEMENT_TYPE)
+/* 64bits are used to store data*/
+#define NVCNT_ELEMENT_SIZE sizeof(NVCNT_ELEMENT_TYPE)
 #define PAGE_HEADER_SIZE  ((HEADER_SIZE/sizeof(NVCNT_DATA_TYPE))*NVCNT_ELEMENT_SIZE)
 /*!< Flash value after erase */
 #define NVCNT_PAGESTAT_ERASED (uint64_t)0xFFFFFFFFFFFFFFFFU /*!< Flash value after erase */
@@ -160,7 +160,7 @@ HAL_StatusTypeDef plat_init_nv_counter(void)
 
   int32_t  err;
   uint32_t  varidx = 0U;
-  NVCNT_ELEMENT_TYPE addressvalue[2] = {0U, 0U};
+  NVCNT_ELEMENT_TYPE addressvalue[1] = {0U};
   NVCNT_DATA_TYPE counter_value;
 
   /*********************************************************************/
@@ -240,8 +240,7 @@ HAL_StatusTypeDef plat_init_nv_counter(void)
     err = FLASH_DEV_NAME.ReadData(BL2_NV_COUNTERS_AREA_ADDR + varidx, &addressvalue[0],
                                   sizeof(addressvalue));
     if ((err == ARM_DRIVER_ERROR_SPECIFIC) ||
-        ((addressvalue[0] != NVCNT_MASK_FULL)
-          &&(addressvalue[1] != NVCNT_MASK_FULL) )
+        (addressvalue[0] != NVCNT_MASK_FULL)
         )
     {
       /* Then increment uhNbWrittenElements and uwAddressNextWrite */
@@ -278,7 +277,7 @@ HAL_StatusTypeDef plat_set_nv_counter(enum nv_counter_t CounterId,
 {
   int32_t err;
   uint32_t crc = 0U;
-  NVCNT_ELEMENT_TYPE element[2];
+  NVCNT_ELEMENT_TYPE element[1];
   NVCNT_DATA_TYPE current_value;
 
   /* reset Updated flag */
@@ -307,7 +306,6 @@ HAL_StatusTypeDef plat_set_nv_counter(enum nv_counter_t CounterId,
   crc = CalculateCrc(Data, CounterId);
   /*  build element  */
   element[0] = NVCNT_ELEMENT_VALUE(CounterId, Data, crc);
-  element[1] = element[0];
   /* Program variable data + virtual address + crc */
   err = FLASH_DEV_NAME.ProgramData(BL2_NV_COUNTERS_AREA_ADDR + uwAddressNextWrite,
                                    &element[0],
@@ -332,7 +330,7 @@ HAL_StatusTypeDef plat_set_nv_counter(enum nv_counter_t CounterId,
 HAL_StatusTypeDef plat_read_nv_counter(enum nv_counter_t counter_id,
                                              uint32_t size, uint8_t *val)
 {
-  NVCNT_ELEMENT_TYPE addressvalue[2] = {0U, 0U};
+  NVCNT_ELEMENT_TYPE addressvalue[1] = {0U};
   uint32_t counter = 0U;
   uint32_t crc = 0U;
   uint32_t found = 0;

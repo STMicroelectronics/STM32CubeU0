@@ -12,12 +12,13 @@ setlocal EnableDelayedExpansion
 set current_log_file="%projectdir%\postbuild.log"
 echo. > %current_log_file%
 
-set appli_dir="..\..\..\Applications\ROT\OEMiROT_Appli"
+set appli_dir="%provisioningdir%\..\%oemirot_appli_path_project%"
 set app_bin="%appli_dir%\Binary\rot_app.bin"
 set app_enc_sign_bin="%appli_dir%\Binary\rot_app_enc_sign.bin"
+set app_init_sign_bin="%appli_dir%\Binary\rot_app_init_sign.bin"
 set code_image_file="%provisioningdir%\OEMiROT\Images\OEMiRoT_Code_Image.xml"
-set init_code_image_file="%provisioningdir%\OEMiROT\Images\OEMiRoT_Init_Code_Image.xml"
-set init_data_image_file="%provisioningdir%\OEMiROT\Images\OEMiRoT_Init_Data_Image.xml"
+set init_code_image_file="%provisioningdir%\OEMiROT\Images\OEMiRoT_Code_Init_Image.xml"
+set init_data_image_file="%provisioningdir%\OEMiROT\Images\OEMiRoT_Data_Init_Image.xml"
 
 ::Field updated with OEMiROT Boot postbuild
 set primary_only=1
@@ -26,7 +27,7 @@ goto exe:
 goto py:
 :exe
 ::line for window executable
-set "applicfg=%cube_fw_path%/Utilities/PC_Software/ROT_AppliConfig/dist/AppliCfg.exe"
+set applicfg="%cube_fw_path%/Utilities/PC_Software/ROT_AppliConfig/dist/AppliCfg.exe"
 set "python="
 if exist %applicfg% (
 echo run config Appli with windows executable
@@ -35,7 +36,7 @@ goto postbuild
 :py
 ::line for python
 echo run config Appli with python script
-set "applicfg=%cube_fw_path%/Utilities/PC_Software/ROT_AppliConfig/AppliCfg.py"
+set applicfg="%cube_fw_path%/Utilities/PC_Software/ROT_AppliConfig/AppliCfg.py"
 set "python=python "
 
 :postbuild
@@ -44,6 +45,13 @@ set "command=%python%%applicfg% xmlval -v %app_bin% --string -n "Firmware binary
 %command%
 IF !errorlevel! NEQ 0 goto :error
 set "command=%python%%applicfg% xmlval -v %app_enc_sign_bin% --string -n "Image output file" %code_image_file%"
+%command%
+IF !errorlevel! NEQ 0 goto :error
+
+set "command=%python%%applicfg% xmlval -v %app_bin% --string -n "Firmware binary input file" %init_code_image_file%"
+%command%
+IF !errorlevel! NEQ 0 goto :error
+set "command=%python%%applicfg% xmlval -v %app_init_sign_bin% --string -n "Image output file" %init_code_image_file%"
 %command%
 IF !errorlevel! NEQ 0 goto :error
 

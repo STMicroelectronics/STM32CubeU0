@@ -49,6 +49,8 @@
 #define TX_APP_THREAD_PRIO                      10
 
 /* USER CODE BEGIN PD */
+#define TX_APP_THREAD_TIME_SLICE                5
+
 #define USE_TX_MUTEX
 
 #if defined(USE_TX_MUTEX) && defined(USE_TX_SEMAPHORE)

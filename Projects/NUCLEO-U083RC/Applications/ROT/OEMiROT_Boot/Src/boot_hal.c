@@ -323,10 +323,10 @@ int32_t boot_platform_init(void)
     /* Configure the system clock */
     SystemClock_Config();
 
-#ifdef OEMIROT_DEV_MODE
+#ifdef MCUBOOT_HAVE_LOGGING
     /* Init for log */
     stdio_init();
-#endif /*  OEMIROT_DEV_MODE */
+#endif /*  MCUBOOT_HAVE_LOGGING */
 
     /* Start HW randomization */
     RNG_Init();
@@ -504,7 +504,7 @@ void Error_Handler(void)
 void __aeabi_assert(const char *expr, const char *file, int line)
 {
 #ifdef OEMIROT_DEV_MODE
-    printf("assertion \" %s \" failed: file %s %d\n", expr, file, line);
+    BOOT_LOG_INF("assertion \" %s \" failed: file %s %d\n", expr, file, line);
 #endif /*  OEMIROT_DEV_MODE  */
     Error_Handler();
 }

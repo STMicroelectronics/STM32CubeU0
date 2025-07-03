@@ -218,7 +218,7 @@
                     <state>USE_HAL_DRIVER</state>
                     <state>NDEBUG</state>
                     <state>MCUBOOT_TARGET_CONFIG=&lt;flash_layout.h&gt;</state>
-                    <state>MBEDTLS_CONFIG_FILE=&lt;config-boot.h&gt;</state>
+                    <state>MBEDTLS_CONFIG_FILE=&lt;mbedtls_config.h&gt;</state>
                     <state>MCUBOOT_DOUBLE_SIGN_VERIF</state>
                     <state>BL2</state>
                     <state>__INITIAL_SP=ARM_LIB_STACK$$Limit</state>
@@ -688,8 +688,8 @@
             <name>BUILDACTION</name>
             <archiveVersion>1</archiveVersion>
             <data>
-                <prebuild>$PROJ_DIR$\prebuild.cmd "$PROJ_DIR$"</prebuild>
-                <postbuild>cmd /C "cmd /C $PROJ_DIR$\postbuild.bat""</postbuild>
+                <prebuild>"$PROJ_DIR$"\prebuild.cmd "$PROJ_DIR$"</prebuild>
+                <postbuild>cmd /C "cmd /C "$PROJ_DIR$\postbuild.bat""</postbuild>
             </data>
         </settings>
         <settings>
@@ -1217,9 +1217,6 @@
                 <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\library\constant_time.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\library\hmac_drbg.c</name>
-            </file>
-            <file>
                 <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\library\ecdh.c</name>
             </file>
             <file>
@@ -1236,6 +1233,9 @@
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\library\hkdf.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\library\hmac_drbg.c</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\library\md.c</name>

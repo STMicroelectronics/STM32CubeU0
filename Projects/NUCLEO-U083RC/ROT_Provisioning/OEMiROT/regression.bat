@@ -13,13 +13,22 @@ set remove_bank1_protect=-ob WRP1A_STRT=0x7f WRP1A_END=0
 set remove_bank2_protect=-ob WRP1B_STRT=0x7f WRP1B_END=0
 set rdp_0=-ob RDP=0xAA
 set remove_hdp_protect=-ob HDP1_PEND=0 HDP1EN=0xB4
-set default_ob=-ob BOOT_LOCK=0 BKPSRAM_HW_ERASE_DISABLE=0
+set default_ob=-ob BOOT_LOCK=0
 set erase_all=-e all
 
 
 ::RDP Regression
 echo Regression to RDP 0
-%stm32programmercli% %connect_reset% %rdp_0%
+:: Unlock RDP 2 to switch in RDP 1
+%stm32programmercli% %connect_reset% -hardRst -unlockRDP2 %oem2_key%
+echo Please unplug USB cable and plug it again to recover SWD Connection.
+echo Press any key to continue...
+echo.
+IF [%1] neq [AUTO] pause >nul
+
+:: Switch RDP 1 to RDP 0
+%stm32programmercli% %connect_no_reset% %rdp_0%
+IF %errorlevel% NEQ 0 %stm32programmercli% %connect_reset% %rdp_0%
 IF !errorlevel! NEQ 0 goto :step_error
 
 ::Provisioning default OEM2 key
@@ -43,7 +52,7 @@ echo Remove HDP protection
 IF !errorlevel! NEQ 0 goto :step_error
 
 ::Set Default OB
-echo Set Default OB (BOOT_LOCK, BKPSRAM_HW_ERASE_DISABLE)
+echo Set Default OB (BOOT_LOCK)
 %stm32programmercli% %connect_no_reset% %default_ob%
 IF !errorlevel! NEQ 0 goto :step_error
 

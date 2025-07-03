@@ -3,7 +3,7 @@
 How to handle I2C data buffer transmission/reception between two boards, 
 using an interrupt.
 
-       Board: NUCLEO-U031R8 (embeds a STM32U031R8Ix device)
+       Board: NUCLEO-U031R8 (embeds a STM32U031R8Tx device)
        - SCL Pin: PB6 (CN10, pin17)
        - SDA Pin: PB7 (CN7, pin21)
 

@@ -7,8 +7,9 @@ echo "$(cd "$(dirname "$1")" && pwd)"
 # Getting the CubeProgammer_cli path
 source ../env.sh
 
-SCRIPT=$(absolutpath $0)
-project_dir=`dirname $SCRIPT`
+SCRIPT=$(absolutpath "$0")
+project_dir=$(dirname "$SCRIPT")
+
 if [ $# -ge 1 ]; then mode=$1; else mode=MANUAL; fi
 
 state_change_log="${project_dir}/OEMiSB/provisioning.log"
@@ -57,6 +58,7 @@ define_rdp_level() {
             echo ""
             rdp_value="0xCC"
             rdp_str="OB_RDP_LEVEL_2"
+            set_oem2_key
             ;;
         *)
             echo "WRONG RDP level selected"
@@ -125,10 +127,26 @@ define_data_size() {
     esac
 }
 
+set_oem2_key()
+{
+  # Step to configure OEM2 key
+  echo "   * OEM2 key setup"
+  echo "       Default oem2_password is kept in env.sh"
+  echo "       Warning: Default OEM2 keys must NOT be used in a product. Make sure to regenerate your own OEM2 keys!"
+  echo "       If you do not want to use Default OEM2 keys, then replace new OEM2 keys in env.sh, close this script and start again"
+  echo "       Press any key to continue with default oem2 keys..."
+  echo
+  if [ "$mode" != "AUTO" ]; then read -p "" -n1 -s; fi
+}
+
+#Application path
+appli_dir="../$oemisb_appli_path_project"
 # Application binary file
-appli_binary="${project_dir}/../Applications/ROT/OEMiSB_Appli/Binary/OEMiSB_Appli.bin"
+appli_binary="${project_dir}/$appli_dir/Binary/OEMiSB_Appli.bin"
+boot_binary="${project_dir}/../$oemisb_boot_path_project/Binary/OEMiSB_Boot.bin"
+
 # Sha.bin
-sha256="${project_dir}/OEMiSB/Binary/sha256.bin"
+sha256="\"${project_dir}/OEMiSB/Binary/sha256.bin\""
 
 hdp_end=0x3
 bootaddress="0x8000000"
@@ -148,12 +166,10 @@ hide_protect="HDP1_PEND=${hdp_end} HDP1EN=1"
 
 boot_lock="BOOT_LOCK=1"
 
-isGeneratedByCubeMX="${PROJECT_GENERATED_BY_CUBEMX}"
-
-appli_main_h="${cube_fw_path}/Projects/NUCLEO-U031R8/Applications/ROT/OEMiSB_Appli/Inc/main.h"
-boot_main_h="${cube_fw_path}/Projects/NUCLEO-U031R8/Applications/ROT/OEMiSB_Boot/Inc/main.h"
-boot_cfg_h="${cube_fw_path}/Projects/NUCLEO-U031R8/Applications/ROT/OEMiSB_Boot/Inc/boot_cfg.h"
-ld_appli="${cube_fw_path}/Projects/NUCLEO-U031R8/Applications/ROT/OEMiSB_Appli/STM32CubeIDE/STM32U031R8TX_FLASH.ld"
+appli_main_h="\"${project_dir}/$appli_dir/Inc/main.h\""
+boot_main_h="\"${project_dir}/../Applications/ROT/OEMiSB_Boot/Inc/main.h\""
+boot_cfg_h="\"${project_dir}/../Applications/ROT/OEMiSB_Boot/Inc/boot_cfg.h\""
+ld_appli="\"${project_dir}/$appli_dir/STM32CubeIDE/STM32U031R8TX_FLASH.ld\""
 
 #line for python
 echo AppliCfg with python script
@@ -176,11 +192,11 @@ define_data_size
 tmp_file="${project_dir}/tmp.c"
 echo "DATA_SIZE=${data_hex_val}" > "${tmp_file}"
 echo "DATA_MPU_SUB_REG=${subregion_val}" >> "${tmp_file}"
-$python$applicfg definevalue -l "${tmp_file}" -m DATA_SIZE -n DATA_SIZE "${boot_main_h}"
-$python$applicfg definevalue -l "${tmp_file}" -m DATA_SIZE -n DATA_SIZE "${appli_main_h}"
-$python$applicfg definevalue -l "${tmp_file}" -m DATA_MPU_SUB_REG -n DATA_MPU_SUB_REG "${boot_main_h}"
-$python$applicfg linker -l "${tmp_file}" -m DATA_SIZE -n FLASH_DATA_AREA_SIZE "${ld_appli}"
-$python$applicfg modifyfilevalue --variable OEMISB_OB_RDP_LEVEL_VALUE --value "${rdp_str}" "${boot_cfg_h}" --str
+eval $python"\"$applicfg\"" definevalue -l "\"${tmp_file}\"" -m DATA_SIZE -n DATA_SIZE "${boot_main_h}"
+eval $python"\"$applicfg\"" definevalue -l "\"${tmp_file}\"" -m DATA_SIZE -n DATA_SIZE "${appli_main_h}"
+eval $python"\"$applicfg\"" definevalue -l "\"${tmp_file}\"" -m DATA_MPU_SUB_REG -n DATA_MPU_SUB_REG "${boot_main_h}"
+eval $python"\"$applicfg\"" linker -l "\"${tmp_file}\"" -m DATA_SIZE -n FLASH_DATA_AREA_SIZE "${ld_appli}"
+eval $python"\"$applicfg\"" modifyfilevalue --variable OEMISB_OB_RDP_LEVEL_VALUE --value "\"${rdp_str}\"" "${boot_cfg_h}" --str
 
 wrpend=$((0x1F - data_hex_val/0x800))
 write_protect="WRP1A_STRT=0 WRP1A_END=${wrpend}"
@@ -204,7 +220,7 @@ action="Programming the option bytes and flashing binaries ..."
 
 action="Provisioning of OEM2 key : "$oem2_key
 echo "    * $action"
-"$stm32programmercli" $connect_reset -lockRDP2 $oem2_key > "$state_change_log"
+"$stm32programmercli" $connect_reset -hardRst -lockRDP2 $oem2_key > "$state_change_log"
 if [ $? -ne 0 ]; then
     echo "Error: Failed to set OEM2 key"
     step_error
@@ -223,7 +239,7 @@ echo ""
 echo "    * Project flash programming"
 echo "        OEMiSB application programming"
 action="OEMiSB_Appli Written"
-"$stm32programmercli" "$connect_reset" -d "$cube_fw_path/Projects/NUCLEO-U031R8/Applications/ROT/OEMiSB_Appli/Binary/OEMiSB_Appli.bin" "$appliaddress" -v >> "$state_change_log"
+"$stm32programmercli" "$connect_reset" -d "$appli_binary" "$appliaddress" -v >> "$state_change_log"
 if [ $? -ne 0 ]; then
     echo "Error: Failed to program OEMiSB_Appli."
     step_error
@@ -233,7 +249,7 @@ echo "$action" >> ob_flash_programming.log
 
 action="OEMiSB boot programming"
 echo "        - $action"
-"$stm32programmercli" "$connect_reset" -d "$cube_fw_path/Projects/NUCLEO-U031R8/Applications/ROT/OEMiSB_Boot/Binary/OEMiSB_Boot.bin" "$bootaddress" -v >> "$state_change_log"
+"$stm32programmercli" "$connect_reset" -d "$boot_binary" "$bootaddress" -v >> "$state_change_log"
 if [ $? -ne 0 ]; then
     echo "Error: Failed to program OEMiSB boot."
     step_error
@@ -245,8 +261,8 @@ echo "$action" >> "$state_change_log"
 
 action="OEMiSB application SHA256 programming"
 echo "        - $action"
-$python$applicfg hashcontent tmp.bin -i "$appli_binary" -t "10000" -d "$sha256"
-"$stm32programmercli" "$connect_reset" -d "$cube_fw_path/Projects/NUCLEO-U031R8/ROT_Provisioning/OEMiSB/Binary/sha256.bin" "$shaaddress" -v --skipErase >> "$state_change_log"
+eval $python"\"$applicfg\"" hashcontent tmp.bin -i "$appli_binary" -t "10000" -d "$sha256"
+"$stm32programmercli" "$connect_reset" -d "${project_dir}/OEMiSB/Binary/sha256.bin" "$shaaddress" -v --skipErase >> "$state_change_log"
 if [ $? -ne 0 ]; then
     echo "Error: Failed to program OEMiSB application SHA256."
     step_error
@@ -279,7 +295,7 @@ echo "$action" >> "$state_change_log"
 action="Setting the final RDP Level $RDP_level"
 echo "    * $action"
 
-"$stm32programmercli" "$connect_no_reset" -ob RDP="$rdp_value" >> "$state_change_log"
+"$stm32programmercli" "$connect_reset" -ob RDP="$rdp_value" >> "$state_change_log"
 echo ""
 if [ "$rdp_value" != "0xAA" ]; then
     echo "   *Please Unplug USB Cable and Plug it again to recover SWD connection"

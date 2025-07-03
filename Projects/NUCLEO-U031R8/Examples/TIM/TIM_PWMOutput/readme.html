@@ -24,7 +24,7 @@
 <section id="tim_pwmoutput-example-description" class="col-sm-12 col-lg-8">
 <h2><b>TIM_PWMOutput Example Description</b></h2>
 <p>This example shows how to configure the TIM peripheral in PWM (Pulse Width Modulation) mode.</p>
-<p>At the beginning of the main program the HAL_Init() function is called to reset all the peripherals, initialize the Flash interface and the systick. The SystemClock_Config() function is used to configure the system clock for STM32U031R8Ix devices : The CPU at 48 MHz</p>
+<p>At the beginning of the main program the HAL_Init() function is called to reset all the peripherals, initialize the Flash interface and the systick. The SystemClock_Config() function is used to configure the system clock for STM32U031R8Tx devices : The CPU at 48 MHz</p>
 <p>SystemCoreClock is set to 48 MHz for STM32U0xx devices.</p>
 <pre><code>In this example TIM2 input clock (TIM2CLK) is set to APB1 clock (PCLK1),
 since APB1 prescaler is equal to 1.
@@ -66,7 +66,7 @@ TIM2 Channel4 duty cycle = (TIM2_CCR4/ TIM2_ARR + 1)* 100 = 12.5%</code></pre>
 </ul>
 <h3 id="hardware-and-software-environment"><b>Hardware and Software environment</b></h3>
 <ul>
-<li><p>This example runs on STM32U031R8Ix devices.</p></li>
+<li><p>This example runs on STM32U031R8Tx devices.</p></li>
 <li><p>In this example, the clock is set to 48 MHz.</p></li>
 <li><p>This example has been tested with STMicroelectronics NUCLEO-U031R8 board and can be easily tailored to any other supported device and development board.</p></li>
 <li><p>NUCLEO-U031R8 Set-up Connect the following pins to an oscilloscope to monitor the different waveforms:</p>

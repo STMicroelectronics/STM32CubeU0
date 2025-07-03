@@ -56,7 +56,7 @@ System, DMA, Data Transfer, Memory to memory, Stream, Flash, RAM
      
 ### <b>Hardware and Software environment</b>
 
-  - This example runs on STM32U031R8Ix Devices.
+  - This example runs on STM32U031R8Tx Devices.
   - This example has been tested with STMicroelectronics NUCLEO-U031R8 
     board and can be easily tailored to any other supported device 
     and development board.    

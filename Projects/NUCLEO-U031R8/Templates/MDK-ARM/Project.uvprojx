@@ -14,16 +14,16 @@
       <uAC6>1</uAC6>
       <TargetOption>
         <TargetCommonOption>
-          <Device>STM32U031R8Ix</Device>
+          <Device>STM32U031R8Tx</Device>
           <Vendor>STMicroelectronics</Vendor>
           <PackID>Keil.STM32U0xx_DFP.0.1.0</PackID>
           <PackURL>https://www.keil.com/pack/</PackURL>
           <Cpu>IRAM(0x20000000,0x2000) IRAM2(0x20002000,0x1000) IROM(0x08000000,0x010000) CPUTYPE("Cortex-M0+") CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
-          <FlashDriverDll>UL2CM3(-S0 -C0 -P0 -FD20000000 -FC2000 -FN1 -FF0STM32U0xx_64k -FS08000000 -FL010000 -FP0($$Device:STM32U031R8Ix$CMSIS\Flash\STM32U0xx_64k.FLM))</FlashDriverDll>
+          <FlashDriverDll>UL2CM3(-S0 -C0 -P0 -FD20000000 -FC2000 -FN1 -FF0STM32U0xx_64k -FS08000000 -FL010000 -FP0($$Device:STM32U031R8Tx$CMSIS\Flash\STM32U0xx_64k.FLM))</FlashDriverDll>
           <DeviceId>0</DeviceId>
-          <RegisterFile>$$Device:STM32U031R8Ix$Drivers\CMSIS\Device\ST\STM32U0xx\Include\stm32u0xx.h</RegisterFile>
+          <RegisterFile>$$Device:STM32U031R8Tx$Drivers\CMSIS\Device\ST\STM32U0xx\Include\stm32u0xx.h</RegisterFile>
           <MemoryEnv></MemoryEnv>
           <Cmp></Cmp>
           <Asm></Asm>
@@ -33,7 +33,7 @@
           <SLE66CMisc></SLE66CMisc>
           <SLE66AMisc></SLE66AMisc>
           <SLE66LinkerMisc></SLE66LinkerMisc>
-          <SFDFile>$$Device:STM32U031R8Ix$CMSIS\SVD\STM32U031.svd</SFDFile>
+          <SFDFile>$$Device:STM32U031R8Tx$CMSIS\SVD\STM32U031.svd</SFDFile>
           <bCustSvd>0</bCustSvd>
           <UseEnv>0</UseEnv>
           <BinPath></BinPath>

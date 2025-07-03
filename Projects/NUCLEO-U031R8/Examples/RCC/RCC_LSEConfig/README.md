@@ -2,7 +2,7 @@
 
 Enabling/disabling of the low-speed external(LSE) RC oscillator (about 32 KHz) at run time, using the RCC HAL API.
 
-   - Board: NUCLEO-U031R8 (embeds a STM32U031R8Ix device)
+   - Board: NUCLEO-U031R8 (embeds a STM32U031R8Tx device)
    - Microcontroller Clock Output MCO1 Pin: PA.08( Pin 8 on connector CN9).
 
 In this example, after startup SYSCLK is configured to the max frequency using the PLL with

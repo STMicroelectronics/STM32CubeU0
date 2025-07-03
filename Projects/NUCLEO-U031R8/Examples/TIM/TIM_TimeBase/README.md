@@ -5,7 +5,7 @@ one second with the corresponding Interrupt request.
 
 At the beginning of the main program the HAL_Init() function is called to reset 
 all the peripherals, initialize the Flash interface and the systick.
-The SystemClock_Config() function is used to configure the system clock for STM32U031R8Ix Devices :
+The SystemClock_Config() function is used to configure the system clock for STM32U031R8Tx Devices :
 The CPU at 48 MHz 
 
     In this example TIM2 input clock (TIM2CLK)  is set to APB1 clock (PCLK1),
@@ -59,7 +59,7 @@ Timer, TIM, time base , Interrupt, Clock source
 
 ### <b>Hardware and Software environment</b>
 
-  - This example runs on STM32U031R8Ix devices.
+  - This example runs on STM32U031R8Tx devices.
   - In this example, the clock is set to 48 MHz.
     
   - This example has been tested with STMicroelectronics NUCLEO-U031R8

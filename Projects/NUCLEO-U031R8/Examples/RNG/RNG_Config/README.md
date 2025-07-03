@@ -53,7 +53,7 @@ Analog, RNG, Random, FIPS PUB 140-2, Analog Random number generator, Entropy, Pe
 
 ### <b>Hardware and Software environment</b>
 
-  - This example runs on STM32U031R8Ix devices.
+  - This example runs on STM32U031R8Tx devices.
 
   - This example has been tested with NUCLEO-U031R8 board and can be
     easily tailored to any other supported device and development board.
