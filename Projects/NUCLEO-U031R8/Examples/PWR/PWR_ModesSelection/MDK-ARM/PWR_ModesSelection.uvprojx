@@ -18,10 +18,10 @@
           <Vendor>STMicroelectronics</Vendor>
           <PackID>Keil.STM32U0xx_DFP.0.1.0</PackID>
           <PackURL>https://www.keil.com/pack/</PackURL>
-          <Cpu>IRAM(0x20000000,0x8000) IRAM2(0x20002000,0x2000) IROM(0x08000000,0x040000) CPUTYPE("Cortex-M0+") CLOCK(12000000) ELITTLE</Cpu>
+          <Cpu>IRAM(0x20000000-0x20001FFF) IROM(0x8000000-0x800FFFF) CLOCK(25000000) CPUTYPE("Cortex-M0+") TZ</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
-          <FlashDriverDll>UL2CM3(-S0 -C0 -P0 -FD20000000 -FC2000 -FN1 -FF0STM32U0xx_256k -FS08000000 -FL040000 -FP0($$Device:STM32U031R8Tx$CMSIS\Flash\STM32U0xx_256k.FLM))</FlashDriverDll>
+          <FlashDriverDll>UL2CM3(-S0 -C0 -P0 -FD20000000 -FC2000 -FN1 -FF0STM32U0xx_64k -FS08000000 -FL010000 -FP0($$Device:STM32U031R8Tx$CMSIS\Flash\STM32U0xx_64k.FLM))</FlashDriverDll>
           <DeviceId>0</DeviceId>
           <RegisterFile></RegisterFile>
           <MemoryEnv></MemoryEnv>
@@ -247,12 +247,12 @@
               <IRAM>
                 <Type>0</Type>
                 <StartAddress>0x20000000</StartAddress>
-                <Size>0x8000</Size>
+                <Size>0x2000</Size>
               </IRAM>
               <IROM>
                 <Type>1</Type>
                 <StartAddress>0x8000000</StartAddress>
-                <Size>0x40000</Size>
+                <Size>0x10000</Size>
               </IROM>
               <XRAM>
                 <Type>0</Type>
@@ -277,7 +277,7 @@
               <OCR_RVCT4>
                 <Type>1</Type>
                 <StartAddress>0x8000000</StartAddress>
-                <Size>0x40000</Size>
+                <Size>0x10000</Size>
               </OCR_RVCT4>
               <OCR_RVCT5>
                 <Type>1</Type>
@@ -302,7 +302,7 @@
               <OCR_RVCT9>
                 <Type>0</Type>
                 <StartAddress>0x20000000</StartAddress>
-                <Size>0x8000</Size>
+                <Size>0x2000</Size>
               </OCR_RVCT9>
               <OCR_RVCT10>
                 <Type>0</Type>
